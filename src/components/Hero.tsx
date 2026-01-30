@@ -56,6 +56,11 @@ const Hero: React.FC = () => {
 
           {/* Headlines - Asymmetrical Alignment (Right Aligned in RTL) */}
           <div className="w-full text-right mb-10 md:mb-16 relative">
+            {/* Live Notifications - Mobile Left Side */}
+            <div className="absolute left-0 top-[40%] -translate-y-1/2 z-0 w-32 md:hidden">
+              <LiveNotifications />
+            </div>
+
             <h1 className="text-[13vw] md:text-[9rem] lg:text-[11rem] font-black leading-[0.8] tracking-[-0.07em] font-[Heebo] select-none">
               {/* First Word - Solid White */}
               <motion.div
@@ -110,7 +115,6 @@ const Hero: React.FC = () => {
                 {/* Button Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.a>
-              <LiveNotifications />
             </div>
 
           </div>
