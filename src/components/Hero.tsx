@@ -20,6 +20,7 @@ const Hero: React.FC = () => {
     >
 
       {/* 1. Background Texture & Aurora */}
+      <ParticleNetwork />
 
 
       {/* Aurora Mesh Gradient - Darker, Moodier */}
