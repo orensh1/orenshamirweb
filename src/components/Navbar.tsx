@@ -22,9 +22,9 @@ const Navbar: React.FC = () => {
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'
         }`}
-      initial={{ y: -100, opacity: 0 }}
+      initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
       <div className="container mx-auto px-6">
         <div className={`
@@ -97,5 +97,7 @@ const Navbar: React.FC = () => {
     </motion.nav>
   );
 };
+
+export default React.memo(Navbar);
 
 export default Navbar;

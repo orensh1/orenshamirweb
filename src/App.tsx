@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StyleSwitcher from './components/StyleSwitcher';
@@ -10,12 +10,14 @@ import FloatingCTA from './components/FloatingCTA';
 
 
 const App: React.FC = () => {
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Custom Cursor Logic
+  // Custom Cursor Logic - Performance Optimized (No State Re-renders)
   useEffect(() => {
     const updateCursor = (e: MouseEvent) => {
-      setCursorPosition({ x: e.clientX, y: e.clientY });
+      if (cursorRef.current) {
+        cursorRef.current.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
+      }
     };
     window.addEventListener('mousemove', updateCursor);
     return () => window.removeEventListener('mousemove', updateCursor);
@@ -27,9 +29,10 @@ const App: React.FC = () => {
 
       {/* Custom Cursor Glow */}
       <div
+        ref={cursorRef}
         className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
         style={{
-          background: `radial-gradient(600px at ${cursorPosition.x}px ${cursorPosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
+          background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
         }}
       />
 
