@@ -1,4 +1,4 @@
-```
+
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, Filter, Coins } from 'lucide-react';
@@ -28,13 +28,13 @@ const Hero: React.FC = () => {
 
       {/* Main Content */}
       <div className="relative z-20 container mx-auto px-6 md:px-12 pt-[100px] pb-12 flex flex-col justify-center min-h-[90vh]">
-        
+
         {/* Desktop: 2-Column Layout (Left: Visual, Right: Text) */}
         {/* Mobile: Vertical Stack (Text -> Visual -> CTA) */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
-          
+
           {/* RIGHT COLUMN (Desktop) / TOP (Mobile): Text Content */}
-          <motion.div 
+          <motion.div
             style={{ y: yText, opacity: opacityText }}
             className="flex flex-col items-center md:items-start text-center md:text-right w-full md:w-1/2 order-1 md:order-2"
           >
@@ -89,16 +89,16 @@ const Hero: React.FC = () => {
               </a>
 
               <div className="flex items-center gap-4 group cursor-pointer">
-                 <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/40 transition-colors">
-                   <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => {e.currentTarget.style.display='none'; e.currentTarget.parentElement!.style.backgroundColor='#333'}} />
-                 </div>
-                 <div className="text-right">
-                    <p className="text-white font-bold text-base leading-tight">דברו איתי בוואטסאפ</p>
-                    <p className="text-zinc-400 text-sm">זמין לפרויקטים חדשים</p>
-                 </div>
-                 <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transition-transform group-hover:-translate-x-1">
-                    <ArrowLeft size={16} strokeWidth={2.5} />
-                 </div>
+                <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-white/40 transition-colors">
+                  <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.style.backgroundColor = '#333' }} />
+                </div>
+                <div className="text-right">
+                  <p className="text-white font-bold text-base leading-tight">דברו איתי בוואטסאפ</p>
+                  <p className="text-zinc-400 text-sm">זמין לפרויקטים חדשים</p>
+                </div>
+                <div className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center transition-transform group-hover:-translate-x-1">
+                  <ArrowLeft size={16} strokeWidth={2.5} />
+                </div>
               </div>
             </div>
           </motion.div>
@@ -110,50 +110,50 @@ const Hero: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="w-full md:w-1/2 flex justify-center md:justify-end relative order-2 md:order-1"
           >
-             {/* The Poster Container (Reference Image Replication) */}
-             <div className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] overflow-hidden bg-[#1A0B2E] shadow-2xl border border-white/10 flex items-center justify-center p-8 group">
-                
-                {/* Background Gradients (The "Vibe") */}
-                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0080]/20 via-[#7928CA]/20 to-[#4a1c68]/40" />
-                <div className="absolute -top-[20%] -right-[20%] w-[80%] h-[80%] bg-[#00D4FF]/30 blur-[80px] rounded-full mix-blend-screen animate-blob" />
-                <div className="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] bg-[#FF0080]/30 blur-[80px] rounded-full mix-blend-screen animate-blob animation-delay-2000" />
-                
-                {/* The Floating Glass Card */}
-                <div className="animate-float relative w-full max-w-[300px] aspect-[3.5/5] rounded-[2rem] bg-white/[0.05] backdrop-blur-xl border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 text-center z-10">
-                   {/* Glossy Overlay */}
-                   <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-40 rounded-[2rem] pointer-events-none" />
-                   
-                   {/* Icons (Funnel + Coins) */}
-                   <div className="relative mb-8 w-28 h-28">
-                      {/* Glow */}
-                      <div className="absolute inset-0 bg-blue-500/40 blur-[40px] rounded-full" />
-                      
-                      {/* Funnel Icon */}
-                      <div className="absolute top-0 left-1/2 -translate-x-1/2 text-cyan-300 drop-shadow-[0_0_15px_rgba(103,232,249,0.8)]">
-                         <Filter size={64} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
-                      </div>
-                      
-                      {/* Coins Icon */}
-                      <div className="absolute bottom-0 right-2 text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
-                         <Coins size={48} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
-                      </div>
-                   </div>
+            {/* The Poster Container (Reference Image Replication) */}
+            <div className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] overflow-hidden bg-[#1A0B2E] shadow-2xl border border-white/10 flex items-center justify-center p-8 group">
 
-                   {/* Text */}
-                   <h3 className="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">יצירת לידים היכותיים</h3>
-                   <p className="text-white/60 text-lg font-medium">הגדלת הכנסות</p>
+              {/* Background Gradients (The "Vibe") */}
+              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0080]/20 via-[#7928CA]/20 to-[#4a1c68]/40" />
+              <div className="absolute -top-[20%] -right-[20%] w-[80%] h-[80%] bg-[#00D4FF]/30 blur-[80px] rounded-full mix-blend-screen animate-blob" />
+              <div className="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] bg-[#FF0080]/30 blur-[80px] rounded-full mix-blend-screen animate-blob animation-delay-2000" />
+
+              {/* The Floating Glass Card */}
+              <div className="animate-float relative w-full max-w-[300px] aspect-[3.5/5] rounded-[2rem] bg-white/[0.05] backdrop-blur-xl border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 text-center z-10">
+                {/* Glossy Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-40 rounded-[2rem] pointer-events-none" />
+
+                {/* Icons (Funnel + Coins) */}
+                <div className="relative mb-8 w-28 h-28">
+                  {/* Glow */}
+                  <div className="absolute inset-0 bg-blue-500/40 blur-[40px] rounded-full" />
+
+                  {/* Funnel Icon */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 text-cyan-300 drop-shadow-[0_0_15px_rgba(103,232,249,0.8)]">
+                    <Filter size={64} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
+                  </div>
+
+                  {/* Coins Icon */}
+                  <div className="absolute bottom-0 right-2 text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                    <Coins size={48} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
+                  </div>
                 </div>
-             </div>
+
+                {/* Text */}
+                <h3 className="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">יצירת לידים היכותיים</h3>
+                <p className="text-white/60 text-lg font-medium">הגדלת הכנסות</p>
+              </div>
+            </div>
           </motion.div>
 
         </div>
 
         {/* MOBILE ONLY: CTA & Profile (Bottom) */}
         <motion.div
-           initial={{ opacity: 0, y: 40 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ duration: 0.8, delay: 0.7 }}
-           className="md:hidden flex flex-col items-center mt-12 gap-6 order-3"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="md:hidden flex flex-col items-center mt-12 gap-6 order-3"
         >
           <a
             href="#contact"
@@ -164,16 +164,16 @@ const Hero: React.FC = () => {
           </a>
 
           <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10">
-             <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
-               <img src={orenImage} alt="Oren" className="w-full h-full object-cover" />
-             </div>
-             <div className="text-right">
-                <p className="text-white font-bold text-sm leading-tight">דברו איתי בוואטסאפ</p>
-                <p className="text-zinc-400 text-xs text-right">זמין לפרויקטים חדשים</p>
-             </div>
-             <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">
-                <ArrowLeft size={14} />
-             </div>
+            <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
+              <img src={orenImage} alt="Oren" className="w-full h-full object-cover" />
+            </div>
+            <div className="text-right">
+              <p className="text-white font-bold text-sm leading-tight">דברו איתי בוואטסאפ</p>
+              <p className="text-zinc-400 text-xs text-right">זמין לפרויקטים חדשים</p>
+            </div>
+            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">
+              <ArrowLeft size={14} />
+            </div>
           </div>
         </motion.div>
 
