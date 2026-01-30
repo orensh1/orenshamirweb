@@ -20,37 +20,42 @@ const LiveNotifications: React.FC = () => {
 
     useEffect(() => {
         let counter = 0;
-        const interval = setInterval(() => {
+
+        const addNotification = () => {
             const newNotif = {
                 id: Date.now(),
                 data: notificationTypes[counter % notificationTypes.length],
-                xOffset: Math.random() * 40 - 20 // Random X drift
+                xOffset: Math.random() * 20 - 10 // Smaller drift
             };
-
-            setNotifications(prev => [...prev.slice(-4), newNotif]); // Keep max 5 items
+            setNotifications(prev => [...prev.slice(-4), newNotif]);
             counter++;
-        }, 2500); // Add new one every 2.5s
+        };
+
+        // Start immediately
+        addNotification();
+
+        const interval = setInterval(addNotification, 3000); // Slightly slower pace
 
         return () => clearInterval(interval);
     }, []);
 
     return (
-        <div className="absolute bottom-0 left-4 md:left-20 w-[300px] h-[60vh] z-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-full mt-6 left-1/2 -translate-x-1/2 w-[300px] h-[200px] z-0 pointer-events-none overflow-visible">
             <AnimatePresence>
                 {notifications.map((item) => (
                     <motion.div
                         key={item.id}
-                        initial={{ opacity: 0, y: 100, x: item.xOffset, scale: 0.8 }}
+                        initial={{ opacity: 0, y: 20, x: item.xOffset, scale: 0.8 }}
                         animate={{
-                            opacity: [0, 0.7, 0], // Fade in then out 
-                            y: -400, // Float up significantly
+                            opacity: [0, 1, 0],
+                            y: -100, // Float up shorter distance
                             scale: 1
                         }}
                         transition={{
-                            duration: 10, // Slow float
+                            duration: 4, // Faster lifecycle
                             ease: "easeOut"
                         }}
-                        className="absolute bottom-0 left-0 flex items-center gap-3 px-4 py-2 bg-white/[0.02] backdrop-blur-sm border border-white/5 rounded-full"
+                        className="absolute bottom-0 left-0 right-0 mx-auto w-fit flex items-center gap-3 px-4 py-2 bg-white/[0.05] backdrop-blur-md border border-white/10 rounded-full shadow-xl"
                         onAnimationComplete={() => {
                             setNotifications(prev => prev.filter(n => n.id !== item.id));
                         }}
@@ -58,7 +63,7 @@ const LiveNotifications: React.FC = () => {
                         <div className={`p-1.5 rounded-full bg-white/5 ${item.data.color}`}>
                             <item.data.icon size={14} />
                         </div>
-                        <span className="text-white/60 text-sm font-medium tracking-wide whitespace-nowrap">
+                        <span className="text-white/80 text-sm font-medium tracking-wide whitespace-nowrap">
                             {item.data.text}
                         </span>
                     </motion.div>

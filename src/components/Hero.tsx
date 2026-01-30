@@ -32,8 +32,6 @@ const Hero: React.FC = () => {
         <div className="absolute inset-0 bg-black/50 z-10" />
       </div>
 
-      <LiveNotifications />
-
       {/* 2. Main Layout - Asymmetrical Editorial */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col justify-center py-24 min-h-[90vh]">
 
@@ -95,7 +93,7 @@ const Hero: React.FC = () => {
             </motion.p>
 
             {/* CTA Button - Center/Left (Hebrew end) */}
-            <div className="order-1 md:order-2 self-start md:self-auto">
+            <div className="order-1 md:order-2 self-start md:self-auto relative group">
               <motion.a
                 href="#contact"
                 initial={{ opacity: 0, scale: 0.95 }}
@@ -108,6 +106,7 @@ const Hero: React.FC = () => {
                 {/* Button Glow */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.a>
+              <LiveNotifications />
             </div>
 
           </div>
