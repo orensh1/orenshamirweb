@@ -152,10 +152,7 @@ const Hero: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </motion.a>
             </div>
-            {/* Desktop Only Notifications */}
-            <div className="hidden md:block absolute left-[-50px] top-1/2">
-              <LiveNotifications />
-            </div>
+            {/* Desktop Only Notifications - REMOVED */}
           </div>
 
         </motion.div>
