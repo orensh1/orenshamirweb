@@ -1,3 +1,4 @@
+import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
