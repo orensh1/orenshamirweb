@@ -66,6 +66,17 @@ const Contact: React.FC = () => {
                 <label className="text-sm font-medium text-zinc-400">על הפרויקט</label>
                 <textarea rows={4} className="w-full bg-zinc-950/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-pink-500 transition-colors text-white resize-none" placeholder="ספר לי קצת על העסק שלך..." />
               </div>
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="privacy-policy"
+                  required
+                  className="mt-1 w-4 h-4 rounded border-white/10 bg-zinc-950/50 text-pink-500 focus:ring-pink-500 focus:ring-offset-0"
+                />
+                <label htmlFor="privacy-policy" className="text-xs text-zinc-400 leading-relaxed cursor-pointer">
+                  אני מאשר/ת את <a href="#privacy" className="underline hover:text-white">מדיניות הפרטיות</a> ומסכים/ה לקבלת פרטים נוספים.
+                </label>
+              </div>
               <Button className="w-full text-lg group">
                 שלח הודעה
                 <Send size={18} className="group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -75,8 +86,17 @@ const Contact: React.FC = () => {
         </div>
 
         <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-zinc-600 text-sm">© 2024 Oren Shamir. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center text-xs text-zinc-500 order-2 md:order-1">
+            <p>© 2024 Oren Shamir. All rights reserved.</p>
+            <div className="flex gap-4">
+              <a href="#privacy" className="hover:text-zinc-300 transition-colors">מדיניות פרטיות</a>
+              <span className="opacity-30">|</span>
+              <a href="#accessibility" className="hover:text-zinc-300 transition-colors">הצהרת נגישות</a>
+              <span className="opacity-30">|</span>
+              <a href="#terms" className="hover:text-zinc-300 transition-colors">תנאי שימוש</a>
+            </div>
+          </div>
+          <div className="flex gap-6 order-1 md:order-2">
             <a href="#" className="text-zinc-600 hover:text-white transition-colors"><Instagram size={20} /></a>
             {/* Add more social icons here */}
           </div>
