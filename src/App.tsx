@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StyleSwitcher from './components/StyleSwitcher';
 import About from './components/About';
+import Process from './components/Process';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import FloatingCTA from './components/FloatingCTA';
@@ -38,6 +39,7 @@ const App: React.FC = () => {
         <Hero />
         <StyleSwitcher />
         <About />
+        <Process />
         <FAQ />
         <Contact />
       </main>
