@@ -95,8 +95,11 @@ const StyleSwitcher: React.FC = () => {
                 <div className="relative max-w-5xl mx-auto">
                     <motion.div
                         layout
-                        className="relative aspect-[16/10] bg-[#1d1d1f] rounded-[2rem] border-[1px] border-white/10 shadow-2xl overflow-hidden ring-1 ring-white/5"
-                        style={{ boxShadow: '0 0 0 1px rgba(0,0,0,1), 0 30px 60px -12px rgba(0,0,0,0.5)' }}
+                        className="relative aspect-[16/10] bg-[#1d1d1f] rounded-[2rem] border-[1px] border-white/10 shadow-2xl overflow-hidden ring-1 ring-white/5 isolation-isolate transform-gpu"
+                        style={{
+                            boxShadow: '0 0 0 1px rgba(0,0,0,1), 0 30px 60px -12px rgba(0,0,0,0.5)',
+                            WebkitMaskImage: '-webkit-radial-gradient(white, black)' // Force mask for Safari
+                        }}
                     >
                         {/* Screen Content */}
                         <div className="absolute inset-0 w-full h-full">
@@ -117,7 +120,7 @@ const StyleSwitcher: React.FC = () => {
                                         initial={{ opacity: 0, scale: 0.5 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ duration: 1, delay: 0.2 }}
-                                        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] ${styles[activeStyle].orb} blur-[120px] opacity-20 hover:opacity-30 transition-opacity duration-700`}
+                                        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[600px] md:h-[600px] ${styles[activeStyle].orb} blur-[80px] md:blur-[120px] opacity-20 hover:opacity-30 transition-opacity duration-700`}
                                     />
 
                                     {/* Content */}
