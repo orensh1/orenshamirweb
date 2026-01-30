@@ -4,6 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
+import conversionEngine from '../assets/conversion-engine.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -23,23 +24,21 @@ const Hero: React.FC = () => {
 
       {/* 1. Background Texture & Aurora */}
       <SuccessStack />
-      {/* Aurora Mesh Gradient - Darker, Moodier */}
+      {/* Aurora Mesh Gradient */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#050505]">
-        {/* Animated CSS Gradients - High Performance */}
-        {/* Mobile: Stronger, smaller blobs. Desktop: Larger, subtler blobs. */}
         <div className="absolute top-[-10%] -right-[20%] w-[80vw] h-[80vw] md:top-[-20%] md:right-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-purple-600/40 md:bg-purple-900/30 blur-[80px] md:blur-[100px] animate-blob mix-blend-screen" />
         <div className="absolute bottom-[-10%] -left-[20%] w-[80vw] h-[80vw] md:bottom-[-20%] md:left-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-pink-600/40 md:bg-pink-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-2000 mix-blend-screen" />
         <div className="absolute top-[20%] left-[10%] w-[60vw] h-[60vw] md:top-[20%] md:left-[20%] md:w-[60vw] md:h-[60vw] rounded-full bg-blue-600/30 md:bg-blue-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
         <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
 
-      {/* 2. Main Layout - 2 Columns (Refined) */}
+      {/* 2. Main Layout - 2 Columns */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col md:flex-row items-center justify-between gap-12 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
 
         {/* Background Glow for Text Area */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(100,50,255,0.15)_0%,rgba(0,0,0,0)_70%)] z-[-1] pointer-events-none md:hidden" />
 
-        {/* RIGHT COLUMN: Text Content (Restored Spacing) */}
+        {/* RIGHT COLUMN: Text Content */}
         <motion.div
           style={{ y: yText, opacity: opacityText }}
           className="flex flex-col items-start w-full md:w-1/2 relative z-20"
@@ -97,10 +96,10 @@ const Hero: React.FC = () => {
             {/* Background Image - Aggressive Zoom/Crop */}
             <div style={{
               position: 'absolute',
-              inset: '-45px', // Increased from -25px to -45px for maximum crop
+              inset: '-45px',
               backgroundImage: `url(${cardBg})`,
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center', // Center focus
               filter: 'brightness(0.9)',
               zIndex: 0
             }}></div>
@@ -108,31 +107,52 @@ const Hero: React.FC = () => {
             {/* Content Overlay */}
             <div style={{ position: 'relative', zIndex: 10, height: '100%', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-              {/* Top Tag - Bigger & Pulsing */}
-              <div style={{ alignSelf: 'flex-end', background: '#222', color: '#fff', padding: '10px 24px', borderRadius: '30px', fontSize: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              {/* Top Tag - Black & Strong Pulse */}
+              <div style={{ alignSelf: 'flex-end', background: '#000', color: '#fff', padding: '10px 24px', borderRadius: '30px', fontSize: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 התחילו היום
                 <motion.span
-                  animate={{ opacity: [1, 0.5, 1], scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  animate={{ opacity: [1, 0.3, 1], scale: [1, 1.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   style={{ color: '#ffd700', fontSize: '12px', display: 'inline-block' }}
                 >
                   ●
                 </motion.span>
               </div>
 
-              {/* Floating Glass Component */}
+              {/* HIGH-END 3D FLOATING CARD (Corrected) */}
               <div style={{
-                background: 'rgba(255, 255, 255, 0.15)',
+                background: 'rgba(255, 255, 255, 0.1)',
                 backdropFilter: 'blur(15px)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                borderRadius: '20px',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                borderRadius: '24px',
                 padding: '20px',
-                width: '140px',
+                width: '180px',
                 marginTop: '10px',
-                animation: 'float 5s ease-in-out infinite'
+                animation: 'float 5s ease-in-out infinite',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                textAlign: 'center'
               }}>
-                <div style={{ fontSize: '30px', marginBottom: '5px' }}>🚀</div>
-                <div style={{ color: 'white', fontWeight: 'bold', fontSize: '13px' }}>צמיחה עסקית</div>
+                {/* 3D Kinetic Sculpture - Rotating */}
+                <motion.img
+                  src={conversionEngine}
+                  alt="Conversion Engine"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  style={{ width: '100px', height: '100px', objectFit: 'contain', marginBottom: '15px', filter: 'drop-shadow(0 0 15px rgba(100,50,255,0.5))' }}
+                />
+
+                {/* New Text - Modern Bold White */}
+                <div style={{
+                  color: 'white',
+                  fontWeight: '800',
+                  fontSize: '18px',
+                  letterSpacing: '0.05em',
+                  textShadow: '0 2px 10px rgba(0,0,0,0.5)'
+                }}>
+                  מנוע המרות
+                </div>
               </div>
 
               {/* Bottom Content Area */}
