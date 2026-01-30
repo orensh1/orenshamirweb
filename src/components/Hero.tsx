@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
           {/* Headlines - Asymmetrical Alignment (Right Aligned in RTL) */}
           <div className="w-full text-right mb-10 md:mb-16 relative">
             {/* Live Notifications - Mobile Left Side */}
-            <div className="absolute left-0 top-[70%] -translate-y-1/2 z-0 w-32 md:hidden">
+            <div className="absolute left-0 top-[80%] -translate-y-1/2 z-0 w-32 md:hidden">
               <LiveNotifications />
             </div>
 
