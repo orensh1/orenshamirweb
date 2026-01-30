@@ -25,3 +25,30 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+/* Float Up Animation */
+@keyframes floatUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.9);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translateY(-80px) scale(1.02);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.95);
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 8s infinite linear;
+}
