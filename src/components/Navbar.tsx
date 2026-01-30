@@ -99,5 +99,3 @@ const Navbar: React.FC = () => {
 };
 
 export default React.memo(Navbar);
-
-export default Navbar;
