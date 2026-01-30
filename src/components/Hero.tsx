@@ -34,41 +34,60 @@ const Hero: React.FC = () => {
         {/* Mobile: Vertical Stack (Text -> Visual -> CTA) */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
 
-          {/* LEFT COLUMN: DesignJoy Card (Text Content) */}
+          {/* LEFT COLUMN: DesignJoy Card (Specific HTML Structure) */}
           <motion.div
             style={{ y: yText, opacity: opacityText }}
             className="w-full md:w-1/2 flex justify-center md:justify-start order-1"
           >
-            <div className="hero__member-card relative w-full max-w-[500px] rounded-[24px] overflow-hidden p-10 text-right" style={{ boxShadow: '0 20px 40px rgba(0,0,0,0.4)' }}>
-              {/* Background */}
-              <div className="card-background absolute inset-0 z-0" style={{ background: 'radial-gradient(circle at 10% 20%, rgb(255, 13, 255) 0%, rgb(0, 153, 255) 90%)' }}></div>
+            <div className="hero__member-card" style={{ position: 'relative', width: '100%', height: '600px', borderRadius: '24px', overflow: 'visible', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-              {/* Content */}
-              <div className="relative z-10 flex flex-col items-start h-full w-full">
-                <div className="badge bg-black text-white px-4 py-2 rounded-full self-start text-sm mb-4 font-bold">
+              {/* 1. Background Gradient */}
+              <div style={{ position: 'absolute', inset: '0', background: 'radial-gradient(circle at 10% 20%, rgb(255, 13, 255) 0%, rgb(0, 153, 255) 90%)', zIndex: '1', borderRadius: '24px' }}></div>
+
+              {/* 2. Glass Splash Card */}
+              <div className="hero__member-card-splash" style={{ position: 'relative', zIndex: '10', width: '85%', background: 'rgba(255, 255, 255, 0.1)', backdropFilter: 'blur(25px)', border: '1px solid rgba(255,255,255,0.2)', borderRadius: '24px', padding: '40px', textAlign: 'right', boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
+
+                <div style={{ background: '#000', color: '#fff', padding: '8px 16px', borderRadius: '50px', display: 'inline-block', marginBottom: '20px', fontWeight: 'bold', fontSize: '14px' }}>
                   🟢 התחילו היום
                 </div>
-                <h2 className="text-[40px] leading-[1.1] text-white font-bold mb-4">
-                  לא עוד סתם<br /><span style={{ color: '#ff00ff' }}>דף נחיתה</span>
-                </h2>
-                <p className="text-white/90 text-[18px] mb-8 font-medium">
-                  האתר שלכם צריך לעשות עבודה. בונה דפים שמביאים פניות.
+
+                <h1 style={{ color: '#fff', fontSize: '48px', lineHeight: '1.1', marginBottom: '10px', fontWeight: '800' }}>
+                  לא עוד סתם<br /><span style={{ color: '#ffbdf7' }}>דף נחיתה</span>
+                </h1>
+
+                <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '18px', marginBottom: '30px' }}>
+                  האתר שלכם צריך לעשות עבודה. אני בונה דפים שנראים טוב ומביאים לידים.
                 </p>
-                <a href="#contact" className="main-cta bg-white text-black border-none py-4 px-6 rounded-xl font-bold cursor-pointer w-full text-[18px] mb-6 text-center shadow-lg transition-transform hover:scale-[1.02] block">
+
+                <a href="#contact" style={{ display: 'block', width: '100%', background: '#fff', color: '#000', textAlign: 'center', padding: '18px', borderRadius: '12px', fontWeight: 'bold', fontSize: '20px', textDecoration: 'none', transition: 'transform 0.2s' }}>
                   רוצה אתר כזה?
                 </a>
-                <div className="profile-row flex items-center gap-3 mt-auto">
-                  <div className="avatar w-10 h-10 bg-[#333] rounded-full bg-cover border border-white/20" style={{ backgroundImage: `url(${orenImage})` }}></div>
-                  <div className="text-right text-white">
-                    <div className="font-bold text-[14px]">דברו איתי בוואטסאפ</div>
-                    <div className="text-[12px] opacity-80">זמין לפרויקטים חדשים</div>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginTop: '20px', gap: '12px' }}>
+                  <div style={{ textAlign: 'left', color: '#fff' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '15px' }}>דברו איתי בוואטסאפ</div>
+                    <div style={{ fontSize: '13px', opacity: '0.8' }}>זמין לפרויקטים</div>
                   </div>
-                </div>
-                {/* Floating Rocket */}
-                <div className="absolute top-4 right-4 text-4xl animate-float opacity-80" style={{ animationDuration: '3s' }}>
-                  🚀
+                  <div style={{ width: '42px', height: '42px', background: '#333', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.3)', backgroundImage: `url(${orenImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
                 </div>
               </div>
+
+              {/* 3. Floating Rocket Mockup */}
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/3214/3214746.png"
+                className="hero__member-card-mockup"
+                alt="Rocket"
+                style={{
+                  position: 'absolute',
+                  top: '-40px',
+                  left: '-40px',
+                  width: '180px',
+                  zIndex: '20',
+                  filter: 'drop-shadow(0 20px 30px rgba(0,0,0,0.4))',
+                  transform: 'translate3d(0px, -10px, 0px) rotateZ(-10deg)',
+                  animation: 'float 6s ease-in-out infinite'
+                }}
+              />
             </div>
           </motion.div>
 
