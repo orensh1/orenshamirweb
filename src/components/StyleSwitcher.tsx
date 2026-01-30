@@ -1,109 +1,169 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Laptop, Monitor, Smartphone } from 'lucide-react';
 
-type StyleOption = 'hitech' | 'minimal' | 'bold';
+type StyleOption = 'innovation' | 'clean' | 'impact';
 
 const StyleSwitcher: React.FC = () => {
-    const [activeStyle, setActiveStyle] = useState<StyleOption>('hitech');
+    const [activeStyle, setActiveStyle] = useState<StyleOption>('innovation');
 
     const styles = {
-        hitech: {
-            label: 'הייטק',
-            color: 'blue',
-            bg: 'bg-gradient-to-br from-[#0f172a] to-[#1e293b]',
-            text: 'text-blue-200',
-            previewText: 'תצוגה מקדימה: סגנון הייטק',
-            description: 'עיצוב כהה, נקי ומתוחכם עם אלמנטים ניאוניים ותחושת עתידנות.'
-        },
-        minimal: {
-            label: 'מינימליסטי',
-            color: 'zinc',
-            bg: 'bg-white',
-            text: 'text-zinc-800',
-            previewText: 'תצוגה מקדימה: סגנון מינימליסטי',
-            description: 'פחות זה יותר. חלל לבן, טיפוגרפיה מדויקת ופוקוס מלא על המסר.'
-        },
-        bold: {
-            label: 'עוצמתי',
-            color: 'red',
-            bg: 'bg-gradient-to-br from-red-600 to-orange-600',
+        innovation: {
+            label: 'חדשנות',
+            previewTitle: 'Future Ready',
+            previewSubtitle: 'חוויה טכנולוגית סוחפת',
+            bg: 'bg-[#000]',
+            accent: 'from-cyan-500 to-blue-600',
             text: 'text-white',
-            previewText: 'תצוגה מקדימה: סגנון מכירתי עוצמתי',
-            description: 'צבעים חזקים, קונטרסט גבוה והנעה לפעולה שאי אפשר לפספס.'
+            gradient: 'bg-gradient-to-tr from-blue-500/10 via-cyan-500/5 to-transparent',
+            orb: 'bg-cyan-500'
+        },
+        clean: {
+            label: 'נקי',
+            previewTitle: 'Pure Essence',
+            previewSubtitle: 'מינימליזם מדויק ויוקרתי',
+            bg: 'bg-[#F5F5F7]',
+            accent: 'from-zinc-400 to-zinc-600',
+            text: 'text-[#1D1D1F]',
+            gradient: 'bg-gradient-to-tr from-white via-zinc-100 to-transparent',
+            orb: 'bg-zinc-400'
+        },
+        impact: {
+            label: 'אימפקט',
+            previewTitle: 'Bold Vision',
+            previewSubtitle: 'נוכחות שלא ניתן להתעלם ממנה',
+            bg: 'bg-[#1a0505]',
+            accent: 'from-orange-500 to-red-600',
+            text: 'text-white',
+            gradient: 'bg-gradient-to-tr from-red-600/10 via-orange-500/5 to-transparent',
+            orb: 'bg-orange-500'
         }
     };
 
     return (
-        <section className="py-24 bg-[#080808] text-white relative overflow-hidden">
-            {/* Background Accent */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-[500px] bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
+        <section className="py-32 bg-[#000] text-white relative overflow-hidden">
+
+            {/* Ambient Lighting */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1200px] h-[800px] bg-white/[0.02] blur-[120px] rounded-full pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
 
-                {/* Headlines */}
-                <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-4">איך ייראה דף הנחיתה שלכם?</h2>
-                    <p className="text-xl text-zinc-400">תבחר סגנון ותראה את הקסם קורה</p>
+                {/* Headlines - Apple Style */}
+                <div className="text-center mb-16 space-y-4">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-5xl md:text-7xl font-semibold tracking-tight"
+                    >
+                        הסיפור שלך. <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">בעיצוב הנכון.</span>
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.1 }}
+                        className="text-2xl md:text-3xl text-zinc-400 font-medium max-w-2xl mx-auto leading-tight"
+                    >
+                        בחר את האווירה שתהפוך גולשים ללקוחות.
+                    </motion.p>
                 </div>
 
-                {/* Controls */}
-                <div className="flex justify-center gap-4 mb-16 flex-wrap">
-                    {(Object.keys(styles) as StyleOption[]).map((key) => (
-                        <button
-                            key={key}
-                            onClick={() => setActiveStyle(key)}
-                            className={`px-8 py-3 rounded-full font-bold transition-all duration-300 border ${activeStyle === key
-                                    ? 'bg-white text-black border-white shadow-[0_0_20px_rgba(255,255,255,0.3)] scale-105'
-                                    : 'bg-transparent text-white/60 border-white/10 hover:border-white/30 hover:text-white'
-                                }`}
-                        >
-                            {styles[key].label}
-                        </button>
-                    ))}
+                {/* Segmented Control - Floating Pill */}
+                <div className="flex justify-center mb-20">
+                    <div className="bg-white/10 backdrop-blur-xl p-1.5 rounded-full inline-flex relative z-20 border border-white/5">
+                        {(Object.keys(styles) as StyleOption[]).map((key) => (
+                            <button
+                                key={key}
+                                onClick={() => setActiveStyle(key)}
+                                className={`relative px-8 py-3 rounded-full text-lg font-medium transition-colors duration-200 ${activeStyle === key ? 'text-black' : 'text-white/70 hover:text-white'
+                                    }`}
+                            >
+                                {activeStyle === key && (
+                                    <motion.div
+                                        layoutId="activePill"
+                                        className="absolute inset-0 bg-white rounded-full shadow-lg"
+                                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    />
+                                )}
+                                <span className="relative z-10">{styles[key].label}</span>
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
-                {/* Laptop Mockup */}
-                <div className="relative max-w-4xl mx-auto">
-                    {/* Laptop Body */}
-                    <div className="relative mx-auto bg-gray-900 border-[8px] border-gray-800 rounded-t-3xl h-[300px] md:h-[450px] w-full shadow-2xl overflow-hidden md:max-w-4xl">
+                {/* Pro Display Mockup */}
+                <div className="relative max-w-5xl mx-auto">
+                    <motion.div
+                        layout
+                        className="relative aspect-[16/10] bg-[#1d1d1f] rounded-[2rem] border-[1px] border-white/10 shadow-2xl overflow-hidden ring-1 ring-white/5"
+                        style={{ boxShadow: '0 0 0 1px rgba(0,0,0,1), 0 30px 60px -12px rgba(0,0,0,0.5)' }}
+                    >
                         {/* Screen Content */}
-                        <div className="h-full w-full relative overflow-hidden">
+                        <div className="absolute inset-0 w-full h-full">
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={activeStyle}
-                                    initial={{ opacity: 0, scale: 0.95 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 1.05 }}
-                                    transition={{ duration: 0.4 }}
-                                    className={`absolute inset-0 flex flex-col items-center justify-center p-8 ${styles[activeStyle].bg}`}
+                                    initial={{ opacity: 0, scale: 1.02, filter: 'blur(10px)' }}
+                                    animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                                    exit={{ opacity: 0, scale: 0.98, filter: 'blur(10px)' }}
+                                    transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+                                    className={`h-full w-full flex flex-col items-center justify-center relative overflow-hidden ${styles[activeStyle].bg}`}
                                 >
-                                    <div className={`text-4xl font-bold mb-4 ${styles[activeStyle].text}`}>
-                                        {styles[activeStyle].previewText}
-                                    </div>
-                                    <p className={`text-lg max-w-md text-center opacity-80 ${activeStyle === 'minimal' ? 'text-zinc-600' : 'text-white'}`}>
-                                        {styles[activeStyle].description}
-                                    </p>
+                                    {/* Dynamic Gradient Background */}
+                                    <div className={`absolute inset-0 ${styles[activeStyle].gradient}`} />
 
-                                    {/* Dummy UI Elements */}
-                                    <div className="mt-8 flex gap-4">
-                                        <div className={`h-12 w-32 rounded-lg ${activeStyle === 'minimal' ? 'bg-black' : 'bg-white/20'}`} />
-                                        <div className={`h-12 w-12 rounded-full ${activeStyle === 'minimal' ? 'bg-zinc-200' : 'bg-white/10'}`} />
+                                    {/* Animated Orb/Glow */}
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.5 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 1, delay: 0.2 }}
+                                        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] ${styles[activeStyle].orb} blur-[120px] opacity-20 hover:opacity-30 transition-opacity duration-700`}
+                                    />
+
+                                    {/* Content */}
+                                    <div className="relative z-10 text-center space-y-6">
+                                        <motion.h3
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 0.1 }}
+                                            className={`text-6xl md:text-8xl font-bold tracking-tighter ${styles[activeStyle].text}`}
+                                        >
+                                            {styles[activeStyle].previewTitle}
+                                        </motion.h3>
+                                        <motion.p
+                                            initial={{ y: 20, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 0.2 }}
+                                            className={`text-2xl font-medium tracking-wide opacity-80 ${styles[activeStyle].text}`}
+                                        >
+                                            {styles[activeStyle].previewSubtitle}
+                                        </motion.p>
+
+                                        {/* UI Element Mockup */}
+                                        <motion.div
+                                            initial={{ y: 40, opacity: 0 }}
+                                            animate={{ y: 0, opacity: 1 }}
+                                            transition={{ delay: 0.3 }}
+                                            className="flex items-center gap-4 justify-center mt-8"
+                                        >
+                                            <div className={`h-14 px-8 rounded-2xl flex items-center bg-gradient-to-r ${styles[activeStyle].accent} shadow-lg text-white font-bold tracking-wide`}>
+                                                להתחיל פרויקט
+                                            </div>
+                                        </motion.div>
                                     </div>
+
                                 </motion.div>
                             </AnimatePresence>
                         </div>
-                    </div>
-                    {/* Laptop Base */}
-                    <div className="relative mx-auto bg-gray-800 rounded-b-xl rounded-t-sm h-[20px] md:h-[30px] w-full md:max-w-[calc(100%+40px)] -ml-[20px] shadow-xl">
-                        <div className="absolute left-1/2 top-0 -translate-x-1/2 bg-gray-700 w-32 h-2 rounded-b-lg"></div>
-                    </div>
 
-                    {/* Glow underneath */}
-                    <div className={`absolute -bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-20 blur-[60px] transition-colors duration-500 rounded-full
-            ${activeStyle === 'hitech' ? 'bg-blue-600/30' :
-                            activeStyle === 'bold' ? 'bg-red-600/30' : 'bg-white/10'}
-          `} />
+                        {/* Glossy Reflection Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.03] to-transparent pointer-events-none" />
+                    </motion.div>
+
+                    {/* Stand (Minimal) */}
+                    <div className="w-[180px] h-12 bg-[#1d1d1f] mx-auto mt-[-2px] rounded-b-2xl relative z-0 border-b border-r border-l border-white/5 opacity-80"></div>
+                    <div className="w-[240px] h-2 bg-[#1d1d1f] mx-auto mt-0 rounded-full opacity-50 blur-sm"></div>
+
                 </div>
 
             </div>
