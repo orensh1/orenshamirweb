@@ -56,8 +56,8 @@ const Hero: React.FC = () => {
             <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; 2024</span>
           </motion.div>
 
-          {/* Headlines - Restored mb-16 */}
-          <div className="w-full text-right mb-16 md:mb-16 relative">
+          {/* Headlines - Increased Margin */}
+          <div className="w-full text-right mb-24 md:mb-24 relative z-50">
             <h1 className="text-[3rem] md:text-[9rem] lg:text-[11rem] font-black leading-[1.2] md:leading-[0.8] tracking-[-0.07em] font-[Heebo] select-none">
               {/* First Word */}
               <motion.div
@@ -107,7 +107,8 @@ const Hero: React.FC = () => {
             overflow: 'hidden',
             boxShadow: '0 30px 60px rgba(0,0,0,0.6)',
             margin: '0 auto 0 0',
-            backgroundColor: '#050505', // FIX: Dark background to prevent white corners
+            background: '#050505', // Fix white corners
+            border: '4px solid #050505', // Aggressive Border Fix
           }}>
             {/* Background Image - Zoomed */}
             <div style={{
