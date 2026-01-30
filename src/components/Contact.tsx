@@ -30,14 +30,13 @@ const Contact: React.FC = () => {
               className="lg:w-1/2"
             >
               <h2 className="text-4xl md:text-7xl font-bold mb-6 tracking-tight">
-                בוא ניצור <br />
+                בואו נתחיל <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-indigo-500">
-                  משהו מדהים.
+                  לעבוד.
                 </span>
               </h2>
               <p className="text-zinc-400 text-xl mb-12 max-w-md">
-                יש לך פרויקט בראש? רוצה לשדרג את העסק?
-                אני זמין לשיחה. בלי התחייבות.
+                השאירו פרטים כאן או שלחו לי הודעה בוואטסאפ ונדבר על הפרויקט שלכם
               </p>
 
               <div className="flex flex-col gap-6">
@@ -117,7 +116,7 @@ const Contact: React.FC = () => {
                     </label>
                   </div>
                   <Button className="w-full text-lg group">
-                    שלח הודעה
+                    שלח פרטים
                     <Send size={18} className="group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </Button>
                 </form>
