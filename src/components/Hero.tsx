@@ -1,8 +1,9 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft, Filter, Coins } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import orenImage from '../assets/oren-portrait-new.jpg'; // Ensure this path is correct based on About.tsx usage or similar
+import heroPoster from '../assets/hero-poster.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -104,46 +105,22 @@ const Hero: React.FC = () => {
           </motion.div>
 
           {/* LEFT COLUMN (Desktop) / MIDDLE (Mobile): Visual "Poster" */}
+          {/* LEFT COLUMN: Visual "Poster" Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, x: -40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="w-full md:w-1/2 flex justify-center md:justify-end relative order-2 md:order-1"
           >
-            {/* The Poster Container (Reference Image Replication) */}
-            <div className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] overflow-hidden bg-[#1A0B2E] shadow-2xl border border-white/10 flex items-center justify-center p-8 group">
-
-              {/* Background Gradients (The "Vibe") */}
-              <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-[#FF0080]/20 via-[#7928CA]/20 to-[#4a1c68]/40" />
-              <div className="absolute -top-[20%] -right-[20%] w-[80%] h-[80%] bg-[#00D4FF]/30 blur-[80px] rounded-full mix-blend-screen animate-blob" />
-              <div className="absolute -bottom-[20%] -left-[20%] w-[80%] h-[80%] bg-[#FF0080]/30 blur-[80px] rounded-full mix-blend-screen animate-blob animation-delay-2000" />
-
-              {/* The Floating Glass Card */}
-              <div className="animate-float relative w-full max-w-[300px] aspect-[3.5/5] rounded-[2rem] bg-white/[0.05] backdrop-blur-xl border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 text-center z-10">
-                {/* Glossy Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-40 rounded-[2rem] pointer-events-none" />
-
-                {/* Icons (Funnel + Coins) */}
-                <div className="relative mb-8 w-28 h-28">
-                  {/* Glow */}
-                  <div className="absolute inset-0 bg-blue-500/40 blur-[40px] rounded-full" />
-
-                  {/* Funnel Icon */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 text-cyan-300 drop-shadow-[0_0_15px_rgba(103,232,249,0.8)]">
-                    <Filter size={64} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
-                  </div>
-
-                  {/* Coins Icon */}
-                  <div className="absolute bottom-0 right-2 text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
-                    <Coins size={48} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
-                  </div>
-                </div>
-
-                {/* Text */}
-                <h3 className="text-2xl font-bold text-white mb-2 leading-tight drop-shadow-md">יצירת לידים היכותיים</h3>
-                <p className="text-white/60 text-lg font-medium">הגדלת הכנסות</p>
-              </div>
-            </div>
+            <div
+              className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden"
+              style={{
+                backgroundImage: `url(${heroPoster})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat'
+              }}
+            />
           </motion.div>
 
         </div>
