@@ -136,70 +136,68 @@ const Hero: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* LEFT COLUMN: Mobile Hero Card (User Design) */}
+        {/* LEFT COLUMN: Mobile Hero Card (FINAL RELIABLE VERSION) */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start z-20 mt-12 md:mt-0">
-          <div className="mobile-hero-container" style={{
+          <div className="phone-mockup" style={{
             position: 'relative',
-            width: '100%',
-            maxWidth: '450px',
-            height: '700px',
-            borderRadius: '30px',
+            width: '380px', // Correct Width
+            height: '600px',
+            borderRadius: '32px',
             overflow: 'hidden',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
-            backgroundImage: `url(${cardBg})`,
-            backgroundSize: 'calc(100% * 1.05) auto',
-            backgroundPosition: 'center bottom',
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'space-between',
-            padding: '40px 30px',
+            boxShadow: '0 30px 60px rgba(0,0,0,0.6)',
+            margin: '0 auto 0 0', // Correct Alignment
           }}>
-            {/* Top Glass Card */}
-            <div className="glass-float" style={{
-              background: 'rgba(255, 255, 255, 0.15)',
-              backdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.3)',
-              borderRadius: '20px',
-              padding: '20px',
-              width: '160px',
-              alignSelf: 'flex-start',
-              marginTop: '20px',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
-              animation: 'float 4s ease-in-out infinite'
-            }}>
-              <div style={{ fontSize: '40px', marginBottom: '10px' }}>🚀</div>
-              <div style={{ color: 'white', fontWeight: 'bold', fontSize: '14px' }}>צמיחה עסקית</div>
-              <div style={{ height: '4px', width: '60%', background: '#00fa9a', borderRadius: '2px', marginTop: '8px' }}></div>
-            </div>
+            {/* Background Image with Zoom */}
+            <div style={{
+              position: 'absolute',
+              inset: '-5px', // Zoom trick
+              backgroundImage: `url(${cardBg})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'brightness(0.9)',
+              zIndex: 0
+            }}></div>
 
-            {/* Bottom Content */}
-            <div className="bottom-content" style={{ textAlign: 'right', direction: 'rtl', zIndex: '2' }}>
-              <h1 style={{ fontSize: '42px', lineHeight: '1', margin: '0 0 10px 0', color: 'white', fontWeight: '800' }}>
-                לא עוד סתם<br />דף נחיתה
-              </h1>
+            {/* Content Overlay */}
+            <div style={{ position: 'relative', zIndex: 10, height: '100%', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-              <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '16px', marginBottom: '25px' }}>
-                האתר שלכם צריך לעשות עבודה. בונה דפים שמביאים פניות.
-              </p>
+              {/* Top Tag */}
+              <div style={{ alignSelf: 'flex-end', background: '#222', color: '#fff', padding: '6px 14px', borderRadius: '20px', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '5px' }}>
+                התחילו היום <span style={{ color: '#ffd700' }}>●</span>
+              </div>
 
-              <button style={{
-                width: '100%',
-                background: 'white',
-                color: 'black',
-                border: 'none',
-                padding: '18px',
-                borderRadius: '50px',
-                fontSize: '18px',
-                fontWeight: 'bold',
-                cursor: 'pointer',
-                boxShadow: '0 10px 20px rgba(0,40,0,0.2)'
+              {/* Floating Glass Component */}
+              <div style={{
+                background: 'rgba(255, 255, 255, 0.15)',
+                backdropFilter: 'blur(15px)',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '20px',
+                padding: '20px',
+                width: '140px',
+                marginTop: '10px',
+                animation: 'float 5s ease-in-out infinite'
               }}>
-                רוצה אתר כזה?
-              </button>
+                <div style={{ fontSize: '30px', marginBottom: '5px' }}>🚀</div>
+                <div style={{ color: 'white', fontWeight: 'bold', fontSize: '13px' }}>צמיחה עסקית</div>
+              </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '20px' }}>
-                <div style={{ background: '#00fa9a', width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>👋</div>
-                <div style={{ color: 'white', fontSize: '14px', fontWeight: '500' }}>דברו איתי בוואטסאפ</div>
+              {/* Bottom Content Area */}
+              <div style={{ textAlign: 'right', direction: 'rtl', color: 'white', marginTop: 'auto' }}>
+                <h2 style={{ fontSize: '36px', lineHeight: '1', fontWeight: '800', marginBottom: '10px' }}>
+                  לא עוד סתם<br />דף נחיתה
+                </h2>
+                <p style={{ fontSize: '15px', opacity: '0.9', marginBottom: '20px' }}>
+                  האתר שלכם צריך לעשות עבודה.
+                </p>
+
+                <button style={{ width: '100%', background: 'white', color: 'black', border: 'none', padding: '16px', borderRadius: '50px', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' }}>
+                  רוצה אתר כזה?
+                </button>
+
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '15px' }}>
+                  <div style={{ width: '36px', height: '36px', background: '#00fa9a', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>👋</div>
+                  <div style={{ fontSize: '13px' }}>דברו איתי בוואטסאפ</div>
+                </div>
               </div>
             </div>
           </div>
