@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
         {/* 2-Column Desktop Layout / Stacked Mobile */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
 
-          {/* LEFT COLUMN: Text Content */}
+          {/* RIGHT COLUMN: Text Content (Aligned Right in RTL) */}
           <motion.div
             style={{ y: yText, opacity: opacityText }}
             className="flex flex-col items-center md:items-start text-center md:text-right w-full md:w-1/2"
@@ -72,64 +72,93 @@ const Hero: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl text-zinc-300 max-w-lg leading-relaxed font-light mb-8 md:mb-0"
+              className="text-lg md:text-xl text-zinc-300 max-w-lg leading-relaxed font-light mb-8 md:mb-12"
             >
               האתר שלכם צריך לעשות את העבודה. אני בונה דפים שנראים טוב ורצים מהר שפשוט מביאים לכם פניות מלקוחות חדשים
             </motion.p>
+
+            {/* DESKTOP ONLY: CTA & Profile (Aligned Right) */}
+            <div className="hidden md:flex flex-col items-start gap-8 w-full">
+              {/* Main CTA Button */}
+              <a
+                href="#contact"
+                className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black rounded-full font-bold text-xl tracking-tight transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] w-auto"
+              >
+                <span>רוצה אתר כזה?</span>
+                <ArrowLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
+              </a>
+
+              {/* Profile Section */}
+              <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors">
+                <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
+                  <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.style.backgroundColor = '#333' }} />
+                </div>
+                <div className="text-right">
+                  <p className="text-white font-bold text-sm leading-tight">דברו איתי בוואטסאפ</p>
+                  <p className="text-zinc-400 text-xs text-right">זמין לפרויקטים חדשים</p>
+                </div>
+                <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">
+                  <ArrowLeft size={14} />
+                </div>
+              </div>
+            </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: Glass Growth Card */}
+          {/* LEFT COLUMN: Visual "Phone Mockup" / Poster Container */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 40 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="w-full md:w-auto flex justify-center md:justify-end relative"
+            className="w-full md:w-1/2 flex justify-center md:justify-end relative"
           >
-            {/* The Floating Glass Card */}
-            <div className="animate-float relative w-[280px] md:w-[320px] aspect-[4/5] rounded-[2rem] bg-white/[0.03] backdrop-blur-xl border border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col items-center justify-center p-8 group overflow-hidden">
-              {/* Glossy Reflection */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none" />
+            {/* The "Phone Mockup" Poster Container */}
+            <div className="relative w-full max-w-[360px] aspect-[9/16] rounded-[2.5rem] overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-700 to-pink-600 shadow-2xl flex items-center justify-center p-6 border-[8px] border-black/20">
+              {/* Internal Aurora Blobs */}
+              <div className="absolute top-[-20%] left-[-20%] w-[120%] h-[120%] bg-blue-500/30 blur-[60px] animate-blob mix-blend-overlay" />
+              <div className="absolute bottom-[-20%] right-[-20%] w-[120%] h-[120%] bg-pink-500/30 blur-[60px] animate-blob animation-delay-2000 mix-blend-overlay" />
 
-              {/* Icon Container with Neon Glow */}
-              <div className="relative mb-8">
-                <div className="absolute inset-0 bg-blue-500/30 blur-[40px] rounded-full" />
-                <div className="relative w-24 h-24 flex items-center justify-center">
-                  <Rocket className="w-16 h-16 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)] -rotate-45" strokeWidth={1.5} />
-                  <TrendingUp className="absolute bottom-0 right-0 w-10 h-10 text-pink-500 drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" strokeWidth={2} />
+              {/* The Floating Glass Card (Centered Inside) */}
+              <div className="animate-float relative w-full aspect-[4/5] rounded-[2rem] bg-white/[0.1] backdrop-blur-md border border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.2)] flex flex-col items-center justify-center p-6 group">
+                {/* Glossy Reflection */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-50 pointer-events-none rounded-[2rem]" />
+
+                {/* Icon Container with Neon Glow */}
+                <div className="relative mb-6">
+                  <div className="absolute inset-0 bg-blue-500/40 blur-[40px] rounded-full" />
+                  <div className="relative w-20 h-20 flex items-center justify-center">
+                    <Rocket className="w-14 h-14 text-cyan-200 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)] -rotate-45" strokeWidth={1.5} />
+                    <TrendingUp className="absolute bottom-0 right-0 w-8 h-8 text-pink-300 drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" strokeWidth={2} />
+                  </div>
                 </div>
+
+                {/* Card Text */}
+                <h3 className="text-2xl font-bold text-white mb-1 text-center drop-shadow-lg">צמיחה עסקית</h3>
+                <p className="text-white/70 text-base font-medium tracking-wide">עוד לידים</p>
               </div>
-
-              {/* Card Text */}
-              <h3 className="text-3xl font-bold text-white mb-2 text-center drop-shadow-lg">צמיחה עסקית</h3>
-              <p className="text-white/60 text-lg font-medium tracking-wide">עוד לידים</p>
-
-              {/* Card Border Glow on Hover */}
-              <div className="absolute inset-0 rounded-[2rem] border border-white/0 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
             </div>
           </motion.div>
 
         </div>
 
-        {/* BOTTOM SECTION: CTA & Profile */}
+        {/* MOBILE ONLY: CTA & Profile (Bottom Stack) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="flex flex-col items-center mt-16 md:mt-24 gap-8"
+          className="md:hidden flex flex-col items-center mt-12 gap-6"
         >
           {/* Main CTA Button */}
           <a
             href="#contact"
-            className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black rounded-full font-bold text-xl tracking-tight transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] w-full md:w-auto max-w-md"
+            className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black rounded-full font-bold text-xl tracking-tight transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] w-full"
           >
             <span>רוצה אתר כזה?</span>
             <ArrowLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
           </a>
 
           {/* Profile Section */}
-          <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors cursor-default">
+          <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors">
             <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
-              {/* If image missing, fallback to gray div */}
               <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.style.backgroundColor = '#333' }} />
             </div>
             <div className="text-right">
@@ -140,9 +169,7 @@ const Hero: React.FC = () => {
               <ArrowLeft size={14} />
             </div>
           </div>
-
         </motion.div>
-
       </div>
     </div>
   );
