@@ -1,9 +1,8 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import orenImage from '../assets/oren-portrait-new.jpg';
-import { Layout, Zap, Smartphone } from 'lucide-react';
-import orenImage from '../assets/oren-portrait-new.jpg';
-import { Code2, Zap, Layout, Smartphone } from 'lucide-react';
+import { Layout, Zap, Smartphone, Code2 } from 'lucide-react';
+
 
 const About: React.FC = () => {
   const { scrollYProgress } = useScroll();

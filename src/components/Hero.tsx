@@ -26,10 +26,14 @@ const Hero: React.FC = () => {
       {/* Aurora Mesh Gradient - Darker, Moodier */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#050505]">
         {/* Animated CSS Gradients - High Performance */}
-        <div className="absolute top-[-20%] right-[-10%] w-[80vw] h-[80vw] rounded-full bg-purple-900/30 blur-[100px] animate-blob" />
-        <div className="absolute bottom-[-20%] left-[-10%] w-[80vw] h-[80vw] rounded-full bg-pink-900/20 blur-[100px] animate-blob animation-delay-2000" />
-        <div className="absolute top-[20%] left-[20%] w-[60vw] h-[60vw] rounded-full bg-blue-900/20 blur-[100px] animate-blob animation-delay-4000 hidden md:block" />
-        <div className="absolute inset-0 bg-black/50 z-10" />
+        {/* Mobile: Stronger, smaller blobs. Desktop: Larger, subtler blobs. */}
+        <div className="absolute top-[-10%] -right-[20%] w-[80vw] h-[80vw] md:top-[-20%] md:right-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-purple-600/40 md:bg-purple-900/30 blur-[80px] md:blur-[100px] animate-blob mix-blend-screen" />
+
+        <div className="absolute bottom-[-10%] -left-[20%] w-[80vw] h-[80vw] md:bottom-[-20%] md:left-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-pink-600/40 md:bg-pink-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-2000 mix-blend-screen" />
+
+        <div className="absolute top-[20%] left-[10%] w-[60vw] h-[60vw] md:top-[20%] md:left-[20%] md:w-[60vw] md:h-[60vw] rounded-full bg-blue-600/30 md:bg-blue-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
+
+        <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
 
       {/* 2. Main Layout - Asymmetrical Editorial */}
