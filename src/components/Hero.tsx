@@ -1,7 +1,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Filter, Coins } from 'lucide-react';
 import orenImage from '../assets/oren-portrait-new.jpg'; // Ensure this path is correct based on About.tsx usage or similar
 import heroPoster from '../assets/hero-poster.png';
 
@@ -34,10 +34,10 @@ const Hero: React.FC = () => {
         {/* Mobile: Vertical Stack (Text -> Visual -> CTA) */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
 
-          {/* RIGHT COLUMN (Desktop) / TOP (Mobile): Text Content */}
+          {/* RIGHT COLUMN: Text Content (Aligned Right) */}
           <motion.div
             style={{ y: yText, opacity: opacityText }}
-            className="flex flex-col items-center md:items-start text-center md:text-right w-full md:w-1/2 order-1 md:order-2"
+            className="flex flex-col items-center md:items-start text-center md:text-right w-full md:w-1/2"
           >
             {/* Pill: Start Today */}
             <motion.div
@@ -79,7 +79,7 @@ const Hero: React.FC = () => {
               האתר שלכם צריך לעשות את העבודה. אני בונה דפים שנראים טוב ורצים מהר שפשוט מביאים לכם פניות מלקוחות חדשים
             </motion.p>
 
-            {/* Desktop CTA & Profile */}
+            {/* Desktop CTA & Profile (Main Page Controls) */}
             <div className="hidden md:flex flex-col items-start gap-8 w-full">
               <a
                 href="#contact"
@@ -104,23 +104,71 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* LEFT COLUMN (Desktop) / MIDDLE (Mobile): Visual "Poster" */}
-          {/* LEFT COLUMN: Visual "Poster" Image */}
+          {/* LEFT COLUMN: Interactive Phone Mockup */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95, x: -40 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="w-full md:w-1/2 flex justify-center md:justify-end relative order-2 md:order-1"
+            className="w-full md:w-1/2 flex justify-center md:justify-end relative"
           >
+            {/* Poster Container with Background Image */}
             <div
-              className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden"
+              className="relative w-full max-w-[420px] aspect-[4/5] md:aspect-[3/4] rounded-[2.5rem] shadow-2xl border border-white/10 overflow-hidden flex flex-col items-center p-6"
               style={{
                 backgroundImage: `url(${heroPoster})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat'
               }}
-            />
+            >
+              {/* 1. Floating Glass Card (Restored) */}
+              <div className="animate-float mt-12 md:mt-16 w-full max-w-[280px] aspect-[3.5/5] rounded-[2rem] bg-white/[0.05] backdrop-blur-md border border-white/20 shadow-[0_30px_60px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center p-6 text-center z-10">
+                {/* Glossy Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-40 rounded-[2rem] pointer-events-none" />
+
+                {/* Icons (Funnel + Coins) */}
+                <div className="relative mb-6 w-24 h-24">
+                  {/* Funnel Icon */}
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 text-cyan-300 drop-shadow-[0_0_15px_rgba(103,232,249,0.8)]">
+                    <Filter size={56} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
+                  </div>
+                  {/* Coins Icon */}
+                  <div className="absolute bottom-0 right-2 text-yellow-400 drop-shadow-[0_0_15px_rgba(250,204,21,0.8)]">
+                    <Coins size={40} fill="currentColor" fillOpacity={0.2} strokeWidth={1.5} />
+                  </div>
+                </div>
+
+                {/* Text */}
+                <h3 className="text-xl font-bold text-white mb-1 leading-tight drop-shadow-md">יצירת לידים איכותיים</h3>
+                <p className="text-white/60 text-base font-medium">הגדלת הכנסות</p>
+              </div>
+
+              {/* 2. Interactive Buttons (Absolute Bottom) */}
+              <div className="absolute bottom-8 w-full px-6 flex flex-col items-center gap-4 z-20">
+                <a
+                  href="#contact"
+                  className="w-full h-12 bg-white text-black rounded-full font-bold text-lg flex items-center justify-center gap-2 shadow-lg hover:scale-105 transition-transform"
+                >
+                  <span>רוצה אתר כזה?</span>
+                  <ArrowLeft size={18} />
+                </a>
+
+                <div className="flex items-center gap-3 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 hover:bg-black/60 transition-colors cursor-pointer w-full justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-8 h-8 rounded-full overflow-hidden border border-white/30">
+                      <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.style.backgroundColor = '#333' }} />
+                    </div>
+                    <div className="text-right">
+                      <p className="text-white font-bold text-xs">דברו איתי בוואטסאפ</p>
+                      <p className="text-zinc-400 text-[10px]">זמין לפרויקטים</p>
+                    </div>
+                  </div>
+                  <div className="w-6 h-6 rounded-full bg-white text-black flex items-center justify-center">
+                    <ArrowLeft size={12} />
+                  </div>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
         </div>
