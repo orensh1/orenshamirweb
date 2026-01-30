@@ -20,9 +20,9 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
-      
+
       {/* Custom Cursor Glow */}
-      <div 
+      <div
         className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
         style={{
           background: `radial-gradient(600px at ${cursorPosition.x}px ${cursorPosition.y}px, rgba(29, 78, 216, 0.15), transparent 80%)`
@@ -30,7 +30,7 @@ const App: React.FC = () => {
       />
 
       <Navbar />
-      
+
       <main className="relative z-10">
         <Hero />
         <Services />
