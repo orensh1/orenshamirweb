@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
-import conversionEngine from '../assets/conversion-engine.png';
+import growthGraphic from '../assets/growth-graphic-card.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
