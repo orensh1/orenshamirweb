@@ -1,15 +1,7 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag } from 'lucide-react';
-import SuccessStack from './ui/SuccessStack';
-import LiveNotifications from './LiveNotifications';
-
-
-const statusMessages = [
-  "מערכת יצירת לידים פעילה",
-  "ליד חדש התקבל לפני 2 דק'",
-  "אורן זמין לפרויקטים חדשים"
-];
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { ArrowLeft, Rocket, TrendingUp } from 'lucide-react';
+import orenImage from '../assets/oren-portrait-new.jpg'; // Ensure this path is correct based on About.tsx usage or similar
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -21,156 +13,139 @@ const Hero: React.FC = () => {
   const yText = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Status Line Cycle
-  const [statusIndex, setStatusIndex] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setStatusIndex((prev) => (prev + 1) % statusMessages.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden text-white will-change-transform transform-gpu"
+      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden text-white will-change-transform transform-gpu bg-[#050505]"
     >
-
-      {/* 1. Background Texture & Aurora */}
-      <SuccessStack />
-      {/* Aurora Mesh Gradient - Darker, Moodier */}
+      {/* Aurora Mesh Gradient Background (Original) */}
       <div className="absolute inset-0 z-0 overflow-hidden bg-[#050505]">
-        {/* Animated CSS Gradients - High Performance */}
-        {/* Mobile: Stronger, smaller blobs. Desktop: Larger, subtler blobs. */}
         <div className="absolute top-[-10%] -right-[20%] w-[80vw] h-[80vw] md:top-[-20%] md:right-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-purple-600/40 md:bg-purple-900/30 blur-[80px] md:blur-[100px] animate-blob mix-blend-screen" />
-
         <div className="absolute bottom-[-10%] -left-[20%] w-[80vw] h-[80vw] md:bottom-[-20%] md:left-[-10%] md:w-[80vw] md:h-[80vw] rounded-full bg-pink-600/40 md:bg-pink-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-2000 mix-blend-screen" />
-
         <div className="absolute top-[20%] left-[10%] w-[60vw] h-[60vw] md:top-[20%] md:left-[20%] md:w-[60vw] md:h-[60vw] rounded-full bg-blue-600/30 md:bg-blue-900/20 blur-[80px] md:blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
-
         <div className="absolute inset-0 bg-black/40 z-10" />
       </div>
 
-      {/* 2. Main Layout - Asymmetrical Editorial */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col justify-center pt-[120px] pb-16 md:py-24 min-h-[90vh]">
+      {/* Main Content */}
+      <div className="relative z-20 container mx-auto px-6 md:px-12 pt-[100px] pb-12 flex flex-col justify-center min-h-[90vh]">
 
-        {/* Background Glow for Text Area */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(100,50,255,0.15)_0%,rgba(0,0,0,0)_70%)] z-[-1] pointer-events-none md:hidden" />
+        {/* 2-Column Desktop Layout / Stacked Mobile */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-20">
 
-        <motion.div
-          style={{ y: yText, opacity: opacityText }}
-          className="flex flex-col items-start w-full relative"
-        >
-
-
-          {/* Top Tag - Minimalist */}
+          {/* LEFT COLUMN: Text Content */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mb-8 md:mb-12 flex items-center gap-4 self-start md:self-auto"
+            style={{ y: yText, opacity: opacityText }}
+            className="flex flex-col items-center md:items-start text-center md:text-right w-full md:w-1/2"
           >
-            <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; 2024</span>
-          </motion.div>
+            {/* Pill: Start Today */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="inline-flex items-center gap-2 bg-black/50 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full mb-8"
+            >
+              <span className="w-2 h-2 rounded-full bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]"></span>
+              <span className="text-sm font-medium text-white/90">התחילו היום</span>
+            </motion.div>
 
-          {/* Headlines - Asymmetrical Alignment (Right Aligned in RTL) */}
-          <div className="w-full text-right mb-16 md:mb-16 relative">
-            <h1 className="text-[3rem] md:text-[9rem] lg:text-[11rem] font-black leading-[1.2] md:leading-[0.8] tracking-[-0.07em] font-[Heebo] select-none">
-              {/* First Word - Solid White */}
+            {/* Headline */}
+            <h1 className="text-[3.5rem] md:text-[5rem] lg:text-[6rem] font-black leading-[1.1] tracking-[-0.02em] font-[Heebo] mb-6">
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="block text-white relative z-10 mix-blend-overlay"
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               >
                 לא עוד סתם
               </motion.div>
-
-              {/* Second Word - Pink Purple Gradient */}
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
-                className="block relative z-0"
+                transition={{ duration: 0.8, ease: "easeOut", delay: 0.3 }}
+                className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 pb-2"
               >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 opacity-100">
-                  דף נחיתה
-                </span>
+                דף נחיתה
               </motion.div>
             </h1>
-          </div>
 
-          {/* Subtext and CTA - Shifted Balance */}
-          <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-12 pl-0 md:pl-20 mt-12 md:mt-8">
-
-            {/* Visual/Description on right (Hebrew start) */}
+            {/* Subtext */}
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-              className="text-lg md:text-2xl text-[#E0E0E0] max-w-lg font-light leading-relaxed order-2 md:order-1 tracking-tight"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg md:text-xl text-zinc-300 max-w-lg leading-relaxed font-light mb-8 md:mb-0"
             >
               האתר שלכם צריך לעשות את העבודה. אני בונה דפים שנראים טוב ורצים מהר שפשוט מביאים לכם פניות מלקוחות חדשים
             </motion.p>
+          </motion.div>
 
-            {/* CTA Button - Center/Left (Hebrew end) */}
-            <div className="order-1 md:order-2 self-start md:self-auto relative group w-full md:w-auto">
-              <motion.a
-                href="#contact"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-                className="group relative inline-flex items-center justify-center gap-4 px-8 py-4 md:py-5 bg-white text-black rounded-full font-bold text-lg overflow-hidden tracking-tight transition-colors shadow-lg hover:shadow-xl w-full md:w-auto"
-              >
-                <span className="relative z-10">רוצה אתר כזה?</span>
-                <ArrowLeft className="relative z-10 w-5 h-5 transition-transform group-hover:-translate-x-1" />
-                {/* Button Glow */}
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-200 to-pink-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </motion.a>
+          {/* RIGHT COLUMN: Glass Growth Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            className="w-full md:w-auto flex justify-center md:justify-end relative"
+          >
+            {/* The Floating Glass Card */}
+            <div className="animate-float relative w-[280px] md:w-[320px] aspect-[4/5] rounded-[2rem] bg-white/[0.03] backdrop-blur-xl border border-white/20 shadow-[0_20px_40px_rgba(0,0,0,0.4)] flex flex-col items-center justify-center p-8 group overflow-hidden">
+              {/* Glossy Reflection */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-50 pointer-events-none" />
+
+              {/* Icon Container with Neon Glow */}
+              <div className="relative mb-8">
+                <div className="absolute inset-0 bg-blue-500/30 blur-[40px] rounded-full" />
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                  <Rocket className="w-16 h-16 text-cyan-400 drop-shadow-[0_0_15px_rgba(34,211,238,0.8)] -rotate-45" strokeWidth={1.5} />
+                  <TrendingUp className="absolute bottom-0 right-0 w-10 h-10 text-pink-500 drop-shadow-[0_0_15px_rgba(236,72,153,0.8)]" strokeWidth={2} />
+                </div>
+              </div>
+
+              {/* Card Text */}
+              <h3 className="text-3xl font-bold text-white mb-2 text-center drop-shadow-lg">צמיחה עסקית</h3>
+              <p className="text-white/60 text-lg font-medium tracking-wide">עוד לידים</p>
+
+              {/* Card Border Glow on Hover */}
+              <div className="absolute inset-0 rounded-[2rem] border border-white/0 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
             </div>
-            {/* Desktop Only Notifications */}
-            <div className="hidden md:block absolute left-[-50px] top-1/2">
-              <LiveNotifications />
+          </motion.div>
+
+        </div>
+
+        {/* BOTTOM SECTION: CTA & Profile */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="flex flex-col items-center mt-16 md:mt-24 gap-8"
+        >
+          {/* Main CTA Button */}
+          <a
+            href="#contact"
+            className="group relative inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-black rounded-full font-bold text-xl tracking-tight transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(255,255,255,0.3)] w-full md:w-auto max-w-md"
+          >
+            <span>רוצה אתר כזה?</span>
+            <ArrowLeft className="w-6 h-6 transition-transform group-hover:-translate-x-1" />
+          </a>
+
+          {/* Profile Section */}
+          <div className="flex items-center gap-4 bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10 hover:bg-white/10 transition-colors cursor-default">
+            <div className="w-10 h-10 rounded-full overflow-hidden border border-white/20">
+              {/* If image missing, fallback to gray div */}
+              <img src={orenImage} alt="Oren" className="w-full h-full object-cover" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.parentElement!.style.backgroundColor = '#333' }} />
+            </div>
+            <div className="text-right">
+              <p className="text-white font-bold text-sm leading-tight">דברו איתי בוואטסאפ</p>
+              <p className="text-zinc-400 text-xs text-right">זמין לפרויקטים חדשים</p>
+            </div>
+            <div className="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center">
+              <ArrowLeft size={14} />
             </div>
           </div>
 
         </motion.div>
-      </div>
 
-      {/* 3. Glass Stats Cards - Bottom */}
-      <div className="relative z-20 px-6 pb-12">
-        <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-          <StatCard number="200%" label="שיפור בהמרה" delay={0} />
-          <StatCard number="16" label="שנות חיים" delay={0.1} />
-          <StatCard number="50+" label="פרויקטים מוצלחים" delay={0.2} />
-        </div>
       </div>
-
     </div>
   );
 };
-
-const StatCard = ({ number, label, delay }: { number: string, label: string, delay: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay, duration: 0.5, ease: "easeOut" }}
-    className="relative group overflow-hidden rounded-xl border border-white/20 bg-white/[0.03] backdrop-blur-md p-6 hover:bg-white/[0.08] transition-all duration-500 will-change-transform transform-gpu"
-  >
-    <div className="flex items-end justify-between relative z-10">
-      <div>
-        <span className="block text-5xl font-bold text-white mb-2 tracking-tighter">{number}</span>
-        <span className="text-sm text-white/60 font-medium uppercase tracking-widest">{label}</span>
-      </div>
-      <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 group-hover:text-white group-hover:border-white/40 transition-all rotate-45 group-hover:rotate-0">
-        <ArrowUpRight size={18} />
-      </div>
-    </div>
-
-    {/* Hover Gradient */}
-    <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-  </motion.div>
-);
 
 export default Hero;
