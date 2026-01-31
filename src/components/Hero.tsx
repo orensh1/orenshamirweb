@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag, Zap, TrendingUp, LayoutTemplate, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag, Zap, TrendingUp, LayoutTemplate, ShieldCheck, Target, Palette, BarChart3 } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import orenPortrait from '../assets/oren-portrait-new.jpg';
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v22 (BENTO GRID)</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v23 (ORBIT VISUALIZER)</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
@@ -87,84 +87,106 @@ const Hero: React.FC = () => {
 
         </motion.div>
 
-        {/* LEFT COLUMN: Hebrew Bento Grid */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-start z-20 mt-12 md:mt-0 relative">
+        {/* LEFT COLUMN: Interactive Orbit Visualizer */}
+        <div className="w-full md:w-1/2 flex justify-center md:justify-start z-20 mt-12 md:mt-0 relative perspective-[1000px]">
 
-          {/* Grid Container */}
-          <div className="grid grid-cols-2 gap-4 w-full max-w-[500px]" style={{ direction: 'rtl' }}>
+          {/* Orbit System Container - Follows Mouse Tilt (Simplified for perf) */}
+          <motion.div
+            className="relative w-[380px] h-[380px] md:w-[500px] md:h-[500px] flex items-center justify-center transform-style-3d"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1 }}
+            whileHover={{ rotateX: 5, rotateY: 5 }}
+          >
 
-            {/* Card 1: Main (Full Width) */}
+            {/* Orbit 1 (Outer) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              whileHover={{ y: -5 }}
-              className="col-span-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col items-start gap-4 relative overflow-hidden group"
-            >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/20 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-purple-500/30 transition-colors" />
+              className="absolute w-[100%] h-[100%] rounded-full border border-white/5 shadow-[0_0_30px_rgba(100,100,255,0.05)]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Orbit 2 (Middle) */}
+            <motion.div
+              className="absolute w-[70%] h-[70%] rounded-full border border-white/10 shadow-[0_0_20px_rgba(200,100,255,0.1)] border-dashed opacity-50"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+            {/* Orbit 3 (Inner) */}
+            <motion.div
+              className="absolute w-[45%] h-[45%] rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            />
 
-              <div className="p-3 bg-white/10 rounded-2xl w-fit">
-                <LayoutTemplate className="w-6 h-6 text-purple-400" />
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-1">דפי נחיתה שממירים</h3>
-                <p className="text-sm text-gray-400">עיצוב מודרני שגורם ללקוחות להשאיר פרטים ולהפוך ללידים איכותיים.</p>
+            {/* Central Core */}
+            <motion.div
+              className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-600/80 to-purple-600/80 backdrop-blur-3xl flex items-center justify-center shadow-[0_0_60px_rgba(50,100,255,0.4)] z-10 border border-white/20"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-black text-white leading-none">20k+</div>
+                <div className="text-xs md:text-sm text-white/80 font-medium mt-1">לידים חדשים</div>
               </div>
             </motion.div>
 
-            {/* Card 2: Stats */}
+            {/* Node 1: Optimization (Top Right) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
-              whileHover={{ y: -5 }}
-              className="col-span-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group"
+              className="absolute top-[10%] right-[15%] flex flex-col items-center gap-2 z-20"
+              animate={{ y: [0, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
             >
-              <div className="absolute bottom-0 left-0 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl -ml-10 -mb-10 group-hover:bg-blue-500/30 transition-colors" />
-              <TrendingUp className="w-8 h-8 text-blue-400 mb-4" />
-              <div>
-                <div className="text-3xl font-black text-white">100%+</div>
-                <div className="text-xs text-gray-400 font-medium">אופטימיזציה<br />של לידים</div>
+              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                <BarChart3 className="w-6 h-6 text-blue-400" />
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
+                אופטימיזציה
               </div>
             </motion.div>
 
-            {/* Card 3: Speed */}
+            {/* Node 2: Converting Design (Bottom Right) */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
-              whileHover={{ y: -5 }}
-              className="col-span-1 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 flex flex-col justify-between relative overflow-hidden group"
+              className="absolute bottom-[20%] right-[10%] flex flex-col items-center gap-2 z-20"
+              animate={{ y: [0, -8, 0] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
-              <div className="absolute top-0 left-0 w-20 h-20 bg-yellow-500/10 rounded-full blur-2xl -ml-5 -mt-5 group-hover:bg-yellow-500/20 transition-colors" />
-              <div className="flex justify-between items-start w-full">
-                <Zap className="w-8 h-8 text-yellow-400" />
+              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                <Palette className="w-6 h-6 text-pink-400" />
               </div>
-              <div className="mt-4">
-                <div className="text-lg font-bold text-white leading-tight">טעינה מהירה</div>
-                <div className="text-xs text-gray-400 mt-1">ציון 98+ בגוגל</div>
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
+                עיצוב ממיר
               </div>
             </motion.div>
 
-            {/* Card 4: Trust (Full Width) */}
+            {/* Node 3: Fast Loading (Bottom Left) */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              whileHover={{ y: -5 }}
-              className="col-span-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-5 flex items-center gap-4 relative overflow-hidden group"
+              className="absolute bottom-[10%] left-[15%] flex flex-col items-center gap-2 z-20"
+              animate={{ y: [0, -12, 0] }}
+              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-12 translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-1000" />
-              <div className="p-2 bg-green-500/20 rounded-full">
-                <ShieldCheck className="w-5 h-5 text-green-400" />
+              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                <Zap className="w-6 h-6 text-yellow-400" />
               </div>
-              <div className="flex-1">
-                <div className="font-bold text-white">מותאם אישית לכל עסק</div>
-                <div className="text-xs text-gray-400">פתרונות מדויקים לצרכים שלך</div>
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
+                טעינה מהירה
               </div>
             </motion.div>
 
-          </div>
+            {/* Node 4: Quality Leads (Top Left) */}
+            <motion.div
+              className="absolute top-[20%] left-[5%] flex flex-col items-center gap-2 z-20"
+              animate={{ y: [0, -9, 0] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+            >
+              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
+                <Target className="w-6 h-6 text-green-400" />
+              </div>
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
+                לידים איכותיים
+              </div>
+            </motion.div>
+
+          </motion.div>
 
         </div>
 
