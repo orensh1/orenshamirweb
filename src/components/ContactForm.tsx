@@ -17,8 +17,8 @@ const ContactForm = () => {
         setIsSubmitting(true);
 
         try {
-            // Updated to point to the PHP script for generic hosting compatibility
-            const response = await fetch('./mail.php', {
+            // Updated to point to Netlify Function
+            const response = await fetch('/.netlify/functions/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
