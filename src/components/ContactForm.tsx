@@ -62,7 +62,7 @@ const ContactForm = () => {
                     className="w-full max-w-2xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl"
                 >
                     <div className="text-center mb-10">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">בואו נדבר תכלס</h2>
+                        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">בואו נדבר</h2>
                         <p className="text-gray-400">השאירו פרטים ואחזור אליכם עם אסטרטגיה מותאמת אישית.</p>
                     </div>
 
