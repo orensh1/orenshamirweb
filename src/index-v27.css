@@ -232,6 +232,65 @@ html.big-cursor * {
   }
 }
 
+/* Wave Animations - Fluid Motion */
+@keyframes wave-slow {
+  0% {
+    transform: rotate(25deg) translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: rotate(20deg) translate(20px, -20px) scale(1.05);
+  }
+
+  100% {
+    transform: rotate(25deg) translate(0, 0) scale(1);
+  }
+}
+
+@keyframes wave-medium {
+  0% {
+    transform: rotate(-15deg) translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: rotate(-10deg) translate(-20px, 20px) scale(1.1);
+  }
+
+  100% {
+    transform: rotate(-15deg) translate(0, 0) scale(1);
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+
+  50% {
+    opacity: 0.8;
+    transform: scale(1.2);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  }
+
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+}
+
+.animate-wave-slow {
+  animation: wave-slow 12s ease-in-out infinite;
+}
+
+.animate-wave-medium {
+  animation: wave-medium 15s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
 /* Aurora Animations - 60FPS Optimized */
 @keyframes aurora-1 {
   0% {
