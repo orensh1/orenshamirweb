@@ -18,10 +18,10 @@ const About: React.FC = () => {
           ease: "linear",
           duration: 30
         }}
-        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.03] select-none pointer-events-none flex gap-10 w-max"
+        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.04] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-0"
       >
-        <span className="text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
-        <span className="text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
