@@ -55,7 +55,8 @@ export const WavyBackground = ({
         const isMobile = window.innerWidth < 768;
         const waveYOffset = isMobile ? 0.5 : 0.75;
         const waveAmplitude = isMobile ? 100 : 200;
-        const speedMultiplier = isMobile ? 0.5 : 1.5; // Slower on mobile (0.5), same on PC (1.5)
+        // FIX: Mobile wants faster animation (was 0.5, now 1.0)
+        const speedMultiplier = isMobile ? 1.0 : 1.5;
 
         const waveColors = colors ?? [
             "#38bdf8",
@@ -69,12 +70,10 @@ export const WavyBackground = ({
             nt += getSpeed() * speedMultiplier;
             for (let i = 0; i < n; i++) {
                 ctx!.beginPath();
-                ctx!.lineWidth = waveWidth || 50;
+                ctx!.lineWidth = (waveWidth || 50);
                 ctx!.strokeStyle = waveColors[i % waveColors.length];
 
-                // OPTIMIZATION: Increased step from 5 to 10 to reduce CPU load by 50%
                 for (let x = 0; x < w; x += 10) {
-                    // Smoother noise scale (x/1000 instead of x/800)
                     var y = noise(x / 1000, 0.3 * i, nt) * waveAmplitude;
                     ctx!.lineTo(x, y + h * waveYOffset);
                 }
@@ -85,6 +84,7 @@ export const WavyBackground = ({
 
         let animationId: number;
         const render = () => {
+            // ... existing render logic
             ctx!.fillStyle = backgroundFill || "black";
             ctx!.globalAlpha = waveOpacity || 0.5;
             ctx!.fillRect(0, 0, w, h);
@@ -95,9 +95,11 @@ export const WavyBackground = ({
         render();
 
         const handleResize = () => {
+            // FIX: Ignore resize if width hasn't changed (prevents mobile URL bar glitches)
+            if (window.innerWidth === w) return;
+
             w = ctx.canvas.width = window.innerWidth;
             h = ctx.canvas.height = window.innerHeight;
-            // Re-init on resize to catch layout shifts (though full re-run handled by effect)
         };
         window.addEventListener("resize", handleResize);
 

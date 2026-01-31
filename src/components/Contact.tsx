@@ -139,7 +139,7 @@ const Contact: React.FC = () => {
               <a href="https://www.instagram.com/orenshamir1/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-pink-500 transition-colors">
                 <Instagram size={20} />
               </a>
-              <a href="mailto:oren@example.com" className="text-zinc-500 hover:text-white transition-colors">
+              <a href="mailto:orenshamir5@gmail.com" className="text-zinc-500 hover:text-white transition-colors">
                 <Mail size={20} />
               </a>
               <a href="tel:+972526448826" className="text-zinc-500 hover:text-white transition-colors">

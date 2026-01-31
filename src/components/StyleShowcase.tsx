@@ -94,18 +94,14 @@ const StyleShowcase: React.FC = () => {
                                 key={theme.id}
                                 onClick={() => setActiveTheme(theme.id)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 relative ${activeTheme === theme.id
-                                        ? 'text-black shadow-lg'
-                                        : 'text-gray-400 hover:text-white'
+                                    ? 'text-black shadow-lg'
+                                    : 'text-gray-400 hover:text-white'
                                     }`}
                             >
                                 {activeTheme === theme.id && (
-                                    <motion.div
-                                        layoutId="activeTab"
-                                        className="absolute inset-0 bg-white rounded-full"
-                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
-                                <span className={`relative z-10 mix-blend-exclusion ${activeTheme === theme.id ? 'text-black' : 'text-gray-200'}`}>{theme.label}</span>
+                                <span className={`relative z-10 ${activeTheme === theme.id ? 'text-black' : 'text-gray-300 group-hover:text-white'}`}>{theme.label}</span>
                             </button>
                         ))}
                     </div>
