@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import StyleSwitcher from './components/StyleSwitcher';
+
 import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
@@ -41,7 +41,7 @@ const App: React.FC = () => {
       <main className="relative z-10">
         <Hero />
 
-        <StyleSwitcher />
+
         <About />
         <Process />
         <FAQ />
