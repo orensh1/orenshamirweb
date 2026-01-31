@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Instagram, Send } from 'lucide-react';
-import Button from './ui/Button';
+import { Mail, Phone, Instagram } from 'lucide-react';
 import LegalModals, { LegalType } from './LegalModals';
+import ContactForm from './ContactForm';
 
 const Contact: React.FC = () => {
   const [activeModal, setActiveModal] = useState<LegalType>(null);
@@ -83,44 +83,9 @@ const Contact: React.FC = () => {
                 <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#25D366_1px,transparent_1px)] [background-size:16px_16px]" />
               </motion.div>
 
-              {/* Existing Form */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="bg-zinc-900/30 backdrop-blur-md p-8 md:p-12 rounded-3xl border border-white/10"
-              >
-                <form className="space-y-6">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-zinc-400">שם מלא</label>
-                    <input type="text" className="w-full bg-zinc-950/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-pink-500 transition-colors text-white" placeholder="ישראל ישראלי" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-zinc-400">אימייל</label>
-                    <input type="email" className="w-full bg-zinc-950/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-pink-500 transition-colors text-white" placeholder="example@email.com" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-zinc-400">על הפרויקט</label>
-                    <textarea rows={4} className="w-full bg-zinc-950/50 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-pink-500 transition-colors text-white resize-none" placeholder="ספר לי קצת על העסק שלך..." />
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <input
-                      type="checkbox"
-                      id="privacy-policy"
-                      required
-                      className="mt-1 w-4 h-4 rounded border-white/10 bg-zinc-950/50 text-pink-500 focus:ring-pink-500 focus:ring-offset-0"
-                    />
-                    <label htmlFor="privacy-policy" className="text-xs text-zinc-400 leading-relaxed cursor-pointer">
-                      אני מאשר/ת את <a href="#privacy" onClick={(e) => openModal(e, 'privacy')} className="underline hover:text-white">מדיניות הפרטיות</a> ומסכים/ה לקבלת פרטים נוספים.
-                    </label>
-                  </div>
-                  <Button className="w-full text-lg group">
-                    שלח פרטים
-                    <Send size={18} className="group-hover:-translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  </Button>
-                </form>
-              </motion.div>
+
+              {/* Working Form with Email Integration */}
+              <ContactForm />
             </div>
           </div>
 
