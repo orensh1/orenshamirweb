@@ -6,6 +6,36 @@ import LiveNotifications from './LiveNotifications';
 import orenPortrait from '../assets/oren-portrait-new.jpg';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
+// Helper Component for Orbit Nodes (Moved to top for scope visibility)
+const OrbitNodeInline = ({ icon, label, desc, styleClass, parentSpeed }: any) => {
+  // Determine counter-rotation animation based on parent
+  const duration = parentSpeed === 'cw' ? '40s' : parentSpeed === 'mid' ? '30s' : '20s';
+  const direction = parentSpeed === 'cw' || parentSpeed === 'fast' ? 'orbitRotateCCW' : 'orbitRotate';
+
+  return (
+    <div
+      className={`absolute flex flex-col items-center gap-2 z-20 group/node ${styleClass}`}
+      style={{
+        animation: `${direction} ${duration} linear infinite`
+      }}
+    >
+      <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all duration-300 group-hover/node:scale-125 group-hover/node:bg-white/20 group-hover/node:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer relative">
+        {icon}
+
+        {/* TOOLTIP */}
+        <div className="absolute top-full mt-4 w-48 p-3 bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl opacity-0 group-hover/node:opacity-100 transition-opacity duration-300 pointer-events-none z-50 flex flex-col gap-1 text-center scale-95 group-hover/node:scale-100 origin-top shadow-2xl">
+          <div className="text-white font-bold text-sm border-b border-white/10 pb-1 mb-1">{label}</div>
+          <div className="text-gray-300 text-xs leading-relaxed" dir="rtl">{desc}</div>
+        </div>
+      </div>
+
+      <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
+        {label}
+      </div>
+    </div>
+  )
+};
+
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -58,7 +88,7 @@ const Hero: React.FC = () => {
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v24 (ADVANCED ORBITS)</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v25 (ORBITS FIXED)</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
@@ -203,34 +233,7 @@ const Hero: React.FC = () => {
       </motion.div>
 
     </div>
-// Helper Component for Orbit Nodes
-        const OrbitNodeInline = ({ icon, label, desc, styleClass, parentSpeed }: any) => {
-    // Determine counter-rotation animation based on parent
-    const duration = parentSpeed === 'cw' ? '40s' : parentSpeed === 'mid' ? '30s' : '20s';
-    const direction = parentSpeed === 'cw' || parentSpeed === 'fast' ? 'orbitRotateCCW' : 'orbitRotate';
+  );
+};
 
-    return (
-      <div
-        className={`absolute flex flex-col items-center gap-2 z-20 group/node ${styleClass}`}
-        style={{
-          animation: `${direction} ${duration} linear infinite`
-        }}
-      >
-        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all duration-300 group-hover/node:scale-125 group-hover/node:bg-white/20 group-hover/node:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer relative">
-          {icon}
-
-          {/* TOOLTIP */}
-          <div className="absolute top-full mt-4 w-48 p-3 bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl opacity-0 group-hover/node:opacity-100 transition-opacity duration-300 pointer-events-none z-50 flex flex-col gap-1 text-center scale-95 group-hover/node:scale-100 origin-top shadow-2xl">
-            <div className="text-white font-bold text-sm border-b border-white/10 pb-1 mb-1">{label}</div>
-            <div className="text-gray-300 text-xs leading-relaxed" dir="rtl">{desc}</div>
-          </div>
-        </div>
-
-        <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
-          {label}
-        </div>
-      </div>
-    )
-  };
-
-  export default Hero;
+export default Hero;
