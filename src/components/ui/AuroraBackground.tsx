@@ -24,8 +24,8 @@ export const AuroraBackground = ({
                 <div
                     className={cn(
                         `
-            [--white-gradient:repeating-linear-gradient(100deg,var(--white)_0%,var(--white)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--white)_16%)]
-            [--dark-gradient:repeating-linear-gradient(100deg,var(--black)_0%,var(--black)_7%,var(--transparent)_10%,var(--transparent)_12%,var(--black)_16%)]
+            [--white-gradient:repeating-linear-gradient(100deg,#ffffff_0%,#ffffff_7%,transparent_10%,transparent_12%,#ffffff_16%)]
+            [--dark-gradient:repeating-linear-gradient(100deg,#000000_0%,#000000_7%,transparent_10%,transparent_12%,#000000_16%)]
             [--aurora:repeating-linear-gradient(100deg,#3B82F6_10%,#A855F7_15%,#9333EA_20%,#EC4899_25%,#22C55E_30%)]
             
             [background-image:var(--white-gradient),var(--aurora)]
@@ -39,7 +39,7 @@ export const AuroraBackground = ({
             pointer-events-none
             absolute -inset-[10px] opacity-40`,
                         showRadialGradient &&
-                        `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]`
+                        `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]`
                     )}
                 ></div>
             </div>
