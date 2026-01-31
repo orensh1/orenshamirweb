@@ -1,5 +1,5 @@
 "use client";
-import { cn } from "../../utils/cn";
+import { cn } "../../utils/cn";
 import React, { useEffect, useRef, useState, ReactNode } from "react";
 import { createNoise3D } from "simplex-noise";
 
@@ -43,19 +43,19 @@ export const WavyBackground = ({
     const init = () => {
         let canvas = canvasRef.current;
         if (!canvas) return;
-        let ctx = canvas.getContext("2d");
+        let ctx = canvas.getContext("2d", { alpha: false }); // Optimization: alpha false if full fill
         if (!ctx) return;
 
         let w = (ctx.canvas.width = window.innerWidth);
         let h = (ctx.canvas.height = window.innerHeight);
-        ctx.filter = `blur(${blur}px)`;
+        // REMOVED ctx.filter = blur; (Expensive) - Using CSS instead
         let nt = 0;
 
         // Responsive Settings
         const isMobile = window.innerWidth < 768;
-        const waveYOffset = isMobile ? 0.5 : 0.75; // Lower on PC (0.75) to hit button
-        const waveAmplitude = isMobile ? 100 : 200; // Move more on PC
-        const speedMultiplier = isMobile ? 1 : 2;   // Faster on PC
+        const waveYOffset = isMobile ? 0.5 : 0.75;
+        const waveAmplitude = isMobile ? 100 : 200;
+        const speedMultiplier = isMobile ? 1 : 1.5; // Slightly reduced for smoothness
 
         const waveColors = colors ?? [
             "#38bdf8",
@@ -71,8 +71,11 @@ export const WavyBackground = ({
                 ctx!.beginPath();
                 ctx!.lineWidth = waveWidth || 50;
                 ctx!.strokeStyle = waveColors[i % waveColors.length];
-                for (let x = 0; x < w; x += 5) {
-                    var y = noise(x / 800, 0.3 * i, nt) * waveAmplitude;
+
+                // OPTIMIZATION: Increased step from 5 to 10 to reduce CPU load by 50%
+                for (let x = 0; x < w; x += 10) {
+                    // Smoother noise scale (x/1000 instead of x/800)
+                    var y = noise(x / 1000, 0.3 * i, nt) * waveAmplitude;
                     ctx!.lineTo(x, y + h * waveYOffset);
                 }
                 ctx!.stroke();
@@ -94,7 +97,6 @@ export const WavyBackground = ({
         const handleResize = () => {
             w = ctx.canvas.width = window.innerWidth;
             h = ctx.canvas.height = window.innerHeight;
-            ctx.filter = `blur(${blur}px)`;
             // Re-init on resize to catch layout shifts (though full re-run handled by effect)
         };
         window.addEventListener("resize", handleResize);
@@ -110,14 +112,7 @@ export const WavyBackground = ({
         return () => cleanup && cleanup();
     }, [blur, speed, waveOpacity]);
 
-    const [isSafari, setIsSafari] = useState(false);
-    useEffect(() => {
-        setIsSafari(
-            typeof window !== "undefined" &&
-            navigator.userAgent.includes("Safari") &&
-            !navigator.userAgent.includes("Chrome")
-        );
-    }, []);
+    // Safari check removed, using universal CSS blur
 
     return (
         <div
@@ -131,7 +126,8 @@ export const WavyBackground = ({
                 ref={canvasRef}
                 id="canvas"
                 style={{
-                    ...(isSafari ? { filter: `blur(${blur}px)` } : {}),
+                    filter: `blur(${blur}px)`, // Use CSS Blur (GPU accelerated)
+                    willChange: "transform"    // Hint to browser
                 }}
             ></canvas>
             <div className={cn("relative z-10", className)} {...props}>

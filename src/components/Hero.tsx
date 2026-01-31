@@ -41,7 +41,7 @@ const Hero: React.FC = () => {
       <WavyBackground
         className="max-w-4xl mx-auto pb-40 flex flex-col items-center justify-center text-center px-4"
         containerClassName="h-screen"
-        colors={['#3B82F6', '#06B6D4', '#22C55E', '#A855F7', '#EC4899']}
+        colors={['#3B82F6', '#06B6D4', '#A855F7', '#EC4899']}
         waveWidth={50}
         blur={10}
       >
