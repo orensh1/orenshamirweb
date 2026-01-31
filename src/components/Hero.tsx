@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
       {/* 1. Global Background */}
       <SuccessStack />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-          {/* Restored Aurora Blobs */}
+        {/* Restored Aurora Blobs */}
         <div className="absolute top-[-10%] -right-[20%] w-[80vw] h-[80vw] rounded-full bg-purple-600/20 blur-[100px] animate-blob mix-blend-screen" />
         <div className="absolute bottom-[-10%] -left-[20%] w-[80vw] h-[80vw] rounded-full bg-pink-600/20 blur-[100px] animate-blob animation-delay-2000 mix-blend-screen" />
       </div>
@@ -66,82 +66,6 @@ const Hero: React.FC = () => {
       {/* 2. Main Layout - 2 Columns */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col md:flex-row items-center justify-between gap-12 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
 
-        {/* LEFT COLUMN: Solar Orbit Visualizer (Restored) 
-            Order: 2 on Mobile (Bottom), 1 on Desktop (Left).
-        */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-center z-20 mt-12 md:mt-0 relative perspective-[1000px] order-2 md:order-1">
-          
-          {/* Orbit System Container (Scaled 75%) */}
-          <motion.div
-            className="relative w-[280px] h-[280px] md:w-[420px] md:h-[420px] flex items-center justify-center transform-style-3d group"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1 }}
-            whileHover={{ rotateX: 5, rotateY: 5 }}
-          >
-            {/* Orbit 1 (Outer) - 40s duration */}
-            <div
-              className="orbit-ring absolute w-[100%] h-[100%] rounded-full border border-white/5 shadow-[0_0_30px_rgba(100,100,255,0.05)] blur-[1px]"
-              style={{ animation: 'orbitRotate 40s linear infinite' }}
-            >
-              {/* Node 1: Optimization */}
-              <OrbitNodeInline
-                styleClass="top-[10%] right-[15%]"
-                icon={<BarChart3 className="w-6 h-6 text-blue-400" />}
-                label="אופטימיזציה"
-                desc="שיפור יחס המרה בעזרת ניתוח נתונים מתקדם."
-                parentSpeed="cw" // Clockwise parent, so node rotates CCW
-              />
-               {/* Node 3: Fast Loading */}
-               <OrbitNodeInline
-                styleClass="bottom-[10%] left-[15%]"
-                icon={<Zap className="w-6 h-6 text-yellow-400" />}
-                label="טעינה מהירה"
-                desc="אתר שעולה תוך פחות משנייה."
-                parentSpeed="cw"
-              />
-            </div>
-
-            {/* Orbit 2 (Middle) - 30s duration CCW */}
-            <div
-              className="orbit-ring absolute w-[70%] h-[70%] rounded-full border border-white/10 shadow-[0_0_20px_rgba(200,100,255,0.1)] border-dashed opacity-60"
-              style={{ animation: 'orbitRotateCCW 30s linear infinite' }}
-            >
-              {/* Node 2: Converting Design */}
-              <OrbitNodeInline
-                styleClass="bottom-[15%] right-[15%]"
-                icon={<Palette className="w-6 h-6 text-pink-400" />}
-                label="עיצוב ממיר"
-                desc="חווית משתמש שמובילה לפעולה."
-                parentSpeed="mid"
-              />
-            </div>
-
-            {/* Orbit 3 (Inner) - 20s duration */}
-            <div
-              className="orbit-ring absolute w-[45%] h-[45%] rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-              style={{ animation: 'orbitRotate 20s linear infinite' }}
-            >
-              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
-                לידים איכותיים
-              </div>
-            </div>
-
-            {/* Central Core */}
-            <motion.div
-              className="absolute w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-blue-600/80 to-purple-600/80 backdrop-blur-3xl flex items-center justify-center shadow-[0_0_60px_rgba(50,100,255,0.4)] z-10 border border-white/20 cursor-default"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              whileHover={{ scale: 1.1, filter: 'brightness(1.2)' }}
-            >
-              <div className="text-center pointer-events-none">
-                <div className="text-3xl md:text-4xl font-black text-white leading-none">20k+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium mt-1">לידים חדשים</div>
-              </div>
-            </motion.div>
-
-          </motion.div>
-        </div>
 
 
         {/* RIGHT COLUMN: Content & Typography (Hebrew)
@@ -153,8 +77,8 @@ const Hero: React.FC = () => {
         >
           {/* Top Tag - Clean "Oren Shamir" */}
           <div className="mb-8 flex items-center gap-3 opacity-60">
-             <span className="text-[11px] tracking-[0.25em] font-bold uppercase text-white/80">OREN SHAMIR</span>
-             <div className="h-[1px] w-8 bg-white/40"></div>
+            <span className="text-[11px] tracking-[0.25em] font-bold uppercase text-white/80">OREN SHAMIR</span>
+            <div className="h-[1px] w-8 bg-white/40"></div>
           </div>
 
           {/* Headlines */}
