@@ -10,7 +10,7 @@ const About: React.FC = () => {
 
   return (
     <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-black min-h-screen">
-      {/* Continuous Marquee Text - More visible on mobile */}
+      {/* Continuous Marquee Text - Mobile: Behind headline, Desktop: Center */}
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
         transition={{
@@ -18,7 +18,7 @@ const About: React.FC = () => {
           ease: "linear",
           duration: 30
         }}
-        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.3] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-1"
+        className="absolute top-1/3 md:top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.15] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-1"
         style={{ position: 'absolute', zIndex: 1 }}
       >
         <span className="text-[10vw] md:text-[20vw] font-black uppercase text-white">OREN SHAMIR CREATIVE</span>
