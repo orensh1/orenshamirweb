@@ -108,14 +108,13 @@ const Hero: React.FC = () => {
                 <Button
                   variant="primary"
                   onClick={scrollToContact}
-                  className="relative !text-xl md:!text-2xl !px-12 !py-5 w-[90%] md:w-auto rounded-full bg-black text-white border border-white/10 overflow-hidden"
+                  className="relative !text-xl md:!text-2xl !px-12 !py-5 w-[90%] md:w-auto rounded-full bg-white text-black font-black tracking-tighter border border-white/10 overflow-hidden"
                 >
                   {/* Shimmer Effect */}
-                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-10 pointer-events-none" />
+                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-black/5 to-transparent z-10 pointer-events-none" />
 
                   <span className="relative z-20 flex items-center justify-center gap-3">
                     אני רוצה אתר כזה
-                    <ArrowUpRight className="w-6 h-6 md:w-7 md:h-7" />
                   </span>
                 </Button>
               </div>
