@@ -52,13 +52,6 @@ const Navbar: React.FC = () => {
             OSH
           </a>
 
-          {/* Center Tagline - Mobile: Small, Desktop: Hidden */}
-          <div className="md:hidden flex-1 text-center px-2">
-            <span className="text-[11px] text-white/90 whitespace-nowrap overflow-hidden block max-w-full">
-              אורן שמיר | בונה דפי נחיתה
-            </span>
-          </div>
-
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
             {links.map((link) => (
