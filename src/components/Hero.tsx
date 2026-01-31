@@ -108,8 +108,7 @@ const Hero: React.FC = () => {
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,
-            transform: 'translate(-50%, -50%)',
-            transition: 'left 0.05s linear, top 0.05s linear'
+            transform: 'translate(-50%, -50%)'
           }}
         />
 
