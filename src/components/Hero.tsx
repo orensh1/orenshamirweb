@@ -120,13 +120,7 @@ const Hero: React.FC = () => {
 
       {/* 2. Glassmorphic Sidebar Cards - Left Side */}
       <div className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-4">
-        <motion.div
-          custom={0}
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default"
-        >
+        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-full bg-green-500/20">
               <Calendar className="w-5 h-5 text-green-400" />
@@ -136,15 +130,9 @@ const Hero: React.FC = () => {
               <div className="text-xs text-gray-400">לפני 2 דקות</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          custom={1}
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default"
-        >
+        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-full bg-blue-500/20">
               <TrendingUp className="w-5 h-5 text-blue-400" />
@@ -154,15 +142,9 @@ const Hero: React.FC = () => {
               <div className="text-xs text-gray-400">השבוע</div>
             </div>
           </div>
-        </motion.div>
+        </div>
 
-        <motion.div
-          custom={2}
-          initial="hidden"
-          animate="visible"
-          variants={cardVariants}
-          className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default"
-        >
+        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
           <div className="flex items-center gap-3">
             <div className="p-2 rounded-full bg-purple-500/20">
               <Mail className="w-5 h-5 text-purple-400" />
@@ -172,7 +154,7 @@ const Hero: React.FC = () => {
               <div className="text-xs text-gray-400">עכשיו</div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* 3. Main Layout - Single Column Centered */}
@@ -226,8 +208,11 @@ const Hero: React.FC = () => {
             dir="rtl"
           >
             בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר{' '}
-            <span className="font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
-              כסף
+            <span className="relative inline-block" style={{ fontSize: '1.4em' }}>
+              <span className="absolute inset-0 bg-gradient-to-r from-green-300 via-emerald-300 to-green-300 bg-clip-text text-transparent blur-sm animate-pulse opacity-70"></span>
+              <span className="relative font-black bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] drop-shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+                כסף
+              </span>
             </span>
             .
           </motion.p>
