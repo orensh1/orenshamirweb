@@ -8,7 +8,7 @@ import {
 const Accessibility: React.FC = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [settings, setSettings] = useState({
-        fontSize: 0, // 0=normal, 1=large, 2=xl
+        fontSize: 0, // 0=normal, 1-4 larger
         contrast: false,
         grayscale: false,
         sepia: false,
@@ -17,10 +17,11 @@ const Accessibility: React.FC = () => {
         underlineLinks: false,
         highlightHeadings: false,
         readableFont: false,
-        zoom: 100, // percentage
+        zoom: 1, // 1 = 100%, 1.1 = 110%, etc.
         bigCursor: false,
         blackCursor: false,
         stopAnimations: false,
+        keyboardNav: false,
     });
 
     // Apply settings
@@ -28,10 +29,11 @@ const Accessibility: React.FC = () => {
         const root = document.documentElement;
         const body = document.body;
 
-        // Font Size & Zoom
-        root.style.fontSize = settings.fontSize === 0 ? '16px' : settings.fontSize === 1 ? '18px' : '20px';
-        // Note: Actual browser zoom cannot be controlled by JS, using transform/scale on body as fallback or CSS var
-        // We'll skip actual page zoom implementation as it's buggy in React w/ fixed elements, sticking to Font Size.
+        // Font Size (Scale rems)
+        root.style.fontSize = `${16 + (settings.fontSize * 2)}px`;
+
+        // Zoom (CSS Zoom property - works in Chrome/Edge/Safari, limited FF support but acceptable for web a11y tools)
+        (body.style as any).zoom = settings.zoom;
 
         // Filters logic
         let filterString = '';
@@ -41,34 +43,15 @@ const Accessibility: React.FC = () => {
         if (settings.invert) filterString += ' invert(100%)';
         root.style.filter = filterString;
 
-        // Black & Yellow
-        if (settings.blackYellow) {
-            root.classList.add('a11y-black-yellow');
-        } else {
-            root.classList.remove('a11y-black-yellow');
-        }
-
-        // Readable Font
-        if (settings.readableFont) {
-            body.classList.add('a11y-readable-font');
-        } else {
-            body.classList.remove('a11y-readable-font');
-        }
-
-        // Links & Headings
+        // Class Toggles
+        root.classList.toggle('a11y-black-yellow', settings.blackYellow);
+        body.classList.toggle('a11y-readable-font', settings.readableFont);
         body.classList.toggle('a11y-underline-links', settings.underlineLinks);
         body.classList.toggle('a11y-highlight-headings', settings.highlightHeadings);
-
-        // Cursors
         body.classList.toggle('a11y-big-cursor', settings.bigCursor);
         body.classList.toggle('a11y-black-cursor', settings.blackCursor);
-
-        // Animations
-        if (settings.stopAnimations) {
-            body.classList.add('a11y-stop-animations');
-        } else {
-            body.classList.remove('a11y-stop-animations');
-        }
+        body.classList.toggle('a11y-stop-animations', settings.stopAnimations);
+        body.classList.toggle('a11y-keyboard-focus', settings.keyboardNav);
 
     }, [settings]);
 
@@ -88,13 +71,18 @@ const Accessibility: React.FC = () => {
         background-color: yellow !important; color: black !important; padding: 2px 5px; 
       }
 
-      .a11y-big-cursor, .a11y-big-cursor * { cursor: zoom-in !important; } /* Fallback for big cursor */
-      .a11y-black-cursor, .a11y-black-cursor * { cursor: cell !important; } /* Fallback for distinctive cursor */
+      .a11y-big-cursor, .a11y-big-cursor * { cursor: zoom-in !important; }
+      .a11y-black-cursor, .a11y-black-cursor * { cursor: cell !important; }
       
       .a11y-stop-animations *, .a11y-stop-animations *::before, .a11y-stop-animations *::after {
         animation: none !important;
         transition: none !important;
         transform: none !important; 
+      }
+
+      .a11y-keyboard-focus *:focus {
+        outline: 4px solid red !important;
+        outline-offset: 2px !important;
       }
     `;
         document.head.appendChild(style);
@@ -105,7 +93,7 @@ const Accessibility: React.FC = () => {
         setSettings({
             fontSize: 0, contrast: false, grayscale: false, sepia: false, invert: false,
             blackYellow: false, underlineLinks: false, highlightHeadings: false, readableFont: false,
-            zoom: 100, bigCursor: false, blackCursor: false, stopAnimations: false,
+            zoom: 1, bigCursor: false, blackCursor: false, stopAnimations: false, keyboardNav: false,
         });
     };
 
@@ -150,8 +138,8 @@ const Accessibility: React.FC = () => {
                         </div>
 
                         <div className="p-3 grid grid-cols-4 gap-2 max-h-[60vh] overflow-y-auto">
-                            {/* 1. Keyboard Nav (Placeholder - usually requires JS focus logic) */}
-                            <OptionBtn icon={Keyboard} label="ניווט מקלדת" active={false} onClick={() => { }} />
+                            {/* 1. Keyboard Nav */}
+                            <OptionBtn icon={Keyboard} label="ניווט מקלדת" active={settings.keyboardNav} onClick={() => setSettings(s => ({ ...s, keyboardNav: !s.keyboardNav }))} />
 
                             {/* 2. Stop Animations */}
                             <OptionBtn icon={ZapOff} label="ביטול הבהובים" active={settings.stopAnimations} onClick={() => setSettings(s => ({ ...s, stopAnimations: !s.stopAnimations }))} />
@@ -178,16 +166,16 @@ const Accessibility: React.FC = () => {
                             <OptionBtn icon={Type} label="גופן קריא" active={settings.readableFont} onClick={() => setSettings(s => ({ ...s, readableFont: !s.readableFont }))} />
 
                             {/* 10. Font + */}
-                            <OptionBtn icon={Type} label="הגדלת גופן" active={settings.fontSize === 2} onClick={() => setSettings(s => ({ ...s, fontSize: 2 }))} />
+                            <OptionBtn icon={Type} label="הגדלת גופן" active={settings.fontSize === 2} onClick={() => setSettings(s => ({ ...s, fontSize: Math.min(s.fontSize + 1, 4) }))} />
 
                             {/* 11. Font - */}
-                            <OptionBtn icon={Type} label="הקטנת גופן" active={settings.fontSize === 0} onClick={() => setSettings(s => ({ ...s, fontSize: 0 }))} />
+                            <OptionBtn icon={Type} label="הקטנת גופן" active={settings.fontSize === 0} onClick={() => setSettings(s => ({ ...s, fontSize: Math.max(s.fontSize - 1, 0) }))} />
 
-                            {/* 12. Zoom + */}
-                            <OptionBtn icon={ZoomIn} label="הגדלת מסך" active={false} onClick={() => { }} />
+                            {/* 12. Zoom + (Increments by 10%) */}
+                            <OptionBtn icon={ZoomIn} label="הגדלת מסך" active={settings.zoom > 1} onClick={() => setSettings(s => ({ ...s, zoom: Math.min(s.zoom + 0.1, 2) }))} />
 
-                            {/* 13. Zoom - */}
-                            <OptionBtn icon={ZoomOut} label="הקטנת מסך" active={false} onClick={() => { }} />
+                            {/* 13. Zoom - (Decrements by 10%) */}
+                            <OptionBtn icon={ZoomOut} label="הקטנת מסך" active={settings.zoom < 1} onClick={() => setSettings(s => ({ ...s, zoom: Math.max(s.zoom - 0.1, 0.5) }))} />
 
                             {/* 14. Big Cursor */}
                             <OptionBtn icon={MousePointer2} label="סמן גדול" active={settings.bigCursor} onClick={() => setSettings(s => ({ ...s, bigCursor: !s.bigCursor }))} />
