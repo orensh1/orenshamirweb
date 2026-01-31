@@ -52,10 +52,10 @@ const Hero: React.FC = () => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute !w-[280px] md:!w-[480px]"
+        className="absolute !w-[280px] md:!w-[500px] pointer-events-none"
         style={{
-          top: '5%',       // Designjoy Spec
-          right: '-80px',  // Clipping off right edge
+          top: '40px',     // Fixed top offset
+          right: '-120px', // Deep clip off right edge
           zIndex: 0,       // Behind content
           filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))'
         }}
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
             className="mb-8 md:mb-12 flex items-center gap-4 self-start md:self-auto"
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v20 (DESIGNJOY FIX)</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v21 (ABSOLUTE FIX)</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
