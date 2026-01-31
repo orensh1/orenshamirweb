@@ -55,7 +55,7 @@ export const WavyBackground = ({
         const isMobile = window.innerWidth < 768;
         const waveYOffset = isMobile ? 0.5 : 0.75;
         const waveAmplitude = isMobile ? 100 : 200;
-        const speedMultiplier = isMobile ? 1 : 1.5; // Slightly reduced for smoothness
+        const speedMultiplier = isMobile ? 0.5 : 1.5; // Slower on mobile (0.5), same on PC (1.5)
 
         const waveColors = colors ?? [
             "#38bdf8",
