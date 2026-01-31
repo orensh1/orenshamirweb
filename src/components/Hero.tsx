@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { smoothScrollTo } from '../utils/smoothScroll';
-import { ArrowUpRight, Calendar, TrendingUp, Mail } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
 
-// --- ENHANCED HERO WITH SIDEBAR CARDS & PREMIUM ANIMATIONS ---
+// --- OPTIMIZED HERO WITH SMOOTH CURSOR & HEBREW ANIMATION ---
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const cursorGlowRef = useRef<HTMLDivElement>(null);
   const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
@@ -19,10 +19,21 @@ const Hero: React.FC = () => {
   const yText = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Cursor tracking for background & magnetic button
+  // Optimized cursor tracking using RAF for smooth 60fps
   useEffect(() => {
+    let rafId: number;
+
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
+      // Cancel previous frame
+      if (rafId) cancelAnimationFrame(rafId);
+
+      // Update cursor glow position directly via RAF
+      rafId = requestAnimationFrame(() => {
+        if (cursorGlowRef.current) {
+          cursorGlowRef.current.style.left = `${e.clientX}px`;
+          cursorGlowRef.current.style.top = `${e.clientY}px`;
+        }
+      });
 
       // Magnetic button effect
       if (buttonRef.current) {
@@ -34,7 +45,6 @@ const Hero: React.FC = () => {
         const distanceY = e.clientY - buttonCenterY;
         const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 
-        // Magnetic effect within 150px radius
         if (distance < 150) {
           const strength = (150 - distance) / 150;
           setButtonOffset({
@@ -48,7 +58,10 @@ const Hero: React.FC = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const scrollToContact = () => {
@@ -80,35 +93,33 @@ const Hero: React.FC = () => {
     }
   };
 
-  const cardVariants = {
-    hidden: { opacity: 0, x: -50 },
-    visible: (custom: number) => ({
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        delay: custom * 0.2
-      }
-    })
-  };
+  // Hebrew floating words
+  const hebrewWords = [
+    { text: 'המרה', delay: 0 },
+    { text: 'לקוחות', delay: 0.3 },
+    { text: 'שיווק', delay: 0.6 },
+    { text: 'דיגיטל', delay: 0.9 },
+    { text: 'תוצאות', delay: 1.2 },
+    { text: 'הצלחה', delay: 1.5 }
+  ];
 
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-black text-white font-sans selection:bg-[#22C55E] selection:text-white"
+      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-black text-white selection:bg-[#22C55E] selection:text-white"
+      style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
     >
-      {/* 1. Cursor-Reactive Background */}
+      {/* 1. Cursor-Reactive Background - Optimized */}
       <SuccessStack />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Large cursor-following purple hue */}
+        {/* Smooth cursor-following purple hue using RAF */}
         <div
-          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-600/40 via-fuchsia-600/30 to-pink-600/40 blur-[150px]"
+          ref={cursorGlowRef}
+          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-600/40 via-fuchsia-600/30 to-pink-600/40 blur-[150px] will-change-transform"
           style={{
-            left: `${mousePosition.x}px`,
-            top: `${mousePosition.y}px`,
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
+            left: '50%',
+            top: '50%'
           }}
         />
 
@@ -117,49 +128,38 @@ const Hero: React.FC = () => {
         <div className="absolute bottom-[-10%] -left-[20%] w-[60vw] h-[60vw] rounded-full bg-pink-600/10 blur-[100px] animate-blob animation-delay-2000" />
       </div>
 
-      {/* 2. Glassmorphic Sidebar Cards - Left Side */}
-      <div className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 z-20 hidden lg:flex flex-col gap-4">
-        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-full bg-green-500/20">
-              <Calendar className="w-5 h-5 text-green-400" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white">שיחה נקבעה</div>
-              <div className="text-xs text-gray-400">לפני 2 דקות</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-full bg-blue-500/20">
-              <TrendingUp className="w-5 h-5 text-blue-400" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white">+150% תנועה</div>
-              <div className="text-xs text-gray-400">השבוע</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="group relative px-5 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl hover:bg-white/10 transition-all duration-300 cursor-default">
-          <div className="flex items-center gap-3">
-            <div className="p-2 rounded-full bg-purple-500/20">
-              <Mail className="w-5 h-5 text-purple-400" />
-            </div>
-            <div>
-              <div className="text-sm font-bold text-white">ליד חדש התקבל</div>
-              <div className="text-xs text-gray-400">עכשיו</div>
-            </div>
-          </div>
-        </div>
+      {/* 2. Hebrew Background Animation - Behind Content */}
+      <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
+        {hebrewWords.map((word, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 100 }}
+            animate={{
+              opacity: [0, 0.08, 0.08, 0],
+              y: [100, -20, -20, -150],
+              x: [0, Math.sin(i) * 50, 0]
+            }}
+            transition={{
+              duration: 12,
+              delay: word.delay,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+            className="absolute text-7xl md:text-9xl font-black text-white/5"
+            style={{
+              left: `${10 + (i * 15)}%`,
+              top: '50%'
+            }}
+          >
+            {word.text}
+          </motion.div>
+        ))}
       </div>
 
       {/* 3. Main Layout - Single Column Centered */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col items-center justify-center gap-12 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
 
-        {/* Content & Typography (Hebrew) - Stagger Animation */}
+        {/* Content & Typography - Stagger Animation */}
         <motion.div
           style={{ y: yText, opacity: opacityText }}
           className="flex flex-col items-center w-full max-w-4xl relative z-20 text-center"
@@ -177,11 +177,10 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Headlines - Premium Typography */}
+          {/* Headlines */}
           <motion.h1
             variants={itemVariants}
             className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-10 relative"
-            style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
           >
             <span className="block text-white drop-shadow-2xl mb-3">לא עוד סתם</span>
             <span className="block relative">
