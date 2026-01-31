@@ -15,16 +15,26 @@ import Accessibility from './components/Accessibility';
 const App: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Custom Cursor Logic - Performance Optimized (GPU Composite Only)
+  // Custom Cursor Logic - Performance Optimized (GPU Composite Only + rAF)
   useEffect(() => {
+    let rafId: number;
+
     const updateCursor = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        // Using translate3d forces GPU acceleration and avoids layout/paint thrashing
-        cursorRef.current.style.transform = `translate3d(${e.clientX - 400}px, ${e.clientY - 400}px, 0)`;
-      }
+      // Cancel previous frame to ensure we only render the latest position
+      if (rafId) cancelAnimationFrame(rafId);
+
+      rafId = requestAnimationFrame(() => {
+        if (cursorRef.current) {
+          cursorRef.current.style.transform = `translate3d(${e.clientX - 400}px, ${e.clientY - 400}px, 0)`;
+        }
+      });
     };
+
     window.addEventListener('mousemove', updateCursor);
-    return () => window.removeEventListener('mousemove', updateCursor);
+    return () => {
+      window.removeEventListener('mousemove', updateCursor);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
