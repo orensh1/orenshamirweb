@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Instagram } from 'lucide-react';
+import { Mail, Phone, Instagram, Send } from 'lucide-react';
 import LegalModals, { LegalType } from './LegalModals';
 import ContactForm from './ContactForm';
 
