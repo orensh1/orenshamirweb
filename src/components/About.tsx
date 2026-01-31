@@ -9,8 +9,8 @@ const About: React.FC = () => {
   const x = useTransform(scrollYProgress, [0.3, 0.6], ["0%", "-10%"]);
 
   return (
-    <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-black">
-      {/* Continuous Marquee Text */}
+    <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-black min-h-screen">
+      {/* Continuous Marquee Text - More visible on mobile */}
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
         transition={{
@@ -18,10 +18,11 @@ const About: React.FC = () => {
           ease: "linear",
           duration: 30
         }}
-        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.04] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-0"
+        className="absolute top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.3] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-1"
+        style={{ position: 'absolute', zIndex: 1 }}
       >
-        <span className="text-[10vw] md:text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
-        <span className="text-[10vw] md:text-[20vw] font-black uppercase">OREN SHAMIR CREATIVE</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-white">OREN SHAMIR CREATIVE</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-white">OREN SHAMIR CREATIVE</span>
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
