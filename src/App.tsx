@@ -15,11 +15,12 @@ import Accessibility from './components/Accessibility';
 const App: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Custom Cursor Logic - Performance Optimized (No State Re-renders)
+  // Custom Cursor Logic - Performance Optimized (GPU Composite Only)
   useEffect(() => {
     const updateCursor = (e: MouseEvent) => {
       if (cursorRef.current) {
-        cursorRef.current.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
+        // Using translate3d forces GPU acceleration and avoids layout/paint thrashing
+        cursorRef.current.style.transform = `translate3d(${e.clientX - 400}px, ${e.clientY - 400}px, 0)`;
       }
     };
     window.addEventListener('mousemove', updateCursor);
@@ -27,15 +28,15 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200 overflow-x-hidden">
 
-
-      {/* Custom Cursor Glow */}
+      {/* Custom Cursor Glow - Optimized */}
       <div
         ref={cursorRef}
-        className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
+        className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-0 opacity-30 blur-[100px] transition-opacity duration-300 will-change-transform"
         style={{
-          background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
+          background: 'radial-gradient(circle, rgba(29, 78, 216, 0.4) 0%, transparent 70%)',
+          transform: 'translate3d(-100%, -100%, 0)' // Start off-screen
         }}
       />
 
