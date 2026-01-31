@@ -24,20 +24,20 @@ export const AuroraBackground = ({
                 <div
                     className={cn(
                         `
-            [--white-gradient:repeating-linear-gradient(100deg,#ffffff_0%,#ffffff_7%,transparent_10%,transparent_12%,#ffffff_16%)]
             [--dark-gradient:repeating-linear-gradient(100deg,#000000_0%,#000000_7%,transparent_10%,transparent_12%,#000000_16%)]
-            [--aurora:repeating-linear-gradient(100deg,#3B82F6_5%,#06B6D4_15%,#22C55E_25%,#A855F7_35%,#EC4899_45%)]
+            [--aurora:repeating-linear-gradient(100deg,#3B82F6_10%,#06B6D4_20%,#22C55E_30%,#A855F7_40%,#EC4899_50%)]
             
-            [background-image:var(--white-gradient),var(--aurora)]
+            [background-image:var(--aurora)]
             [background-size:300%,_200%]
             [background-position:50%_50%,50%_50%]
             filter blur-[10px]
+            will-change-transform
             
-            after:content-[""] after:absolute after:inset-0 after:[background-image:var(--white-gradient),var(--aurora)] 
+            after:content-[""] after:absolute after:inset-0 after:[background-image:var(--aurora)] 
             after:[background-size:200%,_100%] 
-            after:animate-aurora after:[background-attachment:fixed] after:mix-blend-difference
+            after:animate-aurora after:[background-attachment:fixed] after:mix-blend-overlay
             pointer-events-none
-            absolute -inset-[10px] opacity-40`,
+            absolute -inset-[10px] opacity-50`,
                         showRadialGradient &&
                         `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,transparent_70%)]`
                     )}
