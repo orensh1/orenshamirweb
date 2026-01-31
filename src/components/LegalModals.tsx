@@ -67,7 +67,7 @@ const LegalModals: React.FC<LegalModalsProps> = ({ activeModal, onClose }) => {
                             </div>
 
                             {/* Body */}
-                            <div className="p-8 text-zinc-300 leading-relaxed text-lg whitespace-pre-wrap">
+                            <div className="p-8 text-gray-200 leading-relaxed text-lg whitespace-pre-wrap">
                                 {content[activeModal].body}
                             </div>
 

@@ -40,13 +40,13 @@ const Contact: React.FC = () => {
               </p>
 
               <div className="flex flex-col gap-6">
-                <a href="mailto:orenshamir5@gmail.com" className="flex items-center gap-4 text-zinc-300 hover:text-white transition-colors group">
+                <a href="mailto:orenshamir5@gmail.com" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group">
                   <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center group-hover:bg-pink-600 transition-colors">
                     <Mail size={20} />
                   </div>
                   <span className="text-lg">orenshamir5@gmail.com</span>
                 </a>
-                <a href="tel:0526448826" className="flex items-center gap-4 text-zinc-300 hover:text-white transition-colors group">
+                <a href="tel:0526448826" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group">
                   <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center group-hover:bg-pink-600 transition-colors">
                     <Phone size={20} />
                   </div>

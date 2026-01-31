@@ -70,7 +70,7 @@ const About: React.FC = () => {
                 אורן שמיר.
               </span>
             </h2>
-            <div className="space-y-6 text-lg text-zinc-300">
+            <div className="space-y-6 text-lg text-gray-200">
               <p>
                 אני בן 16, מבאר שבע.
               </p>

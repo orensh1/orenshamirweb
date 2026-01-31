@@ -115,6 +115,7 @@ const Accessibility: React.FC = () => {
                 onClick={() => setIsOpen(!isOpen)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                aria-label="Accessibility Menu"
             >
                 <A11yIcon size={24} />
             </motion.button>
