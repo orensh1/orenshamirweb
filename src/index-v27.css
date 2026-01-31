@@ -232,6 +232,68 @@ html.big-cursor * {
   }
 }
 
+/* Aurora Animations - 60FPS Optimized */
+@keyframes aurora-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate3d(30px, -50px, 0) scale(1.1);
+  }
+
+  66% {
+    transform: translate3d(-20px, 20px, 0) scale(0.9);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes aurora-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-40px, 60px, 0) scale(1.2);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes aurora-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.2;
+  }
+
+  50% {
+    transform: translate3d(50px, -30px, 0) scale(0.9);
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.2;
+  }
+}
+
+.animate-aurora-1 {
+  animation: aurora-1 15s infinite ease-in-out;
+}
+
+.animate-aurora-2 {
+  animation: aurora-2 20s infinite ease-in-out;
+}
+
+.animate-aurora-3 {
+  animation: aurora-3 12s infinite ease-in-out;
+}
+
 .orbit-ring {
   animation-play-state: running;
 }
