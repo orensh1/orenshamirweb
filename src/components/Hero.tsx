@@ -4,6 +4,7 @@ import { smoothScrollTo } from '../utils/smoothScroll';
 import { ArrowUpRight } from 'lucide-react';
 import Button from './ui/Button';
 import { WavyBackground } from './ui/wavy-background';
+import Magnetic from './ui/Magnetic';
 
 // --- Wavy HERO COMPONENT (v53) ---
 const Hero: React.FC = () => {
@@ -55,15 +56,11 @@ const Hero: React.FC = () => {
           animate="visible"
           transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
         >
-          {/* Top Panel - Glassmorphic with Inner Glow */}
+          {/* Top Panel - Updated Text (No dots) */}
           <motion.div variants={itemVariants} className="mb-10">
-            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.2),inset_0_0_10px_rgba(255,255,255,0.05)] hover:bg-white/10 transition-colors duration-300">
-              <div className="flex -space-x-3">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-[#050505] shadow-lg"></div>
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#050505] shadow-lg"></div>
-              </div>
-              <span className="text-sm font-bold tracking-wider text-white/90 pr-2 uppercase drop-shadow-md">
-                OREN SHAMIR <span className="text-white/30 font-light mx-2">|</span> V27 PREVIEW
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.2),inset_0_0_10px_rgba(255,255,255,0.05)]">
+              <span className="text-sm font-medium tracking-wide text-white/90 drop-shadow-md">
+                אורן שמיר בונה דפי נחיתה מקצועיים
               </span>
             </div>
           </motion.div>
@@ -98,26 +95,31 @@ const Hero: React.FC = () => {
             .
           </motion.p>
 
-          {/* CTA Button - Premium Shimmer & Glow */}
+          {/* CTA Button: Magnetic, Glowing, Themed */}
           <motion.div
             variants={itemVariants}
-            className="relative z-10 w-full flex justify-center group"
+            className="relative z-10 w-full flex justify-center"
           >
-            <div className="absolute inset-0 bg-purple-600/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full scale-150"></div>
+            <Magnetic>
+              <div className="group relative">
+                {/* Gradient Border Glow */}
+                <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-70 blur-md group-hover:opacity-100 group-hover:blur-lg transition-all duration-500" />
 
-            <Button
-              variant="primary"
-              onClick={scrollToContact}
-              className="relative !text-xl md:!text-2xl !px-12 !py-5 shadow-[0_0_40px_rgba(168,85,247,0.3)] hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] w-[90%] md:w-auto rounded-full border border-white/10 overflow-hidden"
-            >
-              {/* Shimmer Effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10 pointer-events-none" />
+                <Button
+                  variant="primary"
+                  onClick={scrollToContact}
+                  className="relative !text-xl md:!text-2xl !px-12 !py-5 w-[90%] md:w-auto rounded-full bg-black text-white border border-white/10 overflow-hidden"
+                >
+                  {/* Shimmer Effect */}
+                  <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/10 to-transparent z-10 pointer-events-none" />
 
-              <span className="relative z-20 flex items-center justify-center gap-3">
-                אני רוצה אתר כזה
-                <ArrowUpRight className="w-6 h-6 md:w-7 md:h-7" />
-              </span>
-            </Button>
+                  <span className="relative z-20 flex items-center justify-center gap-3">
+                    אני רוצה אתר כזה
+                    <ArrowUpRight className="w-6 h-6 md:w-7 md:h-7" />
+                  </span>
+                </Button>
+              </div>
+            </Magnetic>
           </motion.div>
 
         </motion.div>
