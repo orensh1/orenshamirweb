@@ -81,11 +81,10 @@ const Hero: React.FC = () => {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, x: -50, scale: 0.9 },
+    hidden: { opacity: 0, x: -50 },
     visible: (custom: number) => ({
       opacity: 1,
       x: 0,
-      scale: 1,
       transition: {
         type: "spring",
         stiffness: 100,
@@ -199,7 +198,8 @@ const Hero: React.FC = () => {
           {/* Headlines - Premium Typography */}
           <motion.h1
             variants={itemVariants}
-            className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-10 relative"
+            className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-10 relative"
+            style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
           >
             <span className="block text-white drop-shadow-2xl mb-3">לא עוד סתם</span>
             <span className="block relative">
