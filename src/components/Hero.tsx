@@ -69,15 +69,16 @@ const Hero: React.FC = () => {
 
 
       {/* 2. Main Layout - 2 Columns */}
-      <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col md:flex-row items-center justify-between gap-12 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
+      {/* 2. Main Layout - 2 Columns */}
+      <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col md:flex-row items-center justify-between gap-20 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
 
         {/* Background Glow for Text Area */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(100,50,255,0.15)_0%,rgba(0,0,0,0)_70%)] z-[-1] pointer-events-none md:hidden" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-[600px] max-h-[600px] bg-[radial-gradient(circle,rgba(100,50,255,0.10)_0%,rgba(0,0,0,0)_70%)] z-[-1] pointer-events-none md:hidden" />
 
         {/* RIGHT COLUMN: Text Content */}
         <motion.div
           style={{ y: yText, opacity: opacityText }}
-          className="flex flex-col items-start w-full md:w-1/2 relative z-20"
+          className="flex flex-col items-start w-full md:w-5/12 relative z-20"
         >
 
           {/* Top Tag */}
@@ -89,12 +90,12 @@ const Hero: React.FC = () => {
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v28 - FINAL</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v32 - STABLE & POLISHED</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
           <div className="w-full text-right mb-12 relative z-20">
-            <h1 className="text-7xl md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-tighter text-white drop-shadow-xl">
+            <h1 className="text-7xl md:text-[8rem] lg:text-[9rem] font-black leading-[0.85] tracking-tighter text-white drop-shadow-xl">
               <span className="block text-white relative z-10">
                 לא עוד סתם
               </span>
@@ -118,13 +119,12 @@ const Hero: React.FC = () => {
 
         </motion.div>
 
-        {/* LEFT COLUMN: Interactive Orbit Visualizer v24 */}
-        <div className="w-full md:w-1/2 flex justify-center md:justify-start z-20 mt-12 md:mt-0 relative perspective-[1000px]">
+        {/* LEFT COLUMN: Interactive Orbit Visualizer v32 - SCALED DOWN 75% */}
+        <div className="w-full md:w-6/12 flex justify-center md:justify-end z-20 mt-16 md:mt-0 relative perspective-[1000px]">
 
           {/* Orbit System Container */}
-          {/* Orbit System Container */}
           <motion.div
-            className="relative w-[380px] h-[380px] md:w-[500px] md:h-[500px] flex items-center justify-center transform-style-3d group"
+            className="relative w-[260px] h-[260px] md:w-[420px] md:h-[420px] flex items-center justify-center transform-style-3d group"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
@@ -214,7 +214,10 @@ const Hero: React.FC = () => {
           </motion.div>
 
         </div>
-        );
+
+      </div>
+    </div>
+  );
 };
 
-        export default Hero;
+export default Hero;
