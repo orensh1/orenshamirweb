@@ -17,7 +17,8 @@ const ContactForm = () => {
         setIsSubmitting(true);
 
         try {
-            const response = await fetch('/api/send', {
+            // Updated to point to the PHP script for generic hosting compatibility
+            const response = await fetch('./mail.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
