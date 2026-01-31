@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
-import guaranteeCard from '../assets/guarantee-card-transparent.png';
+import guaranteeCard from '../assets/guarantee-card-final.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -104,38 +104,28 @@ const Hero: React.FC = () => {
               zIndex: 0
             }}></div>
 
+            {/* GUARANTEE CARD - ABSOLUTE TOP RIGHT CLIPPED */}
+            <motion.img
+              src={guaranteeCard}
+              alt="Oren Shamir Guarantee"
+              animate={{ y: [0, 8, 0] }} // Subtle vertical float
+              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+              style={{
+                position: 'absolute',
+                top: '-20px',    // Overlap top edge
+                right: '-35px',  // Overlap right edge
+                width: '48%',    // ~45-50% width
+                transform: 'rotate(-10deg)', // Tilted
+                zIndex: 25,      // On top of overlay
+                filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.4))'
+              }}
+            />
+
             {/* Content Overlay */}
             <div style={{ position: 'relative', zIndex: 10, height: '100%', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-              {/* Top Tag - Black & Strong Pulse */}
-              <div style={{ alignSelf: 'flex-end', background: '#000', color: '#fff', padding: '10px 24px', borderRadius: '30px', fontSize: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                התחילו היום
-                <motion.span
-                  animate={{ opacity: [1, 0.3, 1], scale: [1, 1.5, 1] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  style={{ color: '#ffd700', fontSize: '12px', display: 'inline-block' }}
-                >
-                  ●
-                </motion.span>
-              </div>
-
-              {/* Guarantee Card - Floating */}
-              <motion.div
-                animate={{ y: [0, -15, 0] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                style={{
-                  marginTop: '20px',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.5))'
-                }}
-              >
-                <img
-                  src={guaranteeCard}
-                  alt="Oren Shamir Guarantee"
-                  style={{ width: '220px', height: 'auto', transform: 'rotate(-5deg)' }}
-                />
-              </motion.div>
+              {/* Top Tag REMOVED as requested to make room for card */}
+              <div style={{ height: '40px' }}></div>
 
               {/* Bottom Content Area */}
               <div style={{ textAlign: 'right', direction: 'rtl', color: 'white', marginTop: 'auto' }}>
