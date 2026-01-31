@@ -45,66 +45,78 @@ const Hero: React.FC = () => {
         waveWidth={50}
         blur={10}
       >
+        {/* Spotlight Effect behind text */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-radial-gradient from-white/10 to-transparent pointer-events-none blur-3xl z-0" />
 
         <motion.div
           style={{ y: yText, opacity: opacityText }}
+          className="flex flex-col items-center w-full max-w-4xl mx-auto relative z-20 text-center"
           initial="hidden"
           animate="visible"
-          transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
-          className="w-full flex flex-col items-center"
+          transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
         >
-          {/* Top Panel - Glassmorphic */}
-          <motion.div variants={itemVariants} className="mb-8">
-            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
-              <div className="flex -space-x-2">
-                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-black"></div>
-                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-black"></div>
+          {/* Top Panel - Glassmorphic with Inner Glow */}
+          <motion.div variants={itemVariants} className="mb-10">
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.2),inset_0_0_10px_rgba(255,255,255,0.05)] hover:bg-white/10 transition-colors duration-300">
+              <div className="flex -space-x-3">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 border-2 border-[#050505] shadow-lg"></div>
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-[#050505] shadow-lg"></div>
               </div>
-              <span className="text-xs md:text-sm font-bold tracking-wider text-white/90 pr-2">
-                OREN SHAMIR <span className="text-white/40 font-normal mx-1">|</span> V53
+              <span className="text-sm font-bold tracking-wider text-white/90 pr-2 uppercase drop-shadow-md">
+                OREN SHAMIR <span className="text-white/30 font-light mx-2">|</span> V27 PREVIEW
               </span>
             </div>
           </motion.div>
 
-          {/* Headline: "לא עוד סתם דף נחיתה" (Preserved) */}
+          {/* Headline: "לא עוד סתם דף נחיתה" (Preserved & Enhanced) */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] md:leading-[0.9] tracking-tighter mb-8 relative text-balance text-white drop-shadow-2xl"
+            className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-10 relative text-balance text-white z-10"
             dir="rtl"
           >
-            לא עוד סתם{' '}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="block drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
+              לא עוד סתם
+            </span>
+            <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(168,85,247,0.4)] pb-2">
               דף נחיתה
             </span>
           </motion.h1>
 
-          {/* Subtext: High conversion & Money */}
+          {/* Subtext: Depth & Glow */}
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-3xl text-gray-300 font-medium leading-relaxed max-w-3xl mb-12 px-4"
+            className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14 px-4 drop-shadow-md"
             dir="rtl"
           >
             בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר{' '}
-            <span className="relative inline-block whitespace-nowrap" style={{ fontSize: '1.4em' }}>
-              <span className="relative font-black text-[#22C55E] drop-shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+            <span className="relative inline-block whitespace-nowrap align-middle">
+              <span className="absolute inset-0 bg-green-500/30 blur-xl rounded-full"></span>
+              <span className="relative font-black text-[#4ADE80] drop-shadow-[0_0_15px_rgba(34,197,94,0.6)] text-[1.1em]">
                 כסף
               </span>
             </span>
             .
           </motion.p>
 
-          {/* CTA Button */}
+          {/* CTA Button - Premium Shimmer & Glow */}
           <motion.div
             variants={itemVariants}
-            className="relative z-10 w-full flex justify-center"
+            className="relative z-10 w-full flex justify-center group"
           >
+            <div className="absolute inset-0 bg-purple-600/30 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full scale-150"></div>
+
             <Button
               variant="primary"
               onClick={scrollToContact}
-              className="!text-lg md:!text-xl !px-10 !py-4 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 w-[90%] md:w-auto rounded-full"
+              className="relative !text-xl md:!text-2xl !px-12 !py-5 shadow-[0_0_40px_rgba(168,85,247,0.3)] hover:shadow-[0_0_60px_rgba(168,85,247,0.5)] w-[90%] md:w-auto rounded-full border border-white/10 overflow-hidden"
             >
-              אני רוצה אתר כזה
-              <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
+              {/* Shimmer Effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-white/20 to-transparent z-10 pointer-events-none" />
+
+              <span className="relative z-20 flex items-center justify-center gap-3">
+                אני רוצה אתר כזה
+                <ArrowUpRight className="w-6 h-6 md:w-7 md:h-7" />
+              </span>
             </Button>
           </motion.div>
 
