@@ -133,7 +133,7 @@ const Hero: React.FC = () => {
             className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14"
             dir="rtl"
           >
-            אני בונה דפי נחיתה שממירים גולשים ללקוחות ועוזרים לך להכניס יותר{' '}
+            בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר{' '}
             <span className="font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               כסף
             </span>
