@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import StyleShowcase from './components/StyleShowcase';
 
 import About from './components/About';
 import Process from './components/Process';
@@ -42,6 +43,7 @@ const App: React.FC = () => {
 
       <main className="relative z-10">
         <Hero />
+        <StyleShowcase />
 
 
         <About />
