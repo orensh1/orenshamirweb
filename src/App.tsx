@@ -43,11 +43,9 @@ const App: React.FC = () => {
 
       <main className="relative z-10">
         <Hero />
-        <StyleShowcase />
-
-
         <About />
         <Process />
+        <StyleShowcase />
         <FAQ />
         <Contact />
       </main>

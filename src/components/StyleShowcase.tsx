@@ -28,6 +28,8 @@ const themes: ThemeConfig[] = [
             accent: '#3B82F6',
             card: 'rgba(255, 255, 255, 0.05)',
             border: 'rgba(59, 130, 246, 0.3)',
+            sectionBg: '#000000',
+            sectionText: '#ffffff'
         },
         font: 'Rubik, sans-serif',
         glow: '0 0 30px rgba(59, 130, 246, 0.3)',
@@ -36,11 +38,13 @@ const themes: ThemeConfig[] = [
         id: 'minimal',
         label: 'מינימליסטי',
         colors: {
-            bg: '#f9fafb',
+            bg: '#ffffff',
             text: '#111827',
             accent: '#9CA3AF',
-            card: '#ffffff',
+            card: '#f3f4f6',
             border: '#e5e7eb',
+            sectionBg: '#f0f0f0', // Light gray section bg
+            sectionText: '#111827'
         },
         font: 'Heebo, sans-serif',
         glow: '0 10px 25px rgba(0,0,0,0.05)',
@@ -49,13 +53,15 @@ const themes: ThemeConfig[] = [
         id: 'bold',
         label: 'עוצמתי',
         colors: {
-            bg: '#18181b',
+            bg: '#18181b', // Mockup bg
             text: '#ffffff',
             accent: '#EF4444',
             card: '#27272a',
             border: '#EF4444',
+            sectionBg: '#27272a', // Dark Gray/Zinc section bg
+            sectionText: '#ffffff'
         },
-        font: 'Rubik, sans-serif', // Using the heavy font available
+        font: 'Rubik, sans-serif',
         glow: '0 0 20px rgba(239, 68, 68, 0.4)',
     },
 ];
@@ -66,21 +72,29 @@ const StyleShowcase: React.FC = () => {
     const currentTheme = themes.find((t) => t.id === activeTheme) || themes[0];
 
     return (
-        <section className="py-24 bg-black relative overflow-hidden text-right" dir="rtl">
+        <motion.section
+            animate={{ backgroundColor: currentTheme.colors.sectionBg }}
+            transition={{ duration: 0.7, ease: "easeInOut" }}
+            className="py-24 relative overflow-hidden text-right"
+            dir="rtl"
+        >
             <div className="container mx-auto px-6 relative z-10">
                 <div className="flex flex-col items-center mb-16 text-center">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-8">
+                    <motion.h2
+                        animate={{ color: currentTheme.colors.sectionText }}
+                        className="text-3xl md:text-5xl font-bold mb-8 transition-colors"
+                    >
                         איך ייראה דף הנחיתה שלכם?
-                    </h2>
+                    </motion.h2>
 
                     {/* Theme Switcher Buttons */}
-                    <div className="flex flex-wrap justify-center gap-4 bg-white/5 p-2 rounded-full border border-white/10 backdrop-blur-sm">
+                    <div className="flex flex-wrap justify-center gap-4 bg-white/5 p-2 rounded-full border border-white/10 backdrop-blur-sm shadow-lg">
                         {themes.map((theme) => (
                             <button
                                 key={theme.id}
                                 onClick={() => setActiveTheme(theme.id)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 relative ${activeTheme === theme.id
-                                        ? 'text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]'
+                                        ? 'text-black shadow-lg'
                                         : 'text-gray-400 hover:text-white'
                                     }`}
                             >
@@ -91,7 +105,7 @@ const StyleShowcase: React.FC = () => {
                                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
-                                <span className="relative z-10">{theme.label}</span>
+                                <span className={`relative z-10 mix-blend-exclusion ${activeTheme === theme.id ? 'text-black' : 'text-gray-200'}`}>{theme.label}</span>
                             </button>
                         ))}
                     </div>
@@ -106,16 +120,16 @@ const StyleShowcase: React.FC = () => {
                             boxShadow: currentTheme.glow,
                         }}
                         transition={{ duration: 0.5 }}
-                        className="rounded-2xl border overflow-hidden relative shadow-2xl h-[400px] md:h-[500px]"
+                        className="rounded-2xl border overflow-hidden relative shadow-2xl h-[400px] md:h-[500px] transform transition-transform hover:scale-[1.01]"
                     >
                         {/* Browser Header */}
-                        <div className="h-10 bg-black/10 backdrop-blur-md flex items-center px-4 gap-2 border-b border-white/5 w-full absolute top-0 z-20">
+                        <div className={`h-10 backdrop-blur-md flex items-center px-4 gap-2 border-b w-full absolute top-0 z-20 ${activeTheme === 'minimal' ? 'bg-gray-100/80 border-gray-200' : 'bg-black/10 border-white/5'}`}>
                             <div className="flex gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                                 <div className="w-3 h-3 rounded-full bg-green-500/80" />
                             </div>
-                            <div className="flex-1 text-center text-[10px] text-gray-500 font-mono opacity-50">
+                            <div className={`flex-1 text-center text-[10px] font-mono opacity-50 ${activeTheme === 'minimal' ? 'text-gray-600' : 'text-gray-500'}`}>
                                 website-preview.com
                             </div>
                         </div>
@@ -140,7 +154,7 @@ const StyleShowcase: React.FC = () => {
                             </AnimatePresence>
 
                             <motion.div
-                                key={activeTheme} // Triggers re-render for text animation
+                                key={activeTheme}
                                 initial={{ y: 20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ duration: 0.5 }}
@@ -171,7 +185,7 @@ const StyleShowcase: React.FC = () => {
                                 <motion.button
                                     animate={{
                                         backgroundColor: currentTheme.colors.accent,
-                                        color: activeTheme === 'minimal' ? '#ffffff' : '#ffffff',
+                                        color: '#ffffff',
                                         boxShadow: activeTheme === 'hitech' ? '0 0 20px ' + currentTheme.colors.accent : 'none'
                                     }}
                                     whileHover={{ scale: 1.05 }}
@@ -204,7 +218,7 @@ const StyleShowcase: React.FC = () => {
                     </motion.div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 };
 
