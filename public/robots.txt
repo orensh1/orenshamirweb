@@ -1,0 +1,30 @@
+# robots.txt - Optimized for SEO and AI Answer Engines (AEO)
+
+# Allow all search engines and AI bots
+User-agent: *
+Allow: /
+
+# Explicitly allow AI bots
+User-agent: GPTBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Sitemap location (update with your actual sitemap URL when available)
+# Sitemap: https://orenshamirweb.netlify.app/sitemap.xml
+
+# Crawl-delay for respectful crawling (optional)
+Crawl-delay: 1
