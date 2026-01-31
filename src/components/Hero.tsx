@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
-import guaranteeCard from '../assets/guarantee-card-final-v2.png';
+import guaranteeCard from '../assets/guarantee-card-final-v3.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
                 position: 'absolute',
                 top: '-20px',    // Overlap top edge
                 right: '-35px',  // Overlap right edge
-                width: '60%',    // Upscaled to 60% as requested
+                width: '75%',    // Upscaled to 75% (Massive)
                 transform: 'rotate(-10deg)', // Tilted
                 zIndex: 25,      // On top of overlay
                 filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.4))'
