@@ -107,7 +107,7 @@ const Hero: React.FC = () => {
                 <Button
                   variant="primary"
                   onClick={scrollToContact}
-                  className="relative !text-xl md:!text-2xl !px-12 !py-5 w-[90%] md:w-auto rounded-full bg-white text-black !font-['Rubik'] !font-extrabold !tracking-tighter border border-white/10 overflow-hidden"
+                  className="relative !text-base md:!text-2xl !px-8 md:!px-12 !py-3 md:!py-5 w-auto max-w-xs md:max-w-none rounded-full bg-white text-black !font-['Rubik'] !font-extrabold !tracking-tighter border-2 border-white/20 overflow-hidden shadow-lg"
                 >
                   {/* Shimmer Effect */}
                   <div className="absolute inset-0 -translate-x-full group-hover:animate-[shimmer_1.5s_infinite] bg-gradient-to-r from-transparent via-black/5 to-transparent z-10 pointer-events-none" />
