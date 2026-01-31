@@ -72,10 +72,10 @@ export const WavyBackground = ({
                 ctx!.lineWidth = waveWidth || 50;
                 ctx!.strokeStyle = waveColors[i % waveColors.length];
 
-                // OPTIMIZATION: Increased step from 5 to 10 to reduce CPU load by 50%
-                for (let x = 0; x < w; x += 10) {
+                // OPTIMIZATION: Increased step from 10 to 50 to drastically reduce CPU load
+                for (let x = 0; x < w; x += 50) {
                     // Smoother noise scale (x/1000 instead of x/800)
-                    var y = noise(x / 1000, 0.3 * i, nt) * waveAmplitude;
+                    var y = noise(x / 800, 0.3 * i, nt) * waveAmplitude;
                     ctx!.lineTo(x, y + h * waveYOffset);
                 }
                 ctx!.stroke();
@@ -88,7 +88,7 @@ export const WavyBackground = ({
             ctx!.fillStyle = backgroundFill || "black";
             ctx!.globalAlpha = waveOpacity || 0.5;
             ctx!.fillRect(0, 0, w, h);
-            drawWave(5);
+            drawWave(2); // Reduced from 5 to 2 for performance
             animationId = requestAnimationFrame(render);
         };
 
