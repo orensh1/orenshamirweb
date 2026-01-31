@@ -11,6 +11,7 @@ const ContactForm = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [termsAccepted, setTermsAccepted] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -148,11 +149,25 @@ const ContactForm = () => {
                                 />
                             </div>
 
+                            {/* Terms Checkbox */}
+                            <div className="flex items-start gap-3">
+                                <input
+                                    type="checkbox"
+                                    id="terms-checkbox"
+                                    checked={termsAccepted}
+                                    onChange={(e) => setTermsAccepted(e.target.checked)}
+                                    className="mt-1 w-4 h-4 rounded border-white/20 bg-white/5 text-[#22C55E] focus:ring-[#22C55E] focus:ring-offset-0 cursor-pointer"
+                                />
+                                <label htmlFor="terms-checkbox" className="text-sm text-gray-400 leading-relaxed cursor-pointer">
+                                    אני מאשר/ת את תנאי השירות ומדיניות הפרטיות ומסכים/ה לקבל פניות מהחברה.
+                                </label>
+                            </div>
+
                             {/* Button */}
                             <motion.button
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
-                                disabled={isSubmitting}
+                                disabled={isSubmitting || !termsAccepted}
                                 type="submit"
                                 className="w-full bg-[#22C55E] hover:bg-[#1ea851] text-white font-bold text-lg py-4 rounded-xl shadow-[0_0_30px_rgba(34,197,94,0.4)] hover:shadow-[0_0_50px_rgba(34,197,94,0.6)] transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                             >
