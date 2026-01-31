@@ -5,12 +5,12 @@ import { ArrowUpRight } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
 import Button from './ui/Button';
 
-// --- PREMIUM OPTIMIZED HERO WITH NOISE & MOBILE PERFORMANCE ---
+// --- ULTRA-LIGHTWEIGHT HERO (Static BG, No JS Tracking) ---
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const cursorGlowRef = useRef<HTMLDivElement>(null);
-  const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
+
+  // Removed all cursor tracking logic for maximum FPS
+  // No RAF loop, no mouse listeners
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -19,54 +19,6 @@ const Hero: React.FC = () => {
 
   const yText = useTransform(scrollYProgress, [0, 1], [0, 100]);
   const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  // Optimized cursor tracking - Disabled on mobile for performance
-  useEffect(() => {
-    // Check if device is mobile/touch
-    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (isTouchDevice) return;
-
-    let rafId: number;
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (rafId) cancelAnimationFrame(rafId);
-
-      rafId = requestAnimationFrame(() => {
-        if (cursorGlowRef.current) {
-          // Use transform instead of left/top to avoid reflows (Composite Only)
-          cursorGlowRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
-        }
-      });
-
-      // Magnetic button effect - Desktop only
-      if (buttonRef.current) {
-        const rect = buttonRef.current.getBoundingClientRect();
-        const buttonCenterX = rect.left + rect.width / 2;
-        const buttonCenterY = rect.top + rect.height / 2;
-
-        const distanceX = e.clientX - buttonCenterX;
-        const distanceY = e.clientY - buttonCenterY;
-        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-
-        if (distance < 150) {
-          const strength = (150 - distance) / 150;
-          setButtonOffset({
-            x: distanceX * strength * 0.3,
-            y: distanceY * strength * 0.3
-          });
-        } else {
-          setButtonOffset({ x: 0, y: 0 });
-        }
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, []);
 
   const scrollToContact = () => {
     smoothScrollTo('contact', 1000);
@@ -97,14 +49,12 @@ const Hero: React.FC = () => {
     }
   };
 
-  // Hebrew floating words
+  // Hebrew words - Reduced count and simplified for performance
   const hebrewWords = [
-    { text: 'המרה', delay: 0 },
-    { text: 'לקוחות', delay: 0.3 },
-    { text: 'שיווק', delay: 0.6 },
-    { text: 'דיגיטל', delay: 0.9 },
-    { text: 'תוצאות', delay: 1.2 },
-    { text: 'הצלחה', delay: 1.5 }
+    { text: 'המרה', top: '15%', left: '10%' },
+    { text: 'לקוחות', top: '25%', left: '85%' },
+    { text: 'שיווק', top: '65%', left: '15%' },
+    { text: 'תוצאות', top: '75%', left: '80%' }
   ];
 
   return (
@@ -113,53 +63,38 @@ const Hero: React.FC = () => {
       className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-black text-white selection:bg-[#22C55E] selection:text-white"
       style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
     >
-      {/* 1. Background Elements */}
-      <SuccessStack />
+      {/* 1. Static Optimized Background */}
+      {/* Use static gradients instead of heavy blurs/cursor tracking */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Cursor Glow - Desktop Only */}
-        <div
-          ref={cursorGlowRef}
-          className="hidden md:block absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 blur-[150px] will-change-transform"
-          style={{
-            transform: 'translate3d(50vw, 50vh, 0) translate(-50%, -50%)',
-            left: 0,
-            top: 0
-          }}
-        />
 
-        {/* Mobile Static Glow - Center bloom for mobile */}
-        <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] h-[100vw] bg-purple-600/20 blur-[80px]" />
+        {/* Main Static Glow - Replaces cursor tracking */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[60vh] bg-gradient-to-b from-purple-900/20 via-blue-900/10 to-transparent blur-[120px] rounded-full opacity-60" />
 
-        {/* Subtle base blobs */}
-        <div className="absolute top-[-10%] -right-[20%] w-[60vw] h-[60vw] rounded-full bg-blue-600/10 blur-[100px] animate-blob will-change-transform" />
-        <div className="absolute bottom-[-10%] -left-[20%] w-[60vw] h-[60vw] rounded-full bg-purple-600/10 blur-[100px] animate-blob animation-delay-2000 will-change-transform" />
+        {/* Corner Accents - Static */}
+        <div className="absolute top-0 right-0 w-[50vw] h-[50vw] bg-radial-gradient from-blue-500/10 to-transparent blur-[100px] opacity-40 translate-x-1/4 -translate-y-1/4" />
+        <div className="absolute bottom-0 left-0 w-[50vw] h-[50vw] bg-radial-gradient from-pink-500/10 to-transparent blur-[100px] opacity-40 -translate-x-1/4 translate-y-1/4" />
+
       </div>
 
-      {/* 2. Hebrew Background Animation */}
-      <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none">
+      {/* Success Stack - Keeping logic but ensuring it's not fighting for resources */}
+      <div className="opacity-60">
+        <SuccessStack />
+      </div>
+
+      {/* 2. Simplified Hebrew Background - Reduced animations */}
+      <div className="absolute inset-0 z-[5] overflow-hidden pointer-events-none select-none">
         {hebrewWords.map((word, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, y: 100 }}
-            animate={{
-              opacity: [0, 0.08, 0.08, 0],
-              y: [100, -20, -20, -150],
-              x: [0, Math.sin(i) * 50, 0]
-            }}
-            transition={{
-              duration: 12,
-              delay: word.delay,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-            className="absolute text-7xl md:text-9xl font-black text-white/5 whitespace-nowrap will-change-transform"
+            className="absolute text-6xl md:text-8xl font-black text-white/[0.03]"
             style={{
-              left: `${10 + (i * 15)}%`,
-              top: '50%'
+              top: word.top,
+              left: word.left,
+              transform: 'rotate(-5deg)'
             }}
           >
             {word.text}
-          </motion.div>
+          </div>
         ))}
       </div>
 
@@ -174,7 +109,7 @@ const Hero: React.FC = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Top Panel */}
+          {/* Top Panel - Static Glass */}
           <motion.div variants={itemVariants} className="mb-8 md:mb-10">
             <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
               <div className="flex -space-x-2">
@@ -187,7 +122,7 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Headlines - Text Balance for Mobile */}
+          {/* Headlines - Same Premium Look, Less CPU */}
           <motion.h1
             variants={itemVariants}
             className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] md:leading-[0.9] tracking-tight mb-8 md:mb-10 relative text-balance"
@@ -208,7 +143,7 @@ const Hero: React.FC = () => {
             </span>
           </motion.h1>
 
-          {/* Subtext - Optimized Line Height */}
+          {/* Subtext */}
           <motion.p
             variants={itemVariants}
             className="text-lg md:text-3xl text-gray-300 font-medium leading-relaxed max-w-3xl mb-10 md:mb-14 px-4 text-balance"
@@ -224,13 +159,9 @@ const Hero: React.FC = () => {
             .
           </motion.p>
 
-          {/* CTA Button */}
+          {/* CTA Button - No Magnetic Wrapper (JS Free) */}
           <motion.div
             variants={itemVariants}
-            ref={buttonRef}
-            style={{
-              transform: `translate(${buttonOffset.x}px, ${buttonOffset.y}px)`
-            }}
             className="relative z-10 w-full flex justify-center"
           >
             <Button
