@@ -34,8 +34,8 @@ const Hero: React.FC = () => {
 
       rafId = requestAnimationFrame(() => {
         if (cursorGlowRef.current) {
-          cursorGlowRef.current.style.left = `${e.clientX}px`;
-          cursorGlowRef.current.style.top = `${e.clientY}px`;
+          // Use transform instead of left/top to avoid reflows (Composite Only)
+          cursorGlowRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
         }
       });
 
@@ -121,9 +121,9 @@ const Hero: React.FC = () => {
           ref={cursorGlowRef}
           className="hidden md:block absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-pink-600/20 blur-[150px] will-change-transform"
           style={{
-            transform: 'translate(-50%, -50%)',
-            left: '50%',
-            top: '50%'
+            transform: 'translate3d(50vw, 50vh, 0) translate(-50%, -50%)',
+            left: 0,
+            top: 0
           }}
         />
 
