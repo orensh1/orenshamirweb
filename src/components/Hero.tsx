@@ -3,9 +3,9 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { smoothScrollTo } from '../utils/smoothScroll';
 import { ArrowUpRight } from 'lucide-react';
 import Button from './ui/Button';
-import { AuroraBackground } from './ui/AuroraBackground';
+import { WavyBackground } from './ui/wavy-background';
 
-// --- AURORA HERO COMPONENT (Fixed) ---
+// --- Wavy HERO COMPONENT (v53) ---
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -37,20 +37,21 @@ const Hero: React.FC = () => {
   // Removed "Success Cards" as requested
 
   return (
-    <AuroraBackground className="h-screen">
-      <div
-        ref={containerRef}
-        className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col justify-center gap-12 pt-[80px]"
-        style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
+    <div ref={containerRef} className="relative bg-black h-screen overflow-hidden">
+      <WavyBackground
+        className="max-w-4xl mx-auto pb-40 flex flex-col items-center justify-center text-center px-4"
+        containerClassName="h-screen"
+        colors={['#3B82F6', '#06B6D4', '#22C55E', '#A855F7', '#EC4899']}
+        waveWidth={50}
+        blur={10}
       >
 
-        {/* Content Centered - No side cards */}
         <motion.div
           style={{ y: yText, opacity: opacityText }}
-          className="flex flex-col items-center w-full max-w-4xl mx-auto relative z-20 text-center"
           initial="hidden"
           animate="visible"
           transition={{ staggerChildren: 0.1, delayChildren: 0.2 }}
+          className="w-full flex flex-col items-center"
         >
           {/* Top Panel - Glassmorphic */}
           <motion.div variants={itemVariants} className="mb-8">
@@ -60,7 +61,7 @@ const Hero: React.FC = () => {
                 <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-black"></div>
               </div>
               <span className="text-xs md:text-sm font-bold tracking-wider text-white/90 pr-2">
-                OREN SHAMIR <span className="text-white/40 font-normal mx-1">|</span> V27
+                OREN SHAMIR <span className="text-white/40 font-normal mx-1">|</span> V53
               </span>
             </div>
           </motion.div>
@@ -68,20 +69,16 @@ const Hero: React.FC = () => {
           {/* Headline: "לא עוד סתם דף נחיתה" (Preserved) */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] md:leading-[0.9] tracking-tighter mb-8 relative text-balance"
+            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.95] md:leading-[0.9] tracking-tighter mb-8 relative text-balance text-white drop-shadow-2xl"
+            dir="rtl"
           >
-            <span className="block text-white drop-shadow-2xl mb-2 md:mb-3">
-              לא עוד סתם
-            </span>
-            <span className="block relative">
-              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent blur-md opacity-50"></span>
-              <span className="relative bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">
-                דף נחיתה
-              </span>
+            לא עוד סתם{' '}
+            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              דף נחיתה
             </span>
           </motion.h1>
 
-          {/* Subtext: Reverted to original text */}
+          {/* Subtext: High conversion & Money */}
           <motion.p
             variants={itemVariants}
             className="text-lg md:text-3xl text-gray-300 font-medium leading-relaxed max-w-3xl mb-12 px-4"
@@ -89,8 +86,7 @@ const Hero: React.FC = () => {
           >
             בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר{' '}
             <span className="relative inline-block whitespace-nowrap" style={{ fontSize: '1.4em' }}>
-              <span className="absolute inset-0 bg-gradient-to-r from-green-300 via-emerald-300 to-green-300 bg-clip-text text-transparent blur-sm animate-pulse opacity-70"></span>
-              <span className="relative font-black bg-gradient-to-r from-green-400 via-emerald-400 to-green-400 bg-clip-text text-transparent drop-shadow-[0_0_20px_rgba(34,197,94,0.5)]">
+              <span className="relative font-black text-[#22C55E] drop-shadow-[0_0_20px_rgba(34,197,94,0.5)]">
                 כסף
               </span>
             </span>
@@ -105,7 +101,7 @@ const Hero: React.FC = () => {
             <Button
               variant="primary"
               onClick={scrollToContact}
-              className="!text-lg md:!text-xl !px-10 !py-4 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 w-[90%] md:w-auto"
+              className="!text-lg md:!text-xl !px-10 !py-4 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20 w-[90%] md:w-auto rounded-full"
             >
               אני רוצה אתר כזה
               <ArrowUpRight className="w-5 h-5 md:w-6 md:h-6" />
@@ -114,8 +110,8 @@ const Hero: React.FC = () => {
 
         </motion.div>
 
-      </div>
-    </AuroraBackground>
+      </WavyBackground>
+    </div>
   );
 };
 
