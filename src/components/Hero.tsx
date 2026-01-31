@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v23 (ORBIT VISUALIZER)</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v24 (ADVANCED ORBITS)</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
@@ -87,113 +87,150 @@ const Hero: React.FC = () => {
 
         </motion.div>
 
-        {/* LEFT COLUMN: Interactive Orbit Visualizer */}
+        {/* LEFT COLUMN: Interactive Orbit Visualizer v24 */}
         <div className="w-full md:w-1/2 flex justify-center md:justify-start z-20 mt-12 md:mt-0 relative perspective-[1000px]">
 
-          {/* Orbit System Container - Follows Mouse Tilt (Simplified for perf) */}
+          {/* Orbit System Container */}
           <motion.div
-            className="relative w-[380px] h-[380px] md:w-[500px] md:h-[500px] flex items-center justify-center transform-style-3d"
+            className="relative w-[380px] h-[380px] md:w-[500px] md:h-[500px] flex items-center justify-center transform-style-3d group"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1 }}
             whileHover={{ rotateX: 5, rotateY: 5 }}
           >
 
-            {/* Orbit 1 (Outer) */}
-            <motion.div
-              className="absolute w-[100%] h-[100%] rounded-full border border-white/5 shadow-[0_0_30px_rgba(100,100,255,0.05)]"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Orbit 2 (Middle) */}
-            <motion.div
-              className="absolute w-[70%] h-[70%] rounded-full border border-white/10 shadow-[0_0_20px_rgba(200,100,255,0.1)] border-dashed opacity-50"
-              animate={{ rotate: -360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-            />
-            {/* Orbit 3 (Inner) */}
-            <motion.div
-              className="absolute w-[45%] h-[45%] rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            />
+            {/* Style for CSS Rotation & Pause - Defined here for simplicity */}
+            <style>{`
+               @keyframes orbitRotate {
+                 from { transform: rotate(0deg); }
+                 to { transform: rotate(360deg); }
+               }
+               @keyframes orbitRotateCCW {
+                 from { transform: rotate(360deg); }
+                 to { transform: rotate(0deg); }
+               }
+               .orbit-ring { animation-play-state: running; }
+               .group:hover .orbit-ring { animation-play-state: paused; }
+             `}</style>
 
-            {/* Central Core */}
-            <motion.div
-              className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-600/80 to-purple-600/80 backdrop-blur-3xl flex items-center justify-center shadow-[0_0_60px_rgba(50,100,255,0.4)] z-10 border border-white/20"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-black text-white leading-none">20k+</div>
-                <div className="text-xs md:text-sm text-white/80 font-medium mt-1">לידים חדשים</div>
-              </div>
-            </motion.div>
+            {/* Note: Nodes are now separate from rings to keep them upright (counter-rotation would be needed if nested) 
+                 OR we keep simple: Rotate the RING and the node rotates with it. 
+                 To keep node upright, we need to counter-rotate the node or use absolute positioning on a static container with calculating positions.
+                 
+                 Simpler Approach for v24 per user request "Pause rotation":
+                 We will rotate the RINGS. The nodes are children of the rings. They will rotate.
+                 To keep icons upright, we counter-rotate the ICON inside the node.
+             */}
 
-            {/* Node 1: Optimization (Top Right) */}
-            <motion.div
-              className="absolute top-[10%] right-[15%] flex flex-col items-center gap-2 z-20"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0 }}
+            {/* Orbit 1 (Outer) - 40s duration */}
+            <div
+              className="orbit-ring absolute w-[100%] h-[100%] rounded-full border border-white/5 shadow-[0_0_30px_rgba(100,100,255,0.05)] blur-[1px]"
+              style={{ animation: 'orbitRotate 40s linear infinite' }}
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
-                <BarChart3 className="w-6 h-6 text-blue-400" />
+              {/* Node 1: Optimization */}
+              <div
+                className={`absolute flex flex-col items-center gap-2 z-20 group/node top-[10%] right-[15%]`}
+                style={{ animation: `orbitRotateCCW 40s linear infinite` }}
+              >
+                <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all duration-300 group-hover/node:scale-125 group-hover/node:bg-white/20 group-hover/node:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer relative">
+                  <BarChart3 className="w-6 h-6 text-blue-400" />
+                  <div className="absolute top-full mt-4 w-48 p-3 bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl opacity-0 group-hover/node:opacity-100 transition-opacity duration-300 pointer-events-none z-50 flex flex-col gap-1 text-center scale-95 group-hover/node:scale-100 origin-top shadow-2xl">
+                    <div className="text-white font-bold text-sm border-b border-white/10 pb-1 mb-1">אופטימיזציה</div>
+                    <div className="text-gray-300 text-xs leading-relaxed" dir="rtl">שיפור יחס המרה בעזרת ניתוח נתונים מתקדם.</div>
+                  </div>
+                </div>
+                <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
+                  אופטימיזציה
+                </div>
               </div>
-              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
-                אופטימיזציה
+              {/* Node 3: Fast Loading */}
+              <div
+                className={`absolute flex flex-col items-center gap-2 z-20 group/node bottom-[10%] left-[15%]`}
+                style={{ animation: `orbitRotateCCW 40s linear infinite` }}
+              >
+                <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all duration-300 group-hover/node:scale-125 group-hover/node:bg-white/20 group-hover/node:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer relative">
+                  <Zap className="w-6 h-6 text-yellow-400" />
+                  <div className="absolute top-full mt-4 w-48 p-3 bg-black/80 backdrop-blur-xl border border-white/20 rounded-xl opacity-0 group-hover/node:opacity-100 transition-opacity duration-300 pointer-events-none z-50 flex flex-col gap-1 text-center scale-95 group-hover/node:scale-100 origin-top shadow-2xl">
+                    <div className="text-white font-bold text-sm border-b border-white/10 pb-1 mb-1">טעינה מהירה</div>
+                    <div className="text-gray-300 text-xs leading-relaxed" dir="rtl">אתר שעולה תוך פחות משנייה - כדי שלא תאבד אף לקוח.</div>
+                  </div>
+                </div>
+                <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
+                  טעינה מהירה
+                </div>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Node 2: Converting Design (Bottom Right) */}
-            <motion.div
-              className="absolute bottom-[20%] right-[10%] flex flex-col items-center gap-2 z-20"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            {/* Orbit 2 (Middle) - 30s duration CCW */}
+            <div
+              className="orbit-ring absolute w-[70%] h-[70%] rounded-full border border-white/10 shadow-[0_0_20px_rgba(200,100,255,0.1)] border-dashed opacity-60"
+              style={{ animation: 'orbitRotateCCW 30s linear infinite' }}
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
-                <Palette className="w-6 h-6 text-pink-400" />
-              </div>
-              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
-                עיצוב ממיר
-              </div>
-            </motion.div>
+              {/* Node 2: Converting Design */}
+              <OrbitNodeInline
+                styleClass="bottom-[15%] right-[15%]"
+                icon={<Palette className="w-6 h-6 text-pink-400" />}
+                label="עיצוב ממיר"
+                desc="עיצוב UX/UI שמוביל את העין בדיוק לפעולה שאתה רוצה."
+                parentSpeed="mid"
+              />
+            </div>
 
-            {/* Node 3: Fast Loading (Bottom Left) */}
-            <motion.div
-              className="absolute bottom-[10%] left-[15%] flex flex-col items-center gap-2 z-20"
-              animate={{ y: [0, -12, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+            {/* Orbit 3 (Inner) - 20s duration */}
+            <div
+              className="orbit-ring absolute w-[45%] h-[45%] rounded-full border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+              style={{ animation: 'orbitRotate 20s linear infinite' }}
             >
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
-                <Zap className="w-6 h-6 text-yellow-400" />
-              </div>
-              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
-                טעינה מהירה
-              </div>
-            </motion.div>
-
-            {/* Node 4: Quality Leads (Top Left) */}
-            <motion.div
-              className="absolute top-[20%] left-[5%] flex flex-col items-center gap-2 z-20"
-              animate={{ y: [0, -9, 0] }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-            >
-              <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg">
-                <Target className="w-6 h-6 text-green-400" />
-              </div>
-              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white">
+              <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
                 לידים איכותיים
               </div>
-            </motion.div>
-
-          </motion.div>
-
+            </div>
         </div>
 
-      </div>
+        {/* Central Core (Static relative to orbits) */}
+        <motion.div
+          className="absolute w-32 h-32 md:w-40 md:h-40 rounded-full bg-gradient-to-br from-blue-600/80 to-purple-600/80 backdrop-blur-3xl flex items-center justify-center shadow-[0_0_60px_rgba(50,100,255,0.4)] z-10 border border-white/20 cursor-default"
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.1, filter: 'brightness(1.2)' }}
+        >
+          <div className="text-center pointer-events-none">
+            <div className="text-3xl md:text-4xl font-black text-white leading-none">20k+</div>
+            <div className="text-xs md:text-sm text-white/80 font-medium mt-1">לידים חדשים</div>
+          </div>
+        </motion.div>
+
+      </motion.div>
 
     </div>
-  );
-};
+// Helper Component for Orbit Nodes
+        const OrbitNodeInline = ({ icon, label, desc, styleClass, parentSpeed }: any) => {
+    // Determine counter-rotation animation based on parent
+    const duration = parentSpeed === 'cw' ? '40s' : parentSpeed === 'mid' ? '30s' : '20s';
+    const direction = parentSpeed === 'cw' || parentSpeed === 'fast' ? 'orbitRotateCCW' : 'orbitRotate';
 
-export default Hero;
+    return (
+      <div
+        className={`absolute flex flex-col items-center gap-2 z-20 group/node ${styleClass}`}
+        style={{
+          animation: `${direction} ${duration} linear infinite`
+        }}
+      >
+        <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-lg transition-all duration-300 group-hover/node:scale-125 group-hover/node:bg-white/20 group-hover/node:shadow-[0_0_20px_rgba(255,255,255,0.3)] cursor-pointer relative">
+          {icon}
+
+          {/* TOOLTIP */}
+          <div className="absolute top-full mt-4 w-48 p-3 bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl opacity-0 group-hover/node:opacity-100 transition-opacity duration-300 pointer-events-none z-50 flex flex-col gap-1 text-center scale-95 group-hover/node:scale-100 origin-top shadow-2xl">
+            <div className="text-white font-bold text-sm border-b border-white/10 pb-1 mb-1">{label}</div>
+            <div className="text-gray-300 text-xs leading-relaxed" dir="rtl">{desc}</div>
+          </div>
+        </div>
+
+        <div className="bg-black/40 backdrop-blur-sm px-3 py-1 rounded-full border border-white/10 text-xs text-white whitespace-nowrap opacity-100 group-hover/node:opacity-0 transition-opacity">
+          {label}
+        </div>
+      </div>
+    )
+  };
+
+  export default Hero;
