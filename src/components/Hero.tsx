@@ -56,7 +56,7 @@ const Hero: React.FC = () => {
           animate="visible"
           transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
         >
-          <motion.div variants={itemVariants} className="mb-6">
+          <motion.div variants={itemVariants} className="mb-3">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-xl shadow-[0_0_20px_rgba(0,0,0,0.2),inset_0_0_10px_rgba(255,255,255,0.05)]">
               <span className="text-sm font-black tracking-wide text-white/90 drop-shadow-md">
                 אורן שמיר | בונה דפי נחיתה מקצועיים
