@@ -1,5 +1,5 @@
 "use client";
-import { cn } "../../utils/cn";
+import { cn } from "../../utils/cn";
 import React, { useEffect, useRef, useState, ReactNode } from "react";
 import { createNoise3D } from "simplex-noise";
 
