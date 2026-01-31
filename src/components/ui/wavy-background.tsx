@@ -88,7 +88,10 @@ export const WavyBackground = ({
         };
 
         let animationId: number;
+        let isRunning = false;
+
         const render = () => {
+            if (!isRunning) return; // Stop if paused
             ctx!.fillStyle = backgroundFill || "black";
             ctx!.globalAlpha = waveOpacity || 0.5;
             ctx!.fillRect(0, 0, w / dpr, h / dpr);
@@ -97,10 +100,24 @@ export const WavyBackground = ({
             animationId = requestAnimationFrame(render);
         };
 
-        render();
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    if (!isRunning) {
+                        isRunning = true;
+                        render();
+                    }
+                } else {
+                    isRunning = false;
+                    cancelAnimationFrame(animationId);
+                }
+            },
+            { threshold: 0 }
+        );
+
+        if (canvas) observer.observe(canvas);
 
         const handleResize = () => {
-            // Debounce logic could be added here, but simple resize is okay for now
             w = ctx.canvas.width = window.innerWidth * dpr;
             h = ctx.canvas.height = window.innerHeight * dpr;
             ctx.scale(dpr, dpr);
@@ -108,7 +125,9 @@ export const WavyBackground = ({
         window.addEventListener("resize", handleResize);
 
         return () => {
+            isRunning = false;
             cancelAnimationFrame(animationId);
+            observer.disconnect();
             window.removeEventListener("resize", handleResize);
         };
     };
