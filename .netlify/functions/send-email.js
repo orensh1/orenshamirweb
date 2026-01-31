@@ -10,7 +10,7 @@ exports.handler = async (event) => {
     }
 
     try {
-        const { name, phone, business, message } = JSON.parse(event.body);
+        const { name, email, phone, business, message } = JSON.parse(event.body);
 
         // Resend API Configuration
         const resendApiKey = 're_Lw3yeg6E_EiUDeRodA7EdorEY7mREo8hp';
@@ -18,14 +18,16 @@ exports.handler = async (event) => {
 
         // Prepare email data
         const emailData = {
-            from: 'Oren Shamir Lead <onboarding@resend.dev>',
+            from: 'onboarding@resend.dev',
             to: [toEmail],
+            reply_to: email || 'noreply@resend.dev',
             subject: `ליד חדש מהאתר: ${name || 'Unknown'}`,
             html: `
         <div dir='rtl' style='font-family: Arial, sans-serif; padding: 20px; background-color: #f9fafb;'>
           <h2 style='color: #22C55E;'>ליד חדש התקבל! 🚀</h2>
           <div style='background-color: white; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb;'>
             <p><strong>שם:</strong> ${name || 'Unknown'}</p>
+            <p><strong>אימייל:</strong> <a href='mailto:${email}'>${email || 'No email'}</a></p>
             <p><strong>טלפון:</strong> <a href='tel:${phone}'>${phone || 'No phone'}</a></p>
             <p><strong>סוג העסק:</strong> ${business || 'Not specified'}</p>
             <p><strong>הודעה:</strong></p>

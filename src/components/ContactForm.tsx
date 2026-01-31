@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle2, Loader2, User, Phone, Briefcase, MessageSquare } from 'lucide-react';
+import { Send, CheckCircle2, Loader2, User, Phone, Briefcase, MessageSquare, Mail } from 'lucide-react';
 
 const ContactForm = () => {
     const [formState, setFormState] = useState({
         name: '',
+        email: '',
         phone: '',
         business: '',
         message: ''
@@ -31,7 +32,7 @@ const ContactForm = () => {
 
             if (response.ok) {
                 setIsSuccess(true);
-                setFormState({ name: '', phone: '', business: '', message: '' });
+                setFormState({ name: '', email: '', phone: '', business: '', message: '' });
                 // Reset success message after 5 seconds if desired, currently sticking to success view per logic
             } else {
                 console.error('Submission failed:', data);
@@ -97,6 +98,24 @@ const ContactForm = () => {
                                         placeholder="ישראל ישראלי"
                                     />
                                 </div>
+                                {/* Email */}
+                                <div className="space-y-2">
+                                    <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
+                                        <Mail className="w-4 h-4 text-[#22C55E]" /> אימייל
+                                    </label>
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        value={formState.email}
+                                        onChange={handleChange}
+                                        required
+                                        className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#22C55E]/50 focus:bg-white/10 transition-all placeholder:text-gray-600"
+                                        placeholder="example@mail.com"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Phone */}
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-gray-300 flex items-center gap-2">
