@@ -6,6 +6,8 @@ import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
+import WhatsAppButton from './components/WhatsAppButton';
+import Accessibility from './components/Accessibility';
 
 
 
@@ -47,6 +49,9 @@ const App: React.FC = () => {
         <FAQ />
         <Contact />
       </main>
+
+      <WhatsAppButton />
+      <Accessibility />
     </div>
   );
 };
