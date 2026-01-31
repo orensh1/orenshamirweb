@@ -3,11 +3,12 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { smoothScrollTo } from '../utils/smoothScroll';
 import { ArrowUpRight } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
+import Button from './ui/Button'; // Import canonical Button
 
-// --- OPTIMIZED HERO WITH SMOOTH CURSOR & HEBREW ANIMATION ---
+// --- CONCEPT ALIGNED HERO (v27) ---
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef<HTMLDivElement>(null); // Ref for wrapper
   const cursorGlowRef = useRef<HTMLDivElement>(null);
   const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
 
@@ -35,7 +36,7 @@ const Hero: React.FC = () => {
         }
       });
 
-      // Magnetic button effect
+      // Magnetic button effect - using wrapper ref
       if (buttonRef.current) {
         const rect = buttonRef.current.getBoundingClientRect();
         const buttonCenterX = rect.left + rect.width / 2;
@@ -109,13 +110,13 @@ const Hero: React.FC = () => {
       className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-black text-white selection:bg-[#22C55E] selection:text-white"
       style={{ fontFamily: 'Rubik, Assistant, system-ui, -apple-system, sans-serif' }}
     >
-      {/* 1. Cursor-Reactive Background - Optimized */}
+      {/* 1. Cursor-Reactive Background - Site Theme (Blue/Purple/Pink) */}
       <SuccessStack />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Smooth cursor-following purple hue using RAF */}
+        {/* Smooth cursor-following glow - using site gradient */}
         <div
           ref={cursorGlowRef}
-          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-600/40 via-fuchsia-600/30 to-pink-600/40 blur-[150px] will-change-transform"
+          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-blue-600/30 via-purple-600/30 to-pink-600/30 blur-[150px] will-change-transform"
           style={{
             transform: 'translate(-50%, -50%)',
             left: '50%',
@@ -123,9 +124,9 @@ const Hero: React.FC = () => {
           }}
         />
 
-        {/* Subtle base blobs */}
-        <div className="absolute top-[-10%] -right-[20%] w-[60vw] h-[60vw] rounded-full bg-purple-600/10 blur-[100px] animate-blob" />
-        <div className="absolute bottom-[-10%] -left-[20%] w-[60vw] h-[60vw] rounded-full bg-pink-600/10 blur-[100px] animate-blob animation-delay-2000" />
+        {/* Subtle base blobs - Site Theme */}
+        <div className="absolute top-[-10%] -right-[20%] w-[60vw] h-[60vw] rounded-full bg-blue-600/10 blur-[100px] animate-blob" />
+        <div className="absolute bottom-[-10%] -left-[20%] w-[60vw] h-[60vw] rounded-full bg-purple-600/10 blur-[100px] animate-blob animation-delay-2000" />
       </div>
 
       {/* 2. Hebrew Background Animation - Behind Content */}
@@ -156,10 +157,10 @@ const Hero: React.FC = () => {
         ))}
       </div>
 
-      {/* 3. Main Layout - Single Column Centered */}
+      {/* 3. Main Layout */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col items-center justify-center gap-12 pt-[120px] pb-16 md:py-24 min-h-[90vh]">
 
-        {/* Content & Typography - Stagger Animation */}
+        {/* Content & Typography */}
         <motion.div
           style={{ y: yText, opacity: opacityText }}
           className="flex flex-col items-center w-full max-w-4xl relative z-20 text-center"
@@ -167,17 +168,20 @@ const Hero: React.FC = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* Top Panel */}
+          {/* Top Panel - Glassmorphic (Navbar Style) */}
           <motion.div variants={itemVariants} className="mb-10">
-            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/10 via-fuchsia-500/10 to-pink-500/10 border border-purple-500/30 backdrop-blur-xl">
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-fuchsia-400 animate-pulse"></div>
-              <span className="text-sm font-bold tracking-wider bg-gradient-to-r from-purple-300 via-fuchsia-300 to-pink-300 bg-clip-text text-transparent">
-                OREN SHAMIR
+            <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-lg">
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 border-2 border-black"></div>
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 border-2 border-black"></div>
+              </div>
+              <span className="text-sm font-bold tracking-wider text-white/90 pr-2">
+                OREN SHAMIR <span className="text-white/40 font-normal mx-1">|</span> V27
               </span>
             </div>
           </motion.div>
 
-          {/* Headlines */}
+          {/* Headlines - Site Gradient (Blue -> Purple -> Pink) */}
           <motion.h1
             variants={itemVariants}
             className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-10 relative"
@@ -185,11 +189,11 @@ const Hero: React.FC = () => {
             <span className="block text-white drop-shadow-2xl mb-3">לא עוד סתם</span>
             <span className="block relative">
               {/* Enhanced glow effect */}
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-fuchsia-400 via-pink-400 to-rose-400 bg-clip-text text-transparent blur-md opacity-60"></span>
+              <span className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent blur-md opacity-50"></span>
               <span
                 className="relative animate-gradient bg-[length:200%_auto]"
                 style={{
-                  background: '-webkit-linear-gradient(45deg, #ff007f, #a200ff)',
+                  background: '-webkit-linear-gradient(45deg, #3B82F6, #A855F7, #EC4899)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
                 }}
@@ -202,7 +206,7 @@ const Hero: React.FC = () => {
           {/* Subtext */}
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14"
+            className="text-xl md:text-3xl text-gray-300 font-medium leading-relaxed max-w-3xl mb-14"
             dir="rtl"
           >
             בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר{' '}
@@ -215,24 +219,24 @@ const Hero: React.FC = () => {
             .
           </motion.p>
 
-          {/* CTA Button - Magnetic Effect */}
-          <motion.button
-            ref={buttonRef}
+          {/* CTA Button - Standard UI Button with Magnetic Wrapper */}
+          <motion.div
             variants={itemVariants}
-            onClick={scrollToContact}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative px-12 py-5 bg-white text-black rounded-full font-black text-xl flex items-center gap-3 shadow-[0_0_60px_rgba(168,85,247,0.3)] hover:shadow-[0_0_100px_rgba(168,85,247,0.5)] transition-all duration-300"
+            ref={buttonRef}
             style={{
               transform: `translate(${buttonOffset.x}px, ${buttonOffset.y}px)`
             }}
+            className="relative z-10"
           >
-            {/* Animated gradient border */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10"></div>
-
-            <span>אני רוצה אתר כזה</span>
-            <ArrowUpRight className="w-6 h-6 group-hover:translate-x-[-3px] group-hover:translate-y-[-3px] transition-transform" />
-          </motion.button>
+            <Button
+              variant="primary"
+              onClick={scrollToContact}
+              className="!text-xl !px-10 !py-4 shadow-xl hover:shadow-2xl hover:shadow-purple-500/20"
+            >
+              אני רוצה אתר כזה
+              <ArrowUpRight className="w-6 h-6" />
+            </Button>
+          </motion.div>
         </motion.div>
 
       </div>
