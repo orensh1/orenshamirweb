@@ -6,6 +6,7 @@ import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
+import ContactForm from './components/ContactForm';
 
 
 const App: React.FC = () => {
@@ -39,6 +40,7 @@ const App: React.FC = () => {
 
       <main className="relative z-10">
         <Hero />
+        <ContactForm />
         <StyleSwitcher />
         <About />
         <Process />
