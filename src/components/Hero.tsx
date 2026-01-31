@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
-import guaranteeCard from '../assets/guarantee-card-final.png';
+import guaranteeCard from '../assets/guarantee-card-final-v2.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -114,7 +114,7 @@ const Hero: React.FC = () => {
                 position: 'absolute',
                 top: '-20px',    // Overlap top edge
                 right: '-35px',  // Overlap right edge
-                width: '48%',    // ~45-50% width
+                width: '60%',    // Upscaled to 60% as requested
                 transform: 'rotate(-10deg)', // Tilted
                 zIndex: 25,      // On top of overlay
                 filter: 'drop-shadow(0 15px 30px rgba(0,0,0,0.4))'
@@ -124,8 +124,17 @@ const Hero: React.FC = () => {
             {/* Content Overlay */}
             <div style={{ position: 'relative', zIndex: 10, height: '100%', padding: '30px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-              {/* Top Tag REMOVED as requested to make room for card */}
-              <div style={{ height: '40px' }}></div>
+              {/* Top Tag - Black & Strong Pulse (Restored) */}
+              <div style={{ alignSelf: 'flex-end', background: '#000', color: '#fff', padding: '10px 24px', borderRadius: '30px', fontSize: '15px', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                התחילו היום
+                <motion.span
+                  animate={{ opacity: [1, 0.3, 1], scale: [1, 1.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  style={{ color: '#ffd700', fontSize: '12px', display: 'inline-block' }}
+                >
+                  ●
+                </motion.span>
+              </div>
 
               {/* Bottom Content Area */}
               <div style={{ textAlign: 'right', direction: 'rtl', color: 'white', marginTop: 'auto' }}>
