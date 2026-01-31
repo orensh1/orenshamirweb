@@ -13,6 +13,8 @@ interface ThemeConfig {
         accent: string;
         card: string;
         border: string;
+        sectionBg: string;
+        sectionText: string;
     };
     font: string;
     glow?: string;
@@ -99,6 +101,10 @@ const StyleShowcase: React.FC = () => {
                                     }`}
                             >
                                 {activeTheme === theme.id && (
+                                    <motion.div
+                                        layoutId="activeTab"
+                                        className="absolute inset-0 bg-white rounded-full"
+                                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
                                 <span className={`relative z-10 ${activeTheme === theme.id ? 'text-black' : 'text-gray-300 group-hover:text-white'}`}>{theme.label}</span>
