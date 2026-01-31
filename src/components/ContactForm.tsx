@@ -15,15 +15,32 @@ const ContactForm = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        // Reset after 3s
-        setTimeout(() => {
-            setIsSuccess(false);
-            setFormState({ name: '', phone: '', business: '', message: '' });
-        }, 3000);
+
+        try {
+            const response = await fetch('/api/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formState),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                setIsSuccess(true);
+                setFormState({ name: '', phone: '', business: '', message: '' });
+                // Reset success message after 5 seconds if desired, currently sticking to success view per logic
+            } else {
+                console.error('Submission failed:', data);
+                alert('שגיאה בשליחת הטופס. אנא נסו שנית.');
+            }
+        } catch (error) {
+            console.error('Network error:', error);
+            alert('שגיאת תקשורת. בדקו את החיבור שלכם.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
