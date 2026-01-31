@@ -36,13 +36,28 @@ const Navbar: React.FC = () => {
     >
       <div className="container mx-auto px-6">
         <div className={`
-          relative flex items-center justify-between px-6 py-3 rounded-2xl transition-all duration-500
+          relative flex items-center justify-between gap-2 px-4 md:px-6 py-3 rounded-2xl transition-all duration-500
           ${isScrolled ? 'bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg' : 'bg-transparent'}
         `}>
-          {/* Logo */}
-          <a href="#" className="text-2xl font-bold tracking-tighter text-white flex items-center gap-2">
+          {/* Mobile Menu Toggle - Left Side */}
+          <button
+            className="md:hidden text-white flex-shrink-0"
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+
+          {/* Logo - Desktop Only (Left) */}
+          <a href="#" className="hidden md:block text-2xl font-bold tracking-tighter text-white">
             OSH
           </a>
+
+          {/* Center Tagline - Mobile: Small, Desktop: Hidden */}
+          <div className="md:hidden flex-1 text-center px-2">
+            <span className="text-[11px] text-white/90 whitespace-nowrap overflow-hidden block max-w-full">
+              אורן שמיר | בונה דפי נחיתה
+            </span>
+          </div>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -59,7 +74,7 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          {/* CTA */}
+          {/* CTA - Desktop Only */}
           <div className="hidden md:block">
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
               <Button variant="outline" className="!py-2 !px-4 text-sm flex items-center gap-2">
@@ -68,13 +83,10 @@ const Navbar: React.FC = () => {
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X /> : <Menu />}
-          </button>
+          {/* Logo - Mobile Only (Right Side) */}
+          <a href="#" className="md:hidden text-xl font-bold tracking-tighter text-white flex-shrink-0">
+            OSH
+          </a>
         </div>
       </div>
 
