@@ -4,10 +4,12 @@ import { smoothScrollTo } from '../utils/smoothScroll';
 import { ArrowUpRight } from 'lucide-react';
 import SuccessStack from './ui/SuccessStack';
 
-// --- ENHANCED HERO COMPONENT WITH CURSOR INTERACTION ---
+// --- ENHANCED HERO WITH MAGNETIC BUTTON ---
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,7 +23,30 @@ const Hero: React.FC = () => {
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
+
+      // Magnetic button effect
+      if (buttonRef.current) {
+        const rect = buttonRef.current.getBoundingClientRect();
+        const buttonCenterX = rect.left + rect.width / 2;
+        const buttonCenterY = rect.top + rect.height / 2;
+
+        const distanceX = e.clientX - buttonCenterX;
+        const distanceY = e.clientY - buttonCenterY;
+        const distance = Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+
+        // Magnetic effect within 150px radius
+        if (distance < 150) {
+          const strength = (150 - distance) / 150;
+          setButtonOffset({
+            x: distanceX * strength * 0.3,
+            y: distanceY * strength * 0.3
+          });
+        } else {
+          setButtonOffset({ x: 0, y: 0 });
+        }
+      }
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -33,14 +58,14 @@ const Hero: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-[#050505] text-white font-sans selection:bg-[#22C55E] selection:text-white"
+      className="relative min-h-screen w-full flex flex-col justify-center overflow-hidden bg-black text-white font-sans selection:bg-[#22C55E] selection:text-white"
     >
-      {/* 1. Cursor-Reactive Background */}
+      {/* 1. Cursor-Reactive Background - Enhanced */}
       <SuccessStack />
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Cursor-following glow */}
+        {/* Large cursor-following purple hue */}
         <div
-          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-r from-purple-500/20 to-fuchsia-500/20 blur-[100px] transition-all duration-300 ease-out"
+          className="absolute w-[800px] h-[800px] rounded-full bg-gradient-to-r from-purple-600/40 via-fuchsia-600/30 to-pink-600/40 blur-[150px] transition-all duration-200 ease-out"
           style={{
             left: `${mousePosition.x}px`,
             top: `${mousePosition.y}px`,
@@ -48,10 +73,9 @@ const Hero: React.FC = () => {
           }}
         />
 
-        {/* Animated Aurora Blobs - More Vibrant */}
-        <div className="absolute top-[-10%] -right-[20%] w-[80vw] h-[80vw] rounded-full bg-gradient-to-br from-purple-500/30 via-fuchsia-500/20 to-violet-600/25 blur-[120px] animate-blob mix-blend-screen" />
-        <div className="absolute bottom-[-10%] -left-[20%] w-[80vw] h-[80vw] rounded-full bg-gradient-to-tr from-pink-500/30 via-rose-500/20 to-orange-500/25 blur-[120px] animate-blob animation-delay-2000 mix-blend-screen" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] rounded-full bg-gradient-to-r from-blue-500/15 to-cyan-500/15 blur-[100px] animate-blob animation-delay-4000 mix-blend-screen" />
+        {/* Subtle base blobs */}
+        <div className="absolute top-[-10%] -right-[20%] w-[60vw] h-[60vw] rounded-full bg-purple-600/10 blur-[100px] animate-blob" />
+        <div className="absolute bottom-[-10%] -left-[20%] w-[60vw] h-[60vw] rounded-full bg-pink-600/10 blur-[100px] animate-blob animation-delay-2000" />
       </div>
 
       {/* 2. Main Layout - Single Column Centered */}
@@ -62,12 +86,12 @@ const Hero: React.FC = () => {
           style={{ y: yText, opacity: opacityText }}
           className="flex flex-col items-center w-full max-w-4xl relative z-20 text-center"
         >
-          {/* Top Panel - Redesigned */}
+          {/* Top Panel */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-8"
+            className="mb-10"
           >
             <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-purple-500/10 via-fuchsia-500/10 to-pink-500/10 border border-purple-500/30 backdrop-blur-xl">
               <div className="w-2 h-2 rounded-full bg-gradient-to-r from-purple-400 to-fuchsia-400 animate-pulse"></div>
@@ -77,17 +101,17 @@ const Hero: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Headlines - Updated Font Style */}
+          {/* Headlines - Bolder and More Dominant */}
           <motion.h1
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[0.95] tracking-tight mb-8 relative"
+            className="text-6xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tight mb-10 relative"
           >
-            <span className="block text-white drop-shadow-2xl mb-2">נעים להכיר,</span>
+            <span className="block text-white drop-shadow-2xl mb-3">נעים להכיר,</span>
             <span className="block relative">
-              {/* Animated gradient background */}
-              <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-fuchsia-400 via-pink-400 to-rose-400 bg-clip-text text-transparent blur-sm opacity-50 animate-pulse"></span>
+              {/* Enhanced glow effect */}
+              <span className="absolute inset-0 bg-gradient-to-r from-purple-400 via-fuchsia-400 via-pink-400 to-rose-400 bg-clip-text text-transparent blur-md opacity-60"></span>
               <span
                 className="relative animate-gradient bg-[length:200%_auto]"
                 style={{
@@ -101,36 +125,40 @@ const Hero: React.FC = () => {
             </span>
           </motion.h1>
 
-          {/* Subtext - Animated Entry */}
+          {/* Subtext - Bolder */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg md:text-2xl text-gray-300 font-light leading-relaxed max-w-2xl mb-12"
+            className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14"
             dir="rtl"
           >
             אני בונה דפי נחיתה שממירים גולשים ללקוחות ועוזרים לך להכניס יותר{' '}
-            <span className="font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+            <span className="font-black bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
               כסף
             </span>
             .
           </motion.p>
 
-          {/* CTA Button - Enhanced with Gradient Border */}
+          {/* CTA Button - Magnetic Effect */}
           <motion.button
+            ref={buttonRef}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
             onClick={scrollToContact}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 60px rgba(168, 85, 247, 0.4)" }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-10 py-4 bg-white text-black rounded-full font-bold text-lg flex items-center gap-3 shadow-[0_0_40px_rgba(168,85,247,0.2)] hover:shadow-[0_0_80px_rgba(168,85,247,0.4)] transition-all duration-300"
+            className="group relative px-12 py-5 bg-white text-black rounded-full font-black text-xl flex items-center gap-3 shadow-[0_0_60px_rgba(168,85,247,0.3)] hover:shadow-[0_0_100px_rgba(168,85,247,0.5)] transition-all duration-300"
+            style={{
+              transform: `translate(${buttonOffset.x}px, ${buttonOffset.y}px)`
+            }}
           >
             {/* Animated gradient border */}
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-300 -z-10"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10"></div>
 
             <span>אני רוצה אתר כזה</span>
-            <ArrowUpRight className="w-5 h-5 group-hover:translate-x-[-2px] group-hover:translate-y-[-2px] transition-transform" />
+            <ArrowUpRight className="w-6 h-6 group-hover:translate-x-[-3px] group-hover:translate-y-[-3px] transition-transform" />
           </motion.button>
         </motion.div>
 
