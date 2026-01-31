@@ -43,23 +43,19 @@ export const WavyBackground = ({
     const init = () => {
         let canvas = canvasRef.current;
         if (!canvas) return;
-
-        // Optimizations:
-        const dpr = Math.min(window.devicePixelRatio, 1); // Cap DPR at 1 to prevent lag on 4K/Retina
-        let ctx = canvas.getContext("2d", { alpha: false });
+        let ctx = canvas.getContext("2d", { alpha: false }); // Optimization: alpha false if full fill
         if (!ctx) return;
 
-        let w = (ctx.canvas.width = window.innerWidth * dpr);
-        let h = (ctx.canvas.height = window.innerHeight * dpr);
-        ctx.scale(dpr, dpr);
-
+        let w = (ctx.canvas.width = window.innerWidth);
+        let h = (ctx.canvas.height = window.innerHeight);
+        // REMOVED ctx.filter = blur; (Expensive) - Using CSS instead
         let nt = 0;
 
         // Responsive Settings
         const isMobile = window.innerWidth < 768;
         const waveYOffset = isMobile ? 0.5 : 0.75;
         const waveAmplitude = isMobile ? 100 : 200;
-        const speedMultiplier = isMobile ? 0.5 : 1.5;
+        const speedMultiplier = isMobile ? 0.5 : 1.5; // Slower on mobile (0.5), same on PC (1.5)
 
         const waveColors = colors ?? [
             "#38bdf8",
@@ -73,14 +69,14 @@ export const WavyBackground = ({
             nt += getSpeed() * speedMultiplier;
             for (let i = 0; i < n; i++) {
                 ctx!.beginPath();
-                ctx!.lineWidth = (waveWidth || 50);
-                ctx!.strokeStyle = waveColors[i % waveColors.length]; // Removed .slice to avoid GC
+                ctx!.lineWidth = waveWidth || 50;
+                ctx!.strokeStyle = waveColors[i % waveColors.length];
 
-                // HEAVY OPTIMIZATION: Step 20 instead of 10. 
-                // Since we blur it, the lack of detail is invisible but performance doubles.
-                for (let x = 0; x < w / dpr; x += 20) {
-                    var y = noise(x / 600, 0.3 * i, nt) * waveAmplitude;
-                    ctx!.lineTo(x, y + (h / dpr) * waveYOffset);
+                // OPTIMIZATION: Increased step from 5 to 10 to reduce CPU load by 50%
+                for (let x = 0; x < w; x += 10) {
+                    // Smoother noise scale (x/1000 instead of x/800)
+                    var y = noise(x / 1000, 0.3 * i, nt) * waveAmplitude;
+                    ctx!.lineTo(x, y + h * waveYOffset);
                 }
                 ctx!.stroke();
                 ctx!.closePath();
@@ -88,46 +84,25 @@ export const WavyBackground = ({
         };
 
         let animationId: number;
-        let isRunning = false;
-
         const render = () => {
-            if (!isRunning) return; // Stop if paused
             ctx!.fillStyle = backgroundFill || "black";
             ctx!.globalAlpha = waveOpacity || 0.5;
-            ctx!.fillRect(0, 0, w / dpr, h / dpr);
-            // Limit waves to 3 instead of 5 for 60fps lock
-            drawWave(3);
+            ctx!.fillRect(0, 0, w, h);
+            drawWave(5);
             animationId = requestAnimationFrame(render);
         };
 
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    if (!isRunning) {
-                        isRunning = true;
-                        render();
-                    }
-                } else {
-                    isRunning = false;
-                    cancelAnimationFrame(animationId);
-                }
-            },
-            { threshold: 0 }
-        );
-
-        if (canvas) observer.observe(canvas);
+        render();
 
         const handleResize = () => {
-            w = ctx.canvas.width = window.innerWidth * dpr;
-            h = ctx.canvas.height = window.innerHeight * dpr;
-            ctx.scale(dpr, dpr);
+            w = ctx.canvas.width = window.innerWidth;
+            h = ctx.canvas.height = window.innerHeight;
+            // Re-init on resize to catch layout shifts (though full re-run handled by effect)
         };
         window.addEventListener("resize", handleResize);
 
         return () => {
-            isRunning = false;
             cancelAnimationFrame(animationId);
-            observer.disconnect();
             window.removeEventListener("resize", handleResize);
         };
     };
@@ -136,6 +111,8 @@ export const WavyBackground = ({
         const cleanup = init();
         return () => cleanup && cleanup();
     }, [blur, speed, waveOpacity]);
+
+    // Safari check removed, using universal CSS blur
 
     return (
         <div
@@ -149,10 +126,8 @@ export const WavyBackground = ({
                 ref={canvasRef}
                 id="canvas"
                 style={{
-                    filter: `blur(${blur}px)`,
-                    transform: 'translate3d(0,0,0)', // GPU Force
-                    width: '100%',
-                    height: '100%'
+                    filter: `blur(${blur}px)`, // Use CSS Blur (GPU accelerated)
+                    willChange: "transform"    // Hint to browser
                 }}
             ></canvas>
             <div className={cn("relative z-10", className)} {...props}>

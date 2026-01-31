@@ -15,38 +15,27 @@ import Accessibility from './components/Accessibility';
 const App: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
 
-  // Custom Cursor Logic - Performance Optimized (GPU Composite Only + rAF)
+  // Custom Cursor Logic - Performance Optimized (No State Re-renders)
   useEffect(() => {
-    let rafId: number;
-
     const updateCursor = (e: MouseEvent) => {
-      // Cancel previous frame to ensure we only render the latest position
-      if (rafId) cancelAnimationFrame(rafId);
-
-      rafId = requestAnimationFrame(() => {
-        if (cursorRef.current) {
-          cursorRef.current.style.transform = `translate3d(${e.clientX - 400}px, ${e.clientY - 400}px, 0)`;
-        }
-      });
+      if (cursorRef.current) {
+        cursorRef.current.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
+      }
     };
-
     window.addEventListener('mousemove', updateCursor);
-    return () => {
-      window.removeEventListener('mousemove', updateCursor);
-      cancelAnimationFrame(rafId);
-    };
+    return () => window.removeEventListener('mousemove', updateCursor);
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200 overflow-x-hidden">
+    <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
 
-      {/* Custom Cursor Glow - Optimized */}
+
+      {/* Custom Cursor Glow */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-[800px] h-[800px] pointer-events-none z-0 opacity-30 blur-[100px] transition-opacity duration-300 will-change-transform"
+        className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
         style={{
-          background: 'radial-gradient(circle, rgba(29, 78, 216, 0.4) 0%, transparent 70%)',
-          transform: 'translate3d(-100%, -100%, 0)' // Start off-screen
+          background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
         }}
       />
 

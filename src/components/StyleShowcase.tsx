@@ -13,8 +13,6 @@ interface ThemeConfig {
         accent: string;
         card: string;
         border: string;
-        sectionBg?: string;
-        sectionText?: string;
     };
     font: string;
     glow?: string;
@@ -96,8 +94,8 @@ const StyleShowcase: React.FC = () => {
                                 key={theme.id}
                                 onClick={() => setActiveTheme(theme.id)}
                                 className={`px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 relative ${activeTheme === theme.id
-                                    ? 'text-black shadow-lg'
-                                    : 'text-gray-400 hover:text-white'
+                                        ? 'text-black shadow-lg'
+                                        : 'text-gray-400 hover:text-white'
                                     }`}
                             >
                                 {activeTheme === theme.id && (
