@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowUpRight, CheckCircle2, Bell, MessageCircle, ShoppingBag
 import SuccessStack from './ui/SuccessStack';
 import LiveNotifications from './LiveNotifications';
 import cardBg from '../assets/card-bg.jpg';
-import guaranteeCard from '../assets/guarantee-card-v5-cropped.png';
+import guaranteeCard from '../assets/guarantee-card-final-v6.png';
 import orenPortrait from '../assets/oren-portrait-new.jpg';
 import { smoothScrollTo } from '../utils/smoothScroll';
 
@@ -58,7 +58,7 @@ const Hero: React.FC = () => {
             className="mb-8 md:mb-12 flex items-center gap-4 self-start md:self-auto"
           >
             <div className="h-[1px] w-8 md:w-12 bg-white/30"></div>
-            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; v12.0 (UPDATED)</span>
+            <span className="text-[0.65rem] md:text-xs font-bold tracking-[0.2em] uppercase text-white/50">Oren Shamir &bull; 2024</span>
           </motion.div>
 
           {/* Headlines - Big & Designed */}
@@ -126,9 +126,9 @@ const Hero: React.FC = () => {
               }}
               style={{
                 position: 'absolute',
-                top: '20px',     // Added spacing
-                right: '-80px',  // Adjusted for cropped asset
-                width: '180%',   // 180% of container is HUGE for a cropped image (pure content)
+                top: '20px',     // Kept same
+                right: '-120px', // Revert to standard uncropped offset
+                width: '500%',   // Increased to 500% to compensate for whitespace
                 zIndex: 25,
                 filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.4))'
               }}
