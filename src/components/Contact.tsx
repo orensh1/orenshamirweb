@@ -91,7 +91,7 @@ const Contact: React.FC = () => {
 
 
           <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center text-xs text-zinc-500 order-2 md:order-1">
+            <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center text-xs text-zinc-400 order-2 md:order-1">
               <div className="flex items-center gap-6">
                 <button onClick={(e) => openModal(e, 'privacy')} className="hover:text-white transition-colors">מדיניות פרטיות</button>
                 <button onClick={(e) => openModal(e, 'accessibility')} className="hover:text-white transition-colors">הצהרת נגישות</button>
@@ -101,13 +101,13 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="flex items-center gap-6 order-1 md:order-2">
-              <a href="https://www.instagram.com/orenshamir1/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-pink-500 transition-colors">
+              <a href="https://www.instagram.com/orenshamir1/" target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-pink-500 transition-colors" aria-label="Instagram Profile">
                 <Instagram size={20} />
               </a>
-              <a href="mailto:orenshamir5@gmail.com" className="text-zinc-500 hover:text-white transition-colors">
+              <a href="mailto:orenshamir5@gmail.com" className="text-zinc-400 hover:text-white transition-colors" aria-label="Send Email">
                 <Mail size={20} />
               </a>
-              <a href="tel:+972526448826" className="text-zinc-500 hover:text-white transition-colors">
+              <a href="tel:+972526448826" className="text-zinc-400 hover:text-white transition-colors" aria-label="Call Now">
                 <Phone size={20} />
               </a>
             </div>

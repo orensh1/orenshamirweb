@@ -57,7 +57,7 @@ const Process: React.FC = () => {
                             </div>
 
                             {/* Step Number Badge */}
-                            <div className="absolute top-0 right-[calc(50%-3rem)] bg-zinc-900 border border-white/10 text-xs font-mono px-2 py-1 rounded-full text-zinc-500">
+                            <div className="absolute top-0 right-[calc(50%-3rem)] bg-zinc-900 border border-white/10 text-xs font-mono px-2 py-1 rounded-full text-zinc-400">
                                 0{index + 1}
                             </div>
 
