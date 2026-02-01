@@ -11,8 +11,37 @@ interface LegalModalsProps {
 
 const content = {
     privacy: {
-        title: "מדיניות פרטיות",
-        body: `האתר מכבד את פרטיות המשתמשים. המידע שנאסף (שם וטלפון) נמסר מרצונך החופשי ונועד אך ורק לצורך יצירת קשר למתן שירותי בניית אתרים. המידע נשמר במאגר המידע של אורן שמיר ולא יועבר לצד שלישי ללא הסכמה, למעט כנדרש בחוק. זכותך לעיין במידע ולבקש את מחיקתו בפנייה לטלפון 052-644-8826.`
+        title: "תנאי שימוש, מדיניות פרטיות והצהרת נגישות",
+        body: (
+            <div dir="rtl">
+                <p><strong>עדכון אחרון: פברואר 2026</strong></p>
+
+                <h3 className="text-xl font-bold mt-6 mb-3 text-white">1. מדיניות פרטיות ואבטחת מידע (תיקון 13)</h3>
+                <p className="mb-4">
+                    אורן שמיר מכבד את פרטיות המשתמשים ומחויב להגן על המידע האישי בהתאם לתיקון 13 לחוק הגנת הפרטיות.
+                    המידע הנאסף באתר (שם וטלפון) נמסר על ידך מרצונך החופשי לצורך יצירת קשר בלבד.
+                    האתר משתמש ב-Cookies ובכלי ניתוח (Google Analytics, Microsoft Clarity) לאיסוף מידע סטטיסטי אנונימי.
+                </p>
+
+                <h4 className="text-lg font-bold mt-4 mb-2 text-white">אבטחת מידע</h4>
+                <p className="mb-4">
+                    האתר נוקט באמצעי הגנה טכנולוגיים מחמירים למניעת דלף מידע.
+                    האתר מאוחסן בשרתים מאובטחים העומדים בתקני אבטחה בינלאומיים.
+                </p>
+
+                <h3 className="text-xl font-bold mt-6 mb-3 text-white">2. הצהרת נגישות</h3>
+                <p className="mb-4">
+                    האתר הונגש בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות.
+                    הוא מותאם לניווט מקלדת, קוראי מסך ובעל ניגודיות צבעים תקינה.
+                    בכל בעיה ניתן לפנות לאורן שמיר בטלפון 052-644-8826.
+                </p>
+
+                <h3 className="text-xl font-bold mt-6 mb-3 text-white">3. תנאי שימוש</h3>
+                <p className="mb-4">
+                    כל התכנים באתר הם קניינו הבלעדי של אורן שמיר. אין להעתיק או לשכפל תוכן ללא אישור.
+                </p>
+            </div>
+        )
     },
     accessibility: {
         title: "הצהרת נגישות",
@@ -67,8 +96,11 @@ const LegalModals: React.FC<LegalModalsProps> = ({ activeModal, onClose }) => {
                             </div>
 
                             {/* Body */}
-                            <div className="p-8 text-gray-200 leading-relaxed text-lg whitespace-pre-wrap">
-                                {content[activeModal].body}
+                            <div className="p-8 text-gray-200 leading-relaxed text-lg">
+                                {typeof content[activeModal].body === 'string'
+                                    ? <div className="whitespace-pre-wrap">{content[activeModal].body}</div>
+                                    : content[activeModal].body
+                                }
                             </div>
 
                             {/* Footer */}

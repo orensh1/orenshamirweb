@@ -9,6 +9,7 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 import Accessibility from './components/Accessibility';
+import CookieConsent from './components/CookieConsent';
 
 
 
@@ -52,6 +53,7 @@ const App: React.FC = () => {
 
       <WhatsAppButton />
       <Accessibility />
+      <CookieConsent />
     </div>
   );
 };
