@@ -43,6 +43,7 @@ const Navbar: React.FC = () => {
           <button
             className="md:hidden text-white flex-shrink-0"
             onClick={() => setIsOpen(!isOpen)}
+            aria-label="Open Menu"
           >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

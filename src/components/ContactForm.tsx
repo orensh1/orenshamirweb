@@ -142,6 +142,7 @@ const ContactForm = () => {
                                     name="business"
                                     value={formState.business}
                                     onChange={handleChange}
+                                    aria-label="Choose business type"
                                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#22C55E]/50 focus:bg-white/10 transition-all appearance-none"
                                 >
                                     <option value="" className="bg-gray-900 text-gray-500">בחרו תחום..</option>
