@@ -40,13 +40,13 @@ const Contact: React.FC = () => {
               </p>
 
               <div className="flex flex-col gap-6">
-                <a href="mailto:orenshamir5@gmail.com" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group">
+                <a href="mailto:orenshamir5@gmail.com" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group" aria-label="Send email to orenshamir5@gmail.com">
                   <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center group-hover:bg-pink-600 transition-colors">
                     <Mail size={20} />
                   </div>
                   <span className="text-lg">orenshamir5@gmail.com</span>
                 </a>
-                <a href="tel:0526448826" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group">
+                <a href="tel:0526448826" className="flex items-center gap-4 text-gray-200 hover:text-white transition-colors group" aria-label="Call 052-644-8826">
                   <div className="w-12 h-12 rounded-full bg-zinc-900 flex items-center justify-center group-hover:bg-pink-600 transition-colors">
                     <Phone size={20} />
                   </div>
@@ -115,7 +115,7 @@ const Contact: React.FC = () => {
 
           {/* Credits Bar */}
           <div className="mt-8 pt-4 border-t border-white/5 text-center">
-            <p className="text-zinc-600 text-xs dir-rtl" dir="rtl">
+            <p className="text-zinc-400 text-xs dir-rtl" dir="rtl">
               כל הזכויות שמורות לבונה האתר אורן שמיר 052-644-8826
             </p>
           </div>

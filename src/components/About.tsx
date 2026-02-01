@@ -39,6 +39,8 @@ const About: React.FC = () => {
               <img
                 src={orenImage}
                 alt="Oren Shamir"
+                width="800"
+                height="800"
                 className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
