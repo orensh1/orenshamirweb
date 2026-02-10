@@ -27,6 +27,7 @@ collections:
           - label: "🏠 מסך ראשי (Hero)"
             name: "hero"
             widget: "object"
+            collapsed: true
             summary: "הכותרת הראשית והטקסט שלמעלה"
             fields:
               - label: "טקסט באדג' (הכיתוב הקטן למעלה)"
@@ -63,6 +64,7 @@ collections:
           - label: "📌 תפריט ניווט (Navbar)"
             name: "navbar"
             widget: "object"
+            collapsed: true
             summary: "לוגו, קישורים וכפתור"
             fields:
               - label: "טקסט לוגו"
@@ -85,6 +87,7 @@ collections:
           - label: "👤 קצת עליי (About)"
             name: "about"
             widget: "object"
+            collapsed: true
             summary: "הסיפור האישי והכרטיסים"
             fields:
               - label: "כותרת — שורה ראשונה"
@@ -140,6 +143,7 @@ collections:
           - label: "⚡ תהליך עבודה (Process)"
             name: "process"
             widget: "object"
+            collapsed: true
             summary: "3 השלבים של תהליך העבודה"
             fields:
               - label: "כותרת — חלק ראשון"
@@ -185,6 +189,7 @@ collections:
           - label: "❓ שאלות נפוצות (FAQ)"
             name: "faq"
             widget: "object"
+            collapsed: true
             summary: "שאלות ותשובות"
             fields:
               - label: "כותרת — חלק ראשון"
@@ -205,6 +210,7 @@ collections:
           - label: "📞 יצירת קשר (Contact)"
             name: "contact"
             widget: "object"
+            collapsed: true
             summary: "פרטי קשר, טלפון, אימייל ווואטסאפ"
             fields:
               - label: "כותרת — חלק ראשון"
@@ -257,6 +263,7 @@ collections:
           - label: "💬 כפתור וואטסאפ צף"
             name: "whatsapp"
             widget: "object"
+            collapsed: true
             summary: "הכפתור הירוק שצף בפינה"
             fields:
               - label: "מספר טלפון (עם קידומת)"
