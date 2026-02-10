@@ -54,47 +54,41 @@ header[class*="AppHeader"],
 
 /* ─── USER PROVIDED OVERRIDES (Specific Fixes via #nc-root) ─── */
 
-/* שימוש ב-ID כדי לחזק את הספציפיות */
-#nc-root body,
-html,
+#nc-root * {
+    color: #e0e0e0 !important;
+    text-shadow: none !important;
+}
+
 #nc-root {
     background-color: #0f0f0f !important;
-    color: #e0e0e0 !important;
 }
 
-/* הברחת הרקע הלבן מהשדות - אגרסיבי */
 #nc-root input,
 #nc-root textarea,
+#nc-root select,
 #nc-root [class*="Widget"] {
-    background-color: #1e1e1e !important;
+    background-color: #1a1a1a !important;
     color: #ffffff !important;
     border: 1px solid #444 !important;
-    box-shadow: none !important;
 }
 
-/* טקסטים וכותרות */
-#nc-root label,
-#nc-root span,
 #nc-root h1,
-#nc-root h2 {
-    color: #cccccc !important;
+#nc-root h2,
+#nc-root h3,
+#nc-root label,
+#nc-root span[class*="Label"] {
+    color: #ffffff !important;
 }
 
-/* כרטיסיות */
-#nc-root div[class*="ObjectWidgetTop"] {
-    background-color: #121212 !important;
-    border-left: 4px solid #a855f7 !important;
-    color: #fff !important;
-    /* Ensure text is white */
-}
-
-/* כפתורים */
 #nc-root button[class*="Button"] {
-    background-image: linear-gradient(to right, #ec4899, #a855f7) !important;
-    background-color: transparent !important;
+    background: linear-gradient(to right, #ec4899, #a855f7) !important;
     color: white !important;
     border: none !important;
-    text-shadow: none !important;
+}
+
+#nc-root div[class*="ObjectWidgetTop"] {
+    background-color: #161616 !important;
+    border-color: #333 !important;
 }
 
 /* Netlify Identity Z-Index Fix */
