@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
 import Button from './ui/Button';
 import { Menu, X } from 'lucide-react';
-
 import { smoothScrollTo } from '../utils/smoothScroll';
+import { useSiteContent } from '../content/SiteContentContext';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { scrollY } = useScroll();
+  const { content } = useSiteContent();
+  const nav = content.navbar;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
@@ -16,15 +18,9 @@ const Navbar: React.FC = () => {
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
-    smoothScrollTo(id, 1000); // Instant start, 1s duration
+    smoothScrollTo(id, 1000);
     setIsOpen(false);
   };
-
-  const links = [
-    { name: 'שירותים', href: 'process' },
-    { name: 'קצת עליי', href: 'about' },
-    { name: 'שאלות נפוצות', href: 'faq' },
-  ];
 
   return (
     <motion.nav
@@ -50,12 +46,12 @@ const Navbar: React.FC = () => {
 
           {/* Logo - Desktop Only (Left) */}
           <a href="#" className="hidden md:block text-2xl font-bold tracking-tighter text-white">
-            OSH
+            {nav.logoText}
           </a>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
-            {links.map((link) => (
+            {nav.links.map((link) => (
               <a
                 key={link.name}
                 href={`#${link.href}`}
@@ -72,14 +68,14 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
               <Button variant="outline" className="!py-2 !px-4 text-sm flex items-center gap-2">
-                רוצה אתר כזה?
+                {nav.ctaText}
               </Button>
             </a>
           </div>
 
           {/* Logo - Mobile Only (Right Side) */}
           <a href="#" className="md:hidden text-xl font-bold tracking-tighter text-white flex-shrink-0">
-            OSH
+            {nav.logoText}
           </a>
         </div>
       </div>
@@ -93,7 +89,7 @@ const Navbar: React.FC = () => {
           className="absolute top-full left-0 right-0 p-4 md:hidden"
         >
           <div className="bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4">
-            {links.map((link) => (
+            {nav.links.map((link) => (
               <a
                 key={link.name}
                 href={`#${link.href}`}
@@ -104,7 +100,7 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
-              <Button className="w-full justify-center">רוצה אתר כזה?</Button>
+              <Button className="w-full justify-center">{nav.ctaText}</Button>
             </a>
           </div>
         </motion.div>

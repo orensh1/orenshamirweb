@@ -1,10 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useSiteContent } from '../content/SiteContentContext';
 
 const WhatsAppButton: React.FC = () => {
+    const { content } = useSiteContent();
+    const wa = content.whatsapp;
+
     return (
         <motion.a
-            href="https://wa.me/972526448826"
+            href={`https://wa.me/${wa.phoneNumber}`}
             target="_blank"
             rel="noopener noreferrer"
             className="fixed bottom-6 right-6 z-40 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-lg hover:bg-[#20bd5a] transition-all flex items-center justify-center group"
@@ -30,7 +34,7 @@ const WhatsAppButton: React.FC = () => {
 
             {/* Tooltip */}
             <span className="absolute right-full mr-4 bg-white text-black px-3 py-1 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow-xl pointer-events-none">
-                דבר איתי בוואטסאפ
+                {wa.tooltipText}
             </span>
         </motion.a>
     );

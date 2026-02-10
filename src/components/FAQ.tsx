@@ -1,33 +1,12 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus } from 'lucide-react';
-
-interface FAQItem {
-    question: string;
-    answer: string;
-}
-
-const faqs: FAQItem[] = [
-    {
-        question: "האם זה בכלל מתאים לעסק שלי?",
-        answer: "אני מאמין שאתר דף נחיתה הוא חובה לכל עסק ישראלי שרוצה לצמוח,כיום כולם כולל כולם נמצאים באינטרנט ואם לא תיהיו באינטרנט תישארו מאחור"
-    },
-    {
-        question: "תוך כמה זמן הדף יהיה באוויר?",
-        answer: "הכי מהר שאפשר ברגע שיש לי את כל החומרים אני יושב על זה עד שזה מוכן בדרך כלל זה עניין של כמה ימים בודדים"
-    },
-    {
-        question: "מה קורה אם אני רוצה לשנות משהו אחרי שהדף עלה?",
-        answer: "פשוט מדברים איתי אני לא נעלם אחרי שהאתר באוויר שולחים לי הודעה בוואטסאפ ואני דואג לסדר את זה"
-    },
-    {
-        question: "למה לקחת דווקא אותך ולא חברה גדולה?",
-        answer: "בתור נער בן 16 יש לי הרבה יותר זמן פנוי מהחברות הגדולות כך שאוכל לייצר את האתר שלכם במלוא תשומת ליבי ובמהירות"
-    }
-];
+import { useSiteContent } from '../content/SiteContentContext';
 
 const FAQ: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
+    const { content } = useSiteContent();
+    const faq = content.faq;
 
     return (
         <section id="faq" className="py-20 bg-[#050505] relative overflow-hidden">
@@ -38,11 +17,11 @@ const FAQ: React.FC = () => {
                     viewport={{ once: true }}
                     className="text-4xl md:text-6xl font-bold mb-16 text-center"
                 >
-                    שאלות <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">נפוצות</span>
+                    {faq.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">{faq.titleHighlight}</span>
                 </motion.h2>
 
                 <div className="space-y-4">
-                    {faqs.map((faq, index) => (
+                    {faq.items.map((item, index) => (
                         <motion.div
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
@@ -55,7 +34,7 @@ const FAQ: React.FC = () => {
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                 className="w-full p-6 flex items-center justify-between text-right text-lg md:text-xl font-medium text-white/90 hover:text-white transition-colors"
                             >
-                                <span>{faq.question}</span>
+                                <span>{item.question}</span>
                                 <span className={`mr-4 p-2 rounded-full bg-white/5 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-pink-500/20 text-pink-500' : 'text-zinc-400'}`}>
                                     {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
                                 </span>
@@ -70,7 +49,7 @@ const FAQ: React.FC = () => {
                                         transition={{ duration: 0.3, ease: "easeInOut" }}
                                     >
                                         <div className="px-6 pb-6 text-zinc-400 leading-relaxed font-light">
-                                            {faq.answer}
+                                            {item.answer}
                                         </div>
                                     </motion.div>
                                 )}

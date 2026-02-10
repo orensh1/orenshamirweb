@@ -1,0 +1,138 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "he"
+
+collections:
+  - name: "pages"
+    label: "תוכן האתר"
+    files:
+      - name: "site-data"
+        label: "תוכן ראשי"
+        file: "public/content/site-data.json"
+        format: "json"
+        fields:
+          # ─── Hero Section ───
+          - label: "🏠 Hero — מסך ראשי"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "טקסט באדג'", name: "badgeText", widget: "string" }
+              - { label: "כותרת — שורה 1", name: "headlineLine1", widget: "string" }
+              - { label: "כותרת — שורה 2", name: "headlineLine2", widget: "string" }
+              - { label: "תת כותרת", name: "subtitle", widget: "string" }
+              - { label: "מילה מודגשת (ירוקה)", name: "highlightWord", widget: "string" }
+              - { label: "טקסט כפתור CTA", name: "ctaText", widget: "string" }
+              - label: "צבעי גלים"
+                name: "waveColors"
+                widget: "list"
+                field: { label: "צבע (hex)", name: "color", widget: "string" }
+
+          # ─── Navbar ───
+          - label: "📌 Navbar — תפריט ניווט"
+            name: "navbar"
+            widget: "object"
+            fields:
+              - { label: "טקסט לוגו", name: "logoText", widget: "string" }
+              - label: "קישורי ניווט"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "שם", name: "name", widget: "string" }
+                  - { label: "עוגן (section id)", name: "href", widget: "string" }
+              - { label: "טקסט כפתור CTA", name: "ctaText", widget: "string" }
+
+          # ─── About ───
+          - label: "👤 About — קצת עליי"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "כותרת — שורה 1", name: "headingLine1", widget: "string" }
+              - { label: "כותרת — שם", name: "headingName", widget: "string" }
+              - label: "פסקאות"
+                name: "paragraphs"
+                widget: "list"
+                field: { label: "פסקה", name: "text", widget: "text" }
+              - label: "כרטיסי תכונות"
+                name: "features"
+                widget: "list"
+                fields:
+                  - label: "אייקון"
+                    name: "iconName"
+                    widget: "select"
+                    options: ["Smartphone", "Zap", "Layout"]
+                  - { label: "כותרת", name: "title", widget: "string" }
+                  - { label: "תיאור", name: "description", widget: "text" }
+                  - label: "צבע"
+                    name: "colorClass"
+                    widget: "select"
+                    options: ["purple", "blue", "pink"]
+              - { label: "Alt תמונה", name: "imageAlt", widget: "string" }
+              - { label: "כיתוב תמונה", name: "imageCaption", widget: "string" }
+              - { label: "תת כיתוב תמונה", name: "imageSubCaption", widget: "string" }
+              - { label: "טקסט מרקי", name: "marqueeText", widget: "string" }
+
+          # ─── Process ───
+          - label: "⚡ Process — תהליך עבודה"
+            name: "process"
+            widget: "object"
+            fields:
+              - { label: "כותרת — בסיס", name: "titleBase", widget: "string" }
+              - { label: "כותרת — מודגש", name: "titleHighlight", widget: "string" }
+              - label: "שלבים"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - label: "אייקון"
+                    name: "iconName"
+                    widget: "select"
+                    options: ["MessageCircle", "Code2", "Rocket"]
+                  - { label: "כותרת", name: "title", widget: "string" }
+                  - { label: "תיאור", name: "description", widget: "text" }
+                  - { label: "צבע טקסט (class)", name: "color", widget: "string" }
+                  - { label: "צבע רקע (class)", name: "bg", widget: "string" }
+
+          # ─── FAQ ───
+          - label: "❓ FAQ — שאלות נפוצות"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "כותרת — בסיס", name: "titleBase", widget: "string" }
+              - { label: "כותרת — מודגש", name: "titleHighlight", widget: "string" }
+              - label: "שאלות"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "שאלה", name: "question", widget: "string" }
+                  - { label: "תשובה", name: "answer", widget: "text" }
+
+          # ─── Contact ───
+          - label: "📞 Contact — יצירת קשר"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "כותרת — שורה 1", name: "headingLine1", widget: "string" }
+              - { label: "כותרת — מודגש", name: "headingHighlight", widget: "string" }
+              - { label: "תת כותרת", name: "subtitle", widget: "text" }
+              - { label: "אימייל", name: "email", widget: "string" }
+              - { label: "טלפון", name: "phone", widget: "string" }
+              - { label: "טלפון (תצוגה)", name: "phoneDisplay", widget: "string" }
+              - { label: "מספר וואטסאפ", name: "whatsappNumber", widget: "string" }
+              - { label: "כותרת וואטסאפ", name: "whatsappTitle", widget: "string" }
+              - { label: "תת כותרת וואטסאפ", name: "whatsappSubtitle", widget: "string" }
+              - { label: "טקסט כפתור וואטסאפ", name: "whatsappButtonText", widget: "string" }
+              - { label: "קישור אינסטגרם", name: "instagramUrl", widget: "string" }
+              - { label: "טקסט זכויות יוצרים", name: "copyrightText", widget: "string" }
+              - { label: "טקסט קרדיטים", name: "creditsText", widget: "string" }
+
+          # ─── WhatsApp Button ───
+          - label: "💬 WhatsApp — כפתור צף"
+            name: "whatsapp"
+            widget: "object"
+            fields:
+              - { label: "מספר טלפון", name: "phoneNumber", widget: "string" }
+              - { label: "טקסט טולטיפ", name: "tooltipText", widget: "string" }

@@ -1,8 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import StyleShowcase from './components/StyleShowcase';
-
 import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
@@ -10,8 +9,7 @@ import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 import Accessibility from './components/Accessibility';
 import CookieConsent from './components/CookieConsent';
-
-
+import { SiteContentProvider } from './content/SiteContentContext';
 
 const App: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -28,33 +26,34 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
+    <SiteContentProvider>
+      <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
 
+        {/* Custom Cursor Glow */}
+        <div
+          ref={cursorRef}
+          className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
+          }}
+        />
 
-      {/* Custom Cursor Glow */}
-      <div
-        ref={cursorRef}
-        className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
-        style={{
-          background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
-        }}
-      />
+        <Navbar />
 
-      <Navbar />
+        <main className="relative z-10">
+          <Hero />
+          <About />
+          <Process />
+          <StyleShowcase />
+          <FAQ />
+          <Contact />
+        </main>
 
-      <main className="relative z-10">
-        <Hero />
-        <About />
-        <Process />
-        <StyleShowcase />
-        <FAQ />
-        <Contact />
-      </main>
-
-      <WhatsAppButton />
-      <Accessibility />
-      <CookieConsent />
-    </div>
+        <WhatsAppButton />
+        <Accessibility />
+        <CookieConsent />
+      </div>
+    </SiteContentProvider>
   );
 };
 
