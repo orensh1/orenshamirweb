@@ -7,10 +7,63 @@
     <meta name="robots" content="noindex" />
     <title>ניהול תוכן — Oren Shamir</title>
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        /* Custom branding for the CMS admin panel */
+        [data-slate-editor] {
+            -webkit-user-modify: read-write !important;
+        }
+
+        /* Dark theme for the login screen */
+        body {
+            background-color: #0a0a0a !important;
+        }
+
+        /* Style the top bar */
+        .css-yal7as,
+        [class*="AppHeader"] {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a) !important;
+        }
+
+        /* Make the sidebar feel more modern */
+        [class*="SidebarNavList"] a {
+            border-radius: 8px !important;
+            margin: 2px 8px !important;
+        }
+
+        /* Better looking publish button */
+        [class*="ToolbarButton"]:first-child,
+        [class*="PublishButton"] {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6) !important;
+            border: none !important;
+            border-radius: 12px !important;
+        }
+
+        /* Cleaner field styling */
+        [class*="ControlPaneContainer"] {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* RTL support for the editor */
+        [class*="ControlContainer"] label {
+            text-align: right;
+            direction: rtl;
+        }
+
+        [class*="ControlContainer"] input,
+        [class*="ControlContainer"] textarea {
+            direction: rtl;
+            text-align: right;
+        }
+    </style>
 </head>
 
 <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+    // Register a custom preview style
+    CMS.registerPreviewStyle("/admin/preview.css");
+    </script>
 </body>
 
 </html>
