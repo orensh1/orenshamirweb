@@ -17,8 +17,8 @@
     href="https://fonts.googleapis.com/css2?family=Heebo:wght@100;300;400;500;700;900&family=Rubik:wght@400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <!-- Custom Admin Theme (Cache Busting v3) -->
-  <link rel="stylesheet" href="/admin/admin.css?v=3">
+  <!-- Custom Admin Theme (Cache Busting v4) -->
+  <link rel="stylesheet" href="/admin/admin.css?v=4">
 
   <style>
     /* ─── Custom CMS Branding ─── */
@@ -557,9 +557,9 @@
     // Register the preview for our file collection
     CMS.registerPreviewTemplate('site-data', SitePreview);
 
-    // Custom Welcome Message
+    // Custom Welcome Message & UI Fixes
     window.onload = function () {
-      // Poll for the header to exist
+      // 1. Welcome Message
       var checkHeader = setInterval(function () {
         var header = document.querySelector('header');
         if (header) {
@@ -569,6 +569,37 @@
           header.insertBefore(welcome, header.firstChild);
         }
       }, 1000);
+
+      // 2. Force Dark Mode on Stubborn CMS Elements (Gray Bars)
+      var observer = new MutationObserver(function (mutations) {
+        // Find all gray header bars
+        var headers = document.querySelectorAll('[class*="TopBarContainer"], [class*="ObjectWidgetTopBarContainer"]');
+        headers.forEach(function (el) {
+          if (el.style.backgroundColor !== 'rgb(45, 45, 45)') {
+            el.style.setProperty('background-color', '#2d2d2d', 'important');
+            el.style.setProperty('border-bottom', '1px solid #444', 'important');
+            el.style.setProperty('color', '#ffffff', 'important');
+
+            // Force white text on children
+            var children = el.querySelectorAll('*');
+            children.forEach(function (child) {
+              child.style.setProperty('color', '#ffffff', 'important');
+            });
+          }
+        });
+
+        // Find nested object items that might be gray
+        var listItems = document.querySelectorAll('[class*="ListItem"]');
+        listItems.forEach(function (el) {
+          if (el.style.backgroundColor !== 'rgb(18, 18, 18)') {
+            el.style.setProperty('background-color', '#121212', 'important');
+            el.style.setProperty('border', '1px solid #333', 'important');
+          }
+        });
+      });
+
+      // Start observing the body for changes
+      observer.observe(document.body, { childList: true, subtree: true });
     };
   </script>
 </body>
