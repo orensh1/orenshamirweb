@@ -40,8 +40,15 @@ export interface SiteContent {
     };
     navbar: {
         logoText: string;
+        logoImage?: string; // New: Optional logo image
         links: NavLink[];
         ctaText: string;
+    };
+    appearance?: { // New: Global appearance settings
+        primaryColor: string;
+        accentColor: string;
+        fontHeading: string;
+        fontBody: string;
     };
     about: {
         headingLine1: string;

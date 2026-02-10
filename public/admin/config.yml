@@ -34,7 +34,8 @@ collections:
             widget: "object"
             collapsed: true
             fields:
-              - { label: "לוגו (טקסט)", name: "logoText", widget: "string", hint: "השם שמופיע בצד ימין למעלה. בדרך כלל ראשי תיבות או שם העסק." }
+              - { label: "לוגו (טקסט)", name: "logoText", widget: "string", hint: "השם שמופיע אם אין תמונה." }
+              - { label: "לוגו (תמונה)", name: "logoImage", widget: "image", required: false, hint: "העלאת תמונה שתחליף את הטקסט. מומלץ קובץ PNG שקוף." }
               - { label: "טקסט כפתור בתפריט", name: "ctaText", widget: "string", hint: "הכפתור הקטן בצד שמאל של התפריט." }
               - label: "קישורים בתפריט"
                 name: "links"
@@ -43,6 +44,16 @@ collections:
                 fields:
                   - { label: "שם הקישור", name: "name", widget: "string", hint: "מה הלקוח רואה? למשל 'אודות'" }
                   - { label: "לאן זה מוביל? (ID)", name: "href", widget: "string", hint: "המזהה של החלק באתר (באנגלית). למשל: about, process, faq" }
+
+          - name: "appearance"
+            label: "נראות כללית וצבעים"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "צבע ראשי", name: "primaryColor", widget: "string", default: "#3B82F6", hint: "צבע הכפתורים והדגשים (Hex Code)." }
+              - { label: "צבע משני", name: "accentColor", widget: "string", default: "#A855F7", hint: "צבע נוסף להדרגות ועיצוב." }
+              - { label: "גופן כותרות", name: "fontHeading", widget: "select", options: ["Heebo", "Rubik", "Assistant"], default: "Heebo", hint: "הפונט של הכותרות באתר." }
+              - { label: "גופן טקסט רץ", name: "fontBody", widget: "select", options: ["Heebo", "Rubik", "Assistant"], default: "Rubik", hint: "הפונט של הטקסט הרגיל." }
 
           - name: "about"
             label: "אודות / מי אני"

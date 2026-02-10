@@ -46,7 +46,11 @@ const Navbar: React.FC = () => {
 
           {/* Logo - Desktop Only (Left) */}
           <a href="#" className="hidden md:block text-2xl font-bold tracking-tighter text-white">
-            {nav.logoText}
+            {nav.logoImage ? (
+              <img src={nav.logoImage} alt={nav.logoText} className="h-10 w-auto object-contain" />
+            ) : (
+              nav.logoText
+            )}
           </a>
 
           {/* Desktop Links */}
@@ -75,7 +79,11 @@ const Navbar: React.FC = () => {
 
           {/* Logo - Mobile Only (Right Side) */}
           <a href="#" className="md:hidden text-xl font-bold tracking-tighter text-white flex-shrink-0">
-            {nav.logoText}
+            {nav.logoImage ? (
+              <img src={nav.logoImage} alt={nav.logoText} className="h-8 w-auto object-contain" />
+            ) : (
+              nav.logoText
+            )}
           </a>
         </div>
       </div>

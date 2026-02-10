@@ -16,12 +16,13 @@ import { Routes, Route } from 'react-router-dom';
 import Header from './components/Navbar'; // Assuming Navbar is the Header, or we keep Navbar inside Home? 
 // Wait, Navbar is inside Home in Home.tsx. App.tsx had Navbar outside.
 // Let's use Home component for the main route.
+import ThemeInjector from './components/ThemeInjector';
 import Home from './Home';
-
 
 const App: React.FC = () => {
   return (
     <SiteContentProvider>
+      <ThemeInjector />
       <Routes>
         <Route path="/" element={<Home />} />
 

@@ -14,25 +14,9 @@ const SiteContentContext = createContext<SiteContentContextType>({
 export const useSiteContent = () => useContext(SiteContentContext);
 
 export const SiteContentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [content, setContent] = useState<SiteContent>(defaultContent);
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        fetch('/content/site-data.json')
-            .then((res) => {
-                if (!res.ok) throw new Error(`HTTP ${res.status}`);
-                return res.json();
-            })
-            .then((data: Partial<SiteContent>) => {
-                setContent(deepMerge(defaultContent, data));
-            })
-            .catch((err) => {
-                console.warn('Failed to fetch site content, using defaults:', err);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });
-    }, []);
+    // Direct usage of imported JSON content. No more fetch.
+    const content = defaultContent;
+    const isLoading = false;
 
     return (
         <SiteContentContext.Provider value={{ content, isLoading }}>

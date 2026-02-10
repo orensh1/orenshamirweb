@@ -1,10 +1,10 @@
 {
   "hero": {
-    "badgeText": "vunu",
+    "badgeText": "אורן שמיר | בונה דפי נחיתה מקצועיים",
     "headlineLine1": "לא עוד סתם",
     "headlineLine2": "דף נחיתה",
     "subtitle": "בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר",
-    "highlightWord": "חרא",
+    "highlightWord": "כסף",
     "ctaText": "אני רוצה אתר כזה",
     "waveColors": [
       "#3B82F6",
@@ -15,6 +15,7 @@
   },
   "navbar": {
     "logoText": "OSH",
+    "logoImage": "",
     "ctaText": "רוצה אתר כזה?",
     "links": [
       {
@@ -30,6 +31,12 @@
         "href": "faq"
       }
     ]
+  },
+  "appearance": {
+    "primaryColor": "#3B82F6",
+    "accentColor": "#A855F7",
+    "fontHeading": "Heebo",
+    "fontBody": "Rubik"
   },
   "about": {
     "headingLine1": "נעים להכיר, ",
@@ -115,19 +122,19 @@
     ]
   },
   "contact": {
-    "whatsappTitle": "זמין עכשיו בוואטסאפ",
-    "creditsText": "כל הזכויות שמורות לבונה האתר אורן שמיר 052-644-8826",
-    "whatsappSubtitle": "למענה מהיר ושיחה ישירה, שלחו לי הודעה.",
-    "phone": "0526448826",
-    "whatsappButtonText": "שלח הודעה",
-    "headingHighlight": "לעבוד.",
-    "copyrightText": "© 2026 Oren Shamir. All rights reserved.",
-    "phoneDisplay": "052-644-8826",
-    "subtitle": "השאירו פרטים כאן או שלחו לי הודעה בוואטסאפ ונדבר על הפרויקט שלכם",
     "headingLine1": "בואו נתחיל ",
-    "whatsappNumber": "972526448826",
+    "headingHighlight": "לעבוד.",
+    "subtitle": "השאירו פרטים כאן או שלחו לי הודעה בוואטסאפ ונדבר על הפרויקט שלכם",
     "email": "orenshamir5@gmail.com",
-    "instagramUrl": "https://www.instagram.com/orenshamir1/"
+    "phone": "0526448826",
+    "phoneDisplay": "052-644-8826",
+    "whatsappNumber": "972526448826",
+    "whatsappTitle": "זמין עכשיו בוואטסאפ",
+    "whatsappSubtitle": "למענה מהיר ושיחה ישירה, שלחו לי הודעה.",
+    "whatsappButtonText": "שלח הודעה",
+    "instagramUrl": "https://www.instagram.com/orenshamir1/",
+    "copyrightText": "© 2026 Oren Shamir. All rights reserved.",
+    "creditsText": "כל הזכויות שמורות לבונה האתר אורן שמיר 052-644-8826"
   },
   "whatsapp": {
     "phoneNumber": "972526448826",
