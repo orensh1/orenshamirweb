@@ -1,16 +1,19 @@
 /* 
-  Decap CMS — Cyber/Professional Theme
+  Decap CMS — Premium Dashboard Theme V2
   Author: Oren Shamir (via Gemini Agent)
 */
 
 :root {
     /* ─── COLORS ─── */
-    --bg-body: #050505;
+    --bg-body: #020617;
+    /* Slate 950 */
+    --bg-sidebar: #0f172a;
+    /* Slate 900 */
     --bg-card: #0f172a;
-    /* Deep Navy/Black */
+    /* Slate 900 */
     --bg-input: #1e293b;
     /* Slate 800 */
-    --bg-input-focus: #334155;
+    --bg-input-focus: #1e293b;
 
     --text-main: #f8fafc;
     /* Slate 50 */
@@ -18,31 +21,37 @@
     /* Slate 400 */
 
     --border-color: #334155;
+    /* Slate 700 */
     --border-focus: #a855f7;
     /* Purple 500 */
 
     --brand-gradient: linear-gradient(135deg, #ec4899 0%, #a855f7 50%, #6366f1 100%);
     --brand-purple: #a855f7;
 
-    /* ─── SPACING ─── */
-    --radius-sm: 6px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
+    /* ─── SPACING & SHADOWS ─── */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+
+    --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+    --shadow-input: inset 0 2px 4px 0 rgba(0, 0, 0, 0.3);
 }
 
-/* ─── GLOBAL RESET & TYPOGRAPHY ─── */
+/* ─── GLOBAL RESET ─── */
 body,
 #nc-root {
     background-color: var(--bg-body) !important;
     color: var(--text-main) !important;
-    font-family: 'Heebo', system-ui, sans-serif !important;
+    font-family: 'Rubik', 'Heebo', system-ui, sans-serif !important;
+    /* Switched to Rubik primary */
     -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
 }
 
 /* Scrollbars */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -51,44 +60,106 @@ body,
 
 ::-webkit-scrollbar-thumb {
     background: #334155;
-    border-radius: 4px;
+    border-radius: 99px;
+    border: 2px solid var(--bg-body);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #475569;
 }
 
-/* ─── HEADER ─── */
+/* ─── HEADER (Top Navigation) ─── */
 header[class*="AppHeader"],
 .css-yal7as {
-    background: var(--bg-body) !important;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.1) !important;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5) !important;
+    background: rgba(15, 23, 42, 0.8) !important;
+    /* Glass effect */
+    backdrop-filter: blur(12px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    height: 64px !important;
 }
 
 /* ─── SIDEBAR ─── */
 [class*="SidebarContainer"] {
-    background-color: #020617 !important;
-    /* Extremely dark slat e*/
+    background-color: var(--bg-sidebar) !important;
     border-right: 1px solid var(--border-color) !important;
+}
+
+[class*="SidebarNavList"] {
+    padding: 16px !important;
 }
 
 [class*="SidebarNavList"] a {
     color: var(--text-muted) !important;
     border-radius: var(--radius-sm) !important;
-    margin: 4px 8px !important;
-    transition: all 0.2s ease !important;
+    margin-bottom: 8px !important;
+    padding: 10px 16px !important;
+    font-weight: 500 !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 [class*="SidebarNavList"] a:hover,
 [class*="SidebarNavList"] a[class*="active"] {
-    background: rgba(168, 85, 247, 0.1) !important;
+    background: linear-gradient(90deg, rgba(168, 85, 247, 0.15), transparent) !important;
     color: #fff !important;
-    border-left: 3px solid var(--brand-purple) !important;
-    padding-left: 12px !important;
+    border-left: 4px solid var(--brand-purple) !important;
+    padding-left: 24px !important;
+    /* Indent on active */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
 }
 
-/* ─── INPUTS & FORMS ─── */
+/* ─── EDITING PANE (Left Side) ─── */
+[class*="CollectionPage"] {
+    background-color: var(--bg-body) !important;
+}
+
+/* ─── CARDS & SECTIONS ─── */
+/* The main container for collapsed objects */
+[class*="ObjectControl"],
+[class*="ListControl"] [class*="ListItem"] {
+    background-color: var(--bg-card) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-md) !important;
+    margin-bottom: 24px !important;
+    overflow: hidden !important;
+    box-shadow: var(--shadow-card) !important;
+}
+
+/* Top Bar of Sections (Hero, Navbar, etc.) */
+[class*="TopBarContainer"],
+[class*="ObjectWidgetTopBarContainer"] {
+    background: linear-gradient(to right, #1e293b, #0f172a) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    padding: 16px 24px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Text in Top Bar */
+[class*="TopBarContainer"] *,
+[class*="ObjectWidgetTopBarContainer"] * {
+    color: #fff !important;
+    font-size: 1.1rem !important;
+    /* Larger headings */
+    font-weight: 700 !important;
+    letter-spacing: 0.02em !important;
+}
+
+/* Collapsed summary text */
+[class*="TopBarContainer"] [class*="Summary"],
+[class*="ObjectWidgetTopBarContainer"] [class*="Summary"] {
+    color: #94a3b8 !important;
+    font-weight: 400 !important;
+    font-size: 0.9rem !important;
+}
+
+
+/* ─── INPUTS ─── */
+/* Wrapper for inputs */
+[class*="ControlContainer"] {
+    margin-bottom: 24px !important;
+}
+
+/* The Input Field Itself */
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -101,142 +172,118 @@ select,
 [class*="ControlContainer"] textarea {
     background-color: var(--bg-input) !important;
     color: #ffffff !important;
-    border: 1px solid var(--border-color) !important;
+    border: 1px solid transparent !important;
+    /* Clean defaults */
     border-radius: var(--radius-sm) !important;
-    padding: 12px !important;
-    font-size: 14px !important;
-    transition: border-color 0.2s, box-shadow 0.2s !important;
+    padding: 16px !important;
+    /* Huge clickable area */
+    font-size: 15px !important;
+    box-shadow: var(--shadow-input) !important;
+    transition: all 0.2s ease !important;
+    width: 100% !important;
 }
 
+/* Focus State */
 input:focus,
 textarea:focus,
 select:focus {
-    background-color: var(--bg-input-focus) !important;
-    border-color: var(--border-focus) !important;
-    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2) !important;
+    background-color: #334155 !important;
+    border-color: var(--brand-purple) !important;
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.25) !important;
     outline: none !important;
-}
-
-/* Markdown Editor specific */
-[class*="Markdown"] [role="textbox"] {
-    background-color: var(--bg-input) !important;
-    color: #fff !important;
-}
-
-[class*="Markdown"] [class*="Toolbar"] {
-    background-color: var(--bg-card) !important;
-    border-bottom: 1px solid var(--border-color) !important;
-}
-
-[class*="Markdown"] button {
-    color: var(--text-muted) !important;
-}
-
-[class*="Markdown"] button:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-    color: #fff !important;
+    transform: translateY(-1px) !important;
 }
 
 /* ─── LABELS ─── */
 label,
 [class*="FieldLabel"] {
-    color: var(--text-muted) !important;
+    color: #cbd5e1 !important;
+    /* Lighter than muted */
     text-transform: uppercase !important;
-    font-size: 12px !important;
-    letter-spacing: 1px !important;
-    font-weight: 600 !important;
-    margin-bottom: 6px !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 1.5px !important;
+    font-weight: 700 !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+    opacity: 0.8 !important;
 }
 
-/* Hints */
+/* Description / Hints */
 [class*="Hint"] {
     color: #64748b !important;
-    font-size: 12px !important;
-}
-
-/* ─── CARDS & LIST ITEMS (The Collapsibles) ─── */
-[class*="ObjectControl"],
-[class*="ListControl"] [class*="ListItem"] {
-    background-color: var(--bg-card) !important;
-    border: 1px solid var(--border-color) !important;
-    border-radius: var(--radius-md) !important;
-    margin-bottom: 20px !important;
-    overflow: hidden !important;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-}
-
-/* The Top Bar of the Cards (where the title is) */
-[class*="TopBarContainer"],
-[class*="ObjectWidgetTopBarContainer"] {
-    background-color: #1e293b !important;
-    /* Lighter than card bg */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    padding: 12px 20px !important;
-}
-
-/* Force colors in top bar */
-[class*="TopBarContainer"] *,
-[class*="ObjectWidgetTopBarContainer"] * {
-    color: #fff !important;
-    fill: #fff !important;
-    /* SVGs */
-}
-
-/* Nested Cards (Indent them nicely) */
-[class*="ObjectControl"] [class*="ObjectControl"] {
-    background-color: #0b1121 !important;
-    /* Darker for nesting */
-    border-left: 2px solid var(--brand-purple) !important;
-    margin-top: 16px !important;
+    font-size: 0.85rem !important;
+    margin-top: 6px !important;
+    font-style: italic !important;
 }
 
 /* ─── BUTTONS ─── */
+/* Primary Publish Button */
 button[class*="PublishButton"],
 [class*="ToolbarButton"]:first-child {
     background: var(--brand-gradient) !important;
     color: #fff !important;
     border: none !important;
-    font-weight: 700 !important;
-    padding: 0 24px !important;
-    height: 40px !important;
-    border-radius: var(--radius-sm) !important;
-    box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.3) !important;
-    transition: transform 0.2s, filter 0.2s !important;
+    font-weight: 800 !important;
+    padding: 0 32px !important;
+    height: 48px !important;
+    /* Taller */
+    border-radius: 99px !important;
+    /* Pill shape */
+    box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.5) !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    font-size: 0.9rem !important;
 }
 
 button[class*="PublishButton"]:hover {
-    filter: brightness(1.1) !important;
-    transform: translateY(-1px) !important;
+    filter: brightness(1.2) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 20px 30px -10px rgba(168, 85, 247, 0.6) !important;
 }
 
-/* Add Item Button */
+/* Add Item Button (in lists) */
 button[class*="AddButton"] {
-    background-color: rgba(168, 85, 247, 0.1) !important;
+    background-color: transparent !important;
     color: var(--brand-purple) !important;
-    border: 1px dashed var(--brand-purple) !important;
+    border: 2px dashed rgba(168, 85, 247, 0.4) !important;
     border-radius: var(--radius-sm) !important;
-    font-weight: 600 !important;
-    padding: 10px !important;
-    transition: background 0.2s !important;
+    font-weight: 700 !important;
+    padding: 16px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    transition: all 0.2s !important;
 }
 
 button[class*="AddButton"]:hover {
-    background-color: rgba(168, 85, 247, 0.2) !important;
+    background-color: rgba(168, 85, 247, 0.1) !important;
+    border-color: var(--brand-purple) !important;
+    transform: scale(1.01) !important;
 }
 
-/* Generic Buttons */
-button {
-    cursor: pointer !important;
+/* ─── NESTED OBJECTS ─── */
+[class*="ObjectControl"] [class*="ObjectControl"] {
+    background-color: #0b1121 !important;
+    /* Darker */
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-left: 3px solid var(--brand-purple) !important;
+    margin-left: 8px !important;
+    margin-right: 8px !important;
 }
 
-/* ─── LOGIN SCREEN (Netlify Identity) ─── */
-/* We can't style inside the iframe easily, but we can style the container if it leaks out */
+/* ─── MARKDOWN EDITOR ─── */
+[class*="Markdown"] [class*="Toolbar"] {
+    background: #1e293b !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0 !important;
+}
+
+[class*="Markdown"] [role="textbox"] {
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm) !important;
+}
+
+/* ─── LOGIN OVERLAY ─── */
 #netlify-identity-widget {
-    z-index: 10000 !important;
-}
-
-/* ─── UTILS ─── */
-/* Force hidden elements to stay hidden */
-[hidden] {
-    display: none !important;
+    z-index: 99999 !important;
 }
