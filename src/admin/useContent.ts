@@ -1,6 +1,9 @@
 
 import { useState, useEffect } from 'react';
-import { SiteContent, defaultContent } from '../content/siteContent';
+import defaultContent from '../../public/content/site-data.json';
+import { SectionDef, ADMIN_SCHEMA } from './schema';
+
+export type SiteContent = typeof defaultContent;
 
 export function useContent() {
     const [content, setContent] = useState<SiteContent>(defaultContent);
@@ -9,6 +12,7 @@ export function useContent() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
+        // Fetch initial content
         fetch('/content/site-data.json')
             .then(res => res.json())
             .then(data => {
@@ -16,8 +20,7 @@ export function useContent() {
                 setLoading(false);
             })
             .catch(err => {
-                console.error("Failed to load content", err);
-                setError("Failed to load content");
+                console.error("Failed to load content:", err);
                 setLoading(false);
             });
     }, []);
@@ -29,35 +32,40 @@ export function useContent() {
         }));
     };
 
-    const saveContent = async (password: string) => {
+    const saveContent = async (token: string) => {
         setSaving(true);
         setError(null);
+
         try {
-            const res = await fetch('/.netlify/functions/save-content', {
+            const response = await fetch('/.netlify/functions/save-content', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${password}`
+                    'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({
-                    content,
-                    message: `Update content via Admin UI (${new Date().toLocaleString()})`
-                })
+                body: JSON.stringify(content)
             });
 
-            if (!res.ok) {
-                throw new Error(await res.text());
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.message || 'Failed to save');
             }
 
-            return true;
+            setSaving(false);
+            alert('Content saved successfully! Changes will be live in a few minutes.');
         } catch (err: any) {
             console.error(err);
-            setError(err.message || "Failed to save");
-            return false;
-        } finally {
+            setError(err.message);
             setSaving(false);
         }
     };
 
-    return { content, loading, saving, error, updateSection, saveContent };
+    return {
+        content,
+        loading,
+        saving,
+        error,
+        updateSection,
+        saveContent
+    };
 }

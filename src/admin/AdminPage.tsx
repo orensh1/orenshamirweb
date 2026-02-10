@@ -1,20 +1,35 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useContent } from './useContent';
 import { Editor } from './Editor';
 import { Preview } from './Preview';
 import { AdminLogin } from './AdminLogin';
-import { Loader2, Save, ExternalLink, Monitor, Smartphone, Layout } from 'lucide-react';
+import { Loader2, Save, ExternalLink, Monitor, Smartphone, LogOut } from 'lucide-react';
 import { cn } from '../utils/cn';
+import netlifyIdentity from 'netlify-identity-widget';
 
 export default function AdminPage() {
     const { content, loading, saving, error, updateSection, saveContent } = useContent();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
-    const [password, setPassword] = useState('');
+    const [authToken, setAuthToken] = useState<string | null>(null);
     const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
 
-    if (!isAuthenticated) {
-        return <AdminLogin onLogin={(pass) => { setPassword(pass); setIsAuthenticated(true); }} />;
+    useEffect(() => {
+        netlifyIdentity.init();
+        const user = netlifyIdentity.currentUser();
+        if (user?.token?.access_token) {
+            setAuthToken(user.token.access_token);
+        }
+        netlifyIdentity.on('logout', () => {
+            setAuthToken(null);
+        });
+    }, []);
+
+    const handleLogout = () => {
+        netlifyIdentity.logout();
+    };
+
+    if (!authToken) {
+        return <AdminLogin onLogin={(token) => setAuthToken(token)} />;
     }
 
     if (loading) {
@@ -35,11 +50,11 @@ export default function AdminPage() {
                         <h1 className="text-xl font-black tracking-tight text-white flex items-center gap-2">
                             Admin <span className="text-purple-500">Dashboard</span>
                         </h1>
-                        <p className="text-xs text-slate-400 font-mono mt-1">v2.0 • Custom React Build</p>
+                        <p className="text-xs text-slate-400 font-mono mt-1">v2.1 • Netlify Identity</p>
                     </div>
                     <div className="flex gap-2">
                         <button
-                            onClick={() => saveContent(password)}
+                            onClick={() => saveContent(authToken)}
                             disabled={saving}
                             className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-50 disabled:cursor-not-allowed rounded-lg font-bold text-sm transition-all shadow-lg shadow-purple-900/20"
                         >
@@ -57,6 +72,12 @@ export default function AdminPage() {
                         </div>
                     )}
                     <Editor content={content} onUpdate={updateSection} />
+
+                    <div className="mt-8 pt-8 border-t border-white/10">
+                        <button onClick={handleLogout} className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm">
+                            <LogOut size={16} /> Logout
+                        </button>
+                    </div>
                 </div>
             </div>
 

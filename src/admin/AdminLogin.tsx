@@ -1,53 +1,56 @@
 
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import netlifyIdentity from 'netlify-identity-widget';
 import { Lock, ArrowRight } from 'lucide-react';
 
 export interface AdminLoginProps {
-    onLogin: (password: string) => void;
+    onLogin: (token: string) => void;
 }
 
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
-    const [input, setInput] = useState('');
-    const [error, setError] = useState(false);
+    useEffect(() => {
+        // Initialize Netlify Identity
+        netlifyIdentity.init();
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        if (input.length > 0) {
-            onLogin(input);
-        } else {
-            setError(true);
+        // Check if user is already logged in
+        const user = netlifyIdentity.currentUser();
+        if (user && user.token?.access_token) {
+            onLogin(user.token.access_token);
         }
+
+        // Listen for login events
+        netlifyIdentity.on('login', (user) => {
+            if (user && user.token?.access_token) {
+                onLogin(user.token.access_token);
+                netlifyIdentity.close();
+            }
+        });
+
+        return () => {
+            netlifyIdentity.off('login');
+        };
+    }, [onLogin]);
+
+    const handleLogin = () => {
+        netlifyIdentity.open();
     };
 
     return (
         <div className="min-h-screen bg-[#020617] flex flex-col items-center justify-center text-white p-4">
-            <div className="w-full max-w-md">
-                <div className="text-center mb-10">
-                    <div className="w-16 h-16 bg-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg shadow-purple-900/50">
-                        <Lock className="w-8 h-8 text-white" />
-                    </div>
-                    <h1 className="text-3xl font-black tracking-tighter mb-2">Admin Access</h1>
-                    <p className="text-slate-400">Enter your secure key to manage content.</p>
+            <div className="w-full max-w-md text-center">
+                <div className="w-16 h-16 bg-purple-600 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg shadow-purple-900/50">
+                    <Lock className="w-8 h-8 text-white" />
                 </div>
+                <h1 className="text-3xl font-black tracking-tighter mb-2">Admin Access</h1>
+                <p className="text-slate-400 mb-8">Login via Netlify Identity to manage content.</p>
 
-                <form onSubmit={handleSubmit} className="relative">
-                    <input
-                        type="password"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="Enter secure key..."
-                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-6 py-5 pr-14 outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all font-mono text-lg placeholder:text-slate-600 text-center"
-                        autoFocus
-                    />
-                    <button
-                        type="submit"
-                        className="absolute right-2 top-2 bottom-2 aspect-square bg-purple-600 rounded-lg flex items-center justify-center hover:bg-purple-500 transition-colors"
-                    >
-                        <ArrowRight size={20} />
-                    </button>
-                </form>
-
-                {error && <p className="text-red-500 text-center mt-4 text-sm">Please enter a key</p>}
+                <button
+                    onClick={handleLogin}
+                    className="w-full bg-white text-black font-bold py-4 rounded-xl hover:bg-slate-200 transition-colors flex items-center justify-center gap-2"
+                >
+                    <span>Login with Netlify Identity</span>
+                    <ArrowRight size={20} />
+                </button>
             </div>
         </div>
     );
