@@ -1,0 +1,85 @@
+/* CMS Custom Styling for Hebrew/RTL */
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&family=Rubik:wght@400;500;700&display=swap');
+
+:root {
+    --primary-color: #3b82f6;
+    --bg-color: #f3f4f6;
+    --text-color: #1f2937;
+    --sidebar-bg: #111827;
+    --sidebar-text: #e5e7eb;
+}
+
+body {
+    font-family: 'Heebo', sans-serif !important;
+}
+
+/* Basic RTL adjustments for the editor */
+[class*="AppContainer"],
+[class*="CollectionContainer"],
+[class*="EditorContainer"] {
+    direction: rtl;
+}
+
+/* Sidebar adjustments */
+[class*="SidebarContainer"] {
+    border-right: none !important;
+    border-left: 1px solid #e5e7eb;
+}
+
+/* Form inputs */
+input,
+textarea,
+select {
+    text-align: right;
+    direction: rtl;
+    border-radius: 8px !important;
+    border: 1px solid #d1d5db !important;
+    padding: 10px !important;
+    font-family: 'Rubik', sans-serif !important;
+}
+
+/* Field Labels */
+label {
+    font-weight: 700 !important;
+    color: #374151 !important;
+    font-size: 1rem !important;
+    margin-bottom: 8px !important;
+}
+
+/* Hint text */
+[class*="FieldHint"] {
+    color: #6b7280 !important;
+    font-size: 0.875rem !important;
+    font-style: italic;
+    margin-top: 4px !important;
+}
+
+/* Editor preview pane */
+[class*="PreviewPaneFrame"] {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Buttons */
+button {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
+
+/* Collection list items */
+[class*="Card"] {
+    border-radius: 8px !important;
+    border: 1px solid #e5e7eb !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+[class*="Card"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Status badges */
+[class*="StatusBadge"] {
+    border-radius: 9999px !important;
+    padding: 2px 10px !important;
+}
