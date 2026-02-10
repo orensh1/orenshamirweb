@@ -9,14 +9,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@netlify/functions": "^5.1.2",
     "framer-motion": "^12.29.2",
     "lucide-react": "^0.563.0",
     "node-fetch": "^2.6.7",
-    "octokit": "^5.0.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.0",
     "resend": "^3.2.0",
     "simplex-noise": "^4.0.3"
   },
