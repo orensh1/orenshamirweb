@@ -1,0 +1,115 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "public/assets"
+public_folder: "/assets"
+
+locale: "he"
+
+collections:
+  - name: "pages"
+    label: "עמודים"
+    files:
+      - name: "homepage"
+        label: "דף הבית"
+        file: "src/content/homepage.json"
+        fields:
+          - name: "hero"
+            label: "חלק עליון (Hero)"
+            widget: "object"
+            fields:
+              - { label: "טקסט תג (Badge)", name: "badgeText", widget: "string" }
+              - { label: "כותרת שורה 1", name: "headlineLine1", widget: "string" }
+              - { label: "כותרת שורה 2", name: "headlineLine2", widget: "string" }
+              - { label: "תת כותרת", name: "subtitle", widget: "text" }
+              - { label: "מילה מודגשת", name: "highlightWord", widget: "string" }
+              - { label: "טקסט כפתור", name: "ctaText", widget: "string" }
+              - { label: "צבעי גלים", name: "waveColors", widget: "list", allow_add: true }
+
+          - name: "navbar"
+            label: "תפריט ראשי"
+            widget: "object"
+            fields:
+              - { label: "טקסט לוגו", name: "logoText", widget: "string" }
+              - { label: "טקסט כפתור", name: "ctaText", widget: "string" }
+              - label: "קישורים"
+                name: "links"
+                widget: "list"
+                fields:
+                  - { label: "שם הקישור", name: "name", widget: "string" }
+                  - { label: "מזהה (ID)", name: "href", widget: "string" }
+
+          - name: "about"
+            label: "אודות"
+            widget: "object"
+            fields:
+              - { label: "כותרת שורה 1", name: "headingLine1", widget: "string" }
+              - { label: "שם בכותרת", name: "headingName", widget: "string" }
+              - { label: "פסקאות", name: "paragraphs", widget: "list" }
+              - label: "יתרונות (Features)"
+                name: "features"
+                widget: "list"
+                fields:
+                  - { label: "אייקון (Smartphone/Zap/Layout)", name: "iconName", widget: "select", options: ["Smartphone", "Zap", "Layout"] }
+                  - { label: "כותרת", name: "title", widget: "string" }
+                  - { label: "תיאור", name: "description", widget: "text" }
+                  - { label: "מחלקה לצבע (purple/blue/pink)", name: "colorClass", widget: "select", options: ["purple", "blue", "pink"] }
+              - { label: "טקסט אלטרנטיבי לתמונה", name: "imageAlt", widget: "string" }
+              - { label: "כיתוב תמונה", name: "imageCaption", widget: "string" }
+              - { label: "תת כיתוב תמונה", name: "imageSubCaption", widget: "string" }
+              - { label: "טקסט רץ (Marquee)", name: "marqueeText", widget: "string" }
+
+          - name: "process"
+            label: "תהליך העבודה"
+            widget: "object"
+            fields:
+              - { label: "כותרת בסיס", name: "titleBase", widget: "string" }
+              - { label: "כותרת מודגשת", name: "titleHighlight", widget: "string" }
+              - label: "שלבים"
+                name: "steps"
+                widget: "list"
+                fields:
+                  - { label: "אייקון (MessageCircle/Code2/Rocket)", name: "iconName", widget: "select", options: ["MessageCircle", "Code2", "Rocket"] }
+                  - { label: "כותרת", name: "title", widget: "string" }
+                  - { label: "תיאור", name: "description", widget: "text" }
+                  - { label: "צבע טקסט (למשל text-blue-500)", name: "color", widget: "string" }
+                  - { label: "צבע רקע (למשל bg-blue-500/10)", name: "bg", widget: "string" }
+
+          - name: "faq"
+            label: "שאלות נפוצות"
+            widget: "object"
+            fields:
+              - { label: "כותרת בסיס", name: "titleBase", widget: "string" }
+              - { label: "כותרת מודגשת", name: "titleHighlight", widget: "string" }
+              - label: "שאלות"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "שאלה", name: "question", widget: "string" }
+                  - { label: "תשובה", name: "answer", widget: "text" }
+
+          - name: "contact"
+            label: "צור קשר / פוטר"
+            widget: "object"
+            fields:
+              - { label: "כותרת שורה 1", name: "headingLine1", widget: "string" }
+              - { label: "כותרת מודגשת", name: "headingHighlight", widget: "string" }
+              - { label: "תת כותרת", name: "subtitle", widget: "text" }
+              - { label: "אימייל", name: "email", widget: "string" }
+              - { label: "טלפון (גולמי)", name: "phone", widget: "string" }
+              - { label: "טלפון (תצוגה)", name: "phoneDisplay", widget: "string" }
+              - { label: "מספר וואטסאפ (לקישור)", name: "whatsappNumber", widget: "string" }
+              - { label: "כותרת וואטסאפ", name: "whatsappTitle", widget: "string" }
+              - { label: "תת כותרת וואטסאפ", name: "whatsappSubtitle", widget: "string" }
+              - { label: "טקסט כפתור וואטסאפ", name: "whatsappButtonText", widget: "string" }
+              - { label: "קישור לאינסטגרם", name: "instagramUrl", widget: "string" }
+              - { label: "זכויות יוצרים (אנגלית)", name: "copyrightText", widget: "string" }
+              - { label: "קרדיט (עברית)", name: "creditsText", widget: "string" }
+
+          - name: "whatsapp"
+            label: "כפתור וואטסאפ צף"
+            widget: "object"
+            fields:
+              - { label: "מספר טלפון", name: "phoneNumber", widget: "string" }
+              - { label: "טקסט בועית", name: "tooltipText", widget: "string" }

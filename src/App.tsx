@@ -12,48 +12,20 @@ import Accessibility from './components/Accessibility';
 import CookieConsent from './components/CookieConsent';
 import { SiteContentProvider } from './content/SiteContentContext';
 
+import { Routes, Route } from 'react-router-dom';
+import Header from './components/Navbar'; // Assuming Navbar is the Header, or we keep Navbar inside Home? 
+// Wait, Navbar is inside Home in Home.tsx. App.tsx had Navbar outside.
+// Let's use Home component for the main route.
+import Home from './Home';
+
+
 const App: React.FC = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
-
-  // Custom Cursor Logic - Performance Optimized (No State Re-renders)
-  useEffect(() => {
-    const updateCursor = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.background = `radial-gradient(600px at ${e.clientX}px ${e.clientY}px, rgba(29, 78, 216, 0.15), transparent 80%)`;
-      }
-    };
-    window.addEventListener('mousemove', updateCursor);
-    return () => window.removeEventListener('mousemove', updateCursor);
-  }, []);
-
   return (
     <SiteContentProvider>
-      <div className="bg-[#050505] min-h-screen text-white selection:bg-pink-500/30 selection:text-pink-200">
+      <Routes>
+        <Route path="/" element={<Home />} />
 
-        {/* Custom Cursor Glow */}
-        <div
-          ref={cursorRef}
-          className="fixed inset-0 pointer-events-none z-0 transition-opacity duration-300"
-          style={{
-            background: `radial-gradient(600px at 50% 50%, rgba(29, 78, 216, 0.15), transparent 80%)`
-          }}
-        />
-
-        <Navbar />
-
-        <main className="relative z-10">
-          <Hero />
-          <About />
-          <Process />
-          <StyleShowcase />
-          <FAQ />
-          <Contact />
-        </main>
-
-        <WhatsAppButton />
-        <Accessibility />
-        <CookieConsent />
-      </div>
+      </Routes>
     </SiteContentProvider>
   );
 };
