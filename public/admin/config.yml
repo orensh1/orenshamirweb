@@ -1,6 +1,12 @@
 backend:
   name: git-gateway
   branch: main
+  auth_scope: repo
+  squash_merges: true
+  commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
 
 media_folder: "public/images/uploads"
 public_folder: "/images/uploads"
