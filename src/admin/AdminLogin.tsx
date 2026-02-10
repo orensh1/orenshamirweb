@@ -2,20 +2,16 @@
 import React, { useState } from 'react';
 import { Lock, ArrowRight } from 'lucide-react';
 
-interface AdminLoginProps {
+export interface AdminLoginProps {
     onLogin: (password: string) => void;
 }
 
-export default function AdminLogin({ onLogin }: AdminLoginProps) {
+export const AdminLogin: React.FC<AdminLoginProps> = ({ onLogin }) => {
     const [input, setInput] = useState('');
     const [error, setError] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        // In a real app this would check against a hash, here we rely on the server to validate for saving
-        // But for UI access, we can set a simple client pin or just let them in to See (save will fail)
-        // Changing approach: Let them in, but save will fail if password wrong.
-        // However, to mimic "auth", let's just ask.
         if (input.length > 0) {
             onLogin(input);
         } else {
@@ -55,4 +51,4 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
             </div>
         </div>
     );
-}
+};

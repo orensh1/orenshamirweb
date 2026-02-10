@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '../../utils/cn';
 
-interface AdminInputProps {
+export interface AdminInputProps {
     label: string;
     value: string;
     onChange: (value: string) => void;
@@ -10,7 +10,7 @@ interface AdminInputProps {
     className?: string;
 }
 
-export function AdminInput({ label, value, onChange, type = 'text', className }: AdminInputProps) {
+export const AdminInput: React.FC<AdminInputProps> = ({ label, value, onChange, type = 'text', className }) => {
     return (
         <div className={cn("mb-6", className)}>
             <label className="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">
@@ -34,4 +34,4 @@ export function AdminInput({ label, value, onChange, type = 'text', className }:
             )}
         </div>
     );
-}
+};

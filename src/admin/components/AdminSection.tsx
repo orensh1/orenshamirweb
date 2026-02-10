@@ -3,7 +3,7 @@ import React from 'react';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
-interface AdminSectionProps {
+export interface AdminSectionProps {
     id: string;
     title: string;
     icon?: string;
@@ -12,7 +12,7 @@ interface AdminSectionProps {
     children: React.ReactNode;
 }
 
-export function AdminSection({ title, icon, isOpen, onToggle, children }: AdminSectionProps) {
+export const AdminSection: React.FC<AdminSectionProps> = ({ title, icon, isOpen, onToggle, children }) => {
     return (
         <div className="mb-6 rounded-xl overflow-hidden border border-white/5 shadow-lg bg-slate-900/50 backdrop-blur-md">
             <button
@@ -36,4 +36,4 @@ export function AdminSection({ title, icon, isOpen, onToggle, children }: AdminS
             )}
         </div>
     );
-}
+};

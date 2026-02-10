@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useContent } from './useContent';
 import { Editor } from './Editor';
 import { Preview } from './Preview';
-import AdminLogin from './AdminLogin';
+import { AdminLogin } from './AdminLogin';
 import { Loader2, Save, ExternalLink, Monitor, Smartphone, Layout } from 'lucide-react';
 import { cn } from '../utils/cn';
 
@@ -90,10 +90,6 @@ export default function AdminPage() {
                         "transition-all duration-500 ease-in-out border border-white/10 shadow-2xl overflow-hidden bg-black",
                         previewMode === 'mobile' ? "w-[375px] h-[700px] rounded-[3rem] border-4 border-slate-800" : "w-full h-full rounded-lg"
                     )}>
-                        {/* We render Preview.tsx here but we need to manage scroll inside it if generic */}
-                        {/* Actually Preview component has scale transform, maybe simpler to just render it directly? */}
-                        {/* Let's try to just render the components directly here inside a iframe-like container or just a scaled div */}
-                        {/* For simplicity we will render the components directly with some scale adjustment */}
                         <div className={cn("w-full h-full overflow-y-auto scrollbar-thin", previewMode === 'desktop' ? "scale-100" : "")}>
                             <Preview content={content} />
                         </div>
