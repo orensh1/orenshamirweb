@@ -1,126 +1,203 @@
 /* 
-  Decap CMS — Dark Mode & Custom Branding Theme
-  Author: Oren Shamir
+  Decap CMS — High Contrast Dark Theme
+  Aggressive Overrides for Usability
 */
 
-/* ─── BASE ─── */
+/* ─── BASE & SCROLLBAR ─── */
 body,
-[class*="AppContainer"] {
+#nc-root {
     background-color: #050505 !important;
     color: #e2e8f0 !important;
 }
 
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 /* ─── HEADER ─── */
-/* The top bar */
 header[class*="AppHeader"],
 .css-yal7as {
     background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%) !important;
-    border-bottom: 1px solid rgba(139, 92, 246, 0.2) !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    border-bottom: 1px solid rgba(139, 92, 246, 0.3) !important;
 }
 
 /* ─── SIDEBAR ─── */
 [class*="SidebarContainer"] {
-    background-color: #0f172a !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background-color: #0a0a0a !important;
+    border-right: 1px solid #222 !important;
 }
 
 [class*="SidebarNavList"] a {
     color: #94a3b8 !important;
-    border-radius: 8px !important;
-    margin: 4px 12px !important;
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-[class*="SidebarNavList"] a:hover {
-    background-color: rgba(139, 92, 246, 0.1) !important;
-    color: #a855f7 !important;
-}
-
+[class*="SidebarNavList"] a:hover,
 [class*="SidebarNavList"] a[class*="active"] {
-    background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), transparent) !important;
     color: #fff !important;
+    background: rgba(139, 92, 246, 0.15) !important;
     border-left: 3px solid #a855f7 !important;
 }
 
-/* ─── INPUT FIELDS ─── */
-/* Text inputs, Textareas, Selects */
+/* ─── INPUTS & WIDGETS (CRITICAL FIX) ─── */
+/* Target all input types specifically to override browser/cms defaults */
 input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
 textarea,
 select,
+[class*="Widget"] input,
+[class*="Widget"] textarea,
 [class*="ControlContainer"] input,
 [class*="ControlContainer"] textarea {
-    background-color: #1e293b !important;
-    color: #f1f5f9 !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    border-radius: 8px !important;
-    padding: 12px !important;
-    transition: all 0.2s !important;
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #444 !important;
+    border-radius: 6px !important;
+    padding: 10px 12px !important;
+    font-size: 14px !important;
+    box-shadow: none !important;
 }
 
-input[type="text"]:focus,
+/* Focus state for inputs */
+input:focus,
 textarea:focus,
 select:focus {
     border-color: #a855f7 !important;
-    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2) !important;
+    background-color: #252525 !important;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.25) !important;
     outline: none !important;
 }
 
-/* Labels */
-label {
-    color: #cbd5e1 !important;
-    font-weight: 500 !important;
-    margin-bottom: 6px !important;
+/* Placeholder styling */
+::placeholder {
+    color: #666 !important;
+    opacity: 1 !important;
 }
 
-/* Hints/Descriptions */
+/* Markdown editor specific fixes */
+[class*="Markdown"] [role="textbox"] {
+    color: #fff !important;
+    background-color: #1e1e1e !important;
+}
+
+/* ─── LABELS & HEADERS ─── */
+label,
+[class*="FieldLabel"] {
+    color: #e0e0e0 !important;
+    font-weight: 600 !important;
+    font-size: 13px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 8px !important;
+    display: block !important;
+}
+
+/* Hints/Description text */
 [class*="Hint"],
 [class*="FieldLabel"]+div {
-    color: #64748b !important;
-    font-size: 0.9em !important;
+    color: #888 !important;
+    font-size: 12px !important;
+    margin-bottom: 8px !important;
+}
+
+/* ─── CARDS & OBJECTS (COLLAPSIBLE) ─── */
+/* The main container for list items and objects */
+[class*="ObjectControl"],
+[class*="ListControl"] [class*="ListItem"] {
+    background-color: #121212 !important;
+    border: 1px solid #333 !important;
+    border-left: 4px solid #a855f7 !important;
+    /* Visual indicator */
+    border-radius: 8px !important;
+    margin-bottom: 16px !important;
+    padding: 16px !important;
+}
+
+/* Nested styling for depth */
+[class*="ObjectControl"] [class*="ObjectControl"] {
+    background-color: #0a0a0a !important;
+    border-left: 4px solid #3b82f6 !important;
+    /* Blue for nested */
+    margin-top: 12px !important;
+}
+
+/* Card Headers/Summary */
+[class*="Card"] button,
+[class*="ObjectControl"] div[role="button"] {
+    color: #fff !important;
+    font-weight: 600 !important;
 }
 
 /* ─── BUTTONS ─── */
-/* Primary Action Buttons (Publish, etc.) */
+/* Primary "Publish" button */
 button[class*="PublishButton"],
 [class*="ToolbarButton"]:first-child {
     background: linear-gradient(135deg, #ec4899, #8b5cf6) !important;
-    color: white !important;
+    color: #ffffff !important;
     border: none !important;
-    border-radius: 10px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    font-size: 13px !important;
     padding: 0 24px !important;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3) !important;
-    transition: transform 0.1s !important;
+    height: 40px !important;
+    border-radius: 6px !important;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4) !important;
 }
 
 button[class*="PublishButton"]:hover {
+    filter: brightness(1.1) !important;
     transform: translateY(-1px) !important;
-    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4) !important;
 }
 
-/* Secondary Buttons */
+/* Standard/Secondary Buttons */
 button {
-    border-radius: 8px !important;
+    color: #e2e8f0 !important;
 }
 
-/* ─── CARDS & LIST ITEMS ─── */
-[class*="Card"],
-[class*="ListItem"] {
+button:not([class*="PublishButton"]):hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Add/Plus buttons for lists */
+button[class*="AddButton"] {
     background-color: #1e293b !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
-    border-radius: 12px !important;
+    color: #a855f7 !important;
+    border: 1px dashed #a855f7 !important;
+    font-weight: 600 !important;
 }
 
-/* Topbar search */
-[class*="AppHeader"] input {
-    background-color: rgba(0, 0, 0, 0.2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
+button[class*="AddButton"]:hover {
+    background-color: rgba(168, 85, 247, 0.1) !important;
 }
 
-/* ─── LOGIN WIDGET (Netlify Identity) ─── */
-/* This targets the iframe or modal if possible, generally handled by config */
-div[class*="netlify-identity-widget"] {
-    font-family: 'Rubik', sans-serif !important;
+/* ─── MODALS & MEDIA LIBRARY ─── */
+[class*="Modal"] {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+}
+
+[class*="MediaLibrary"] {
+    background-color: #050505 !important;
+}
+
+/* ─── NETLIFY IDENTITY WIDGET ─── */
+/* Attempt to style the iframe content if accessible, mostly handled by config */
+#netlify-identity-widget,
+iframe[src*="identity"] {
+    z-index: 99999 !important;
 }
