@@ -96,9 +96,9 @@ const Contact: React.FC = () => {
           <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex flex-col md:flex-row gap-6 md:gap-8 items-center text-xs text-zinc-400 order-2 md:order-1">
               <div className="flex items-center gap-6">
-                <button onClick={(e) => openModal(e, 'privacy')} className="hover:text-white transition-colors">מדיניות פרטיות</button>
-                <button onClick={(e) => openModal(e, 'accessibility')} className="hover:text-white transition-colors">הצהרת נגישות</button>
-                <button onClick={(e) => openModal(e, 'terms')} className="hover:text-white transition-colors">תנאי שימוש</button>
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">מדיניות פרטיות</a>
+                <a href="/accessibility" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">הצהרת נגישות</a>
+                <a href="/terms" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">תנאי שימוש</a>
               </div>
               <p>{c.copyrightText}</p>
             </div>

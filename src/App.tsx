@@ -1,34 +1,24 @@
-
-import React, { useRef, useEffect } from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import StyleShowcase from './components/StyleShowcase';
-import About from './components/About';
-import Process from './components/Process';
-import FAQ from './components/FAQ';
-import Contact from './components/Contact';
-import WhatsAppButton from './components/WhatsAppButton';
-import Accessibility from './components/Accessibility';
-import CookieConsent from './components/CookieConsent';
-import { SiteContentProvider } from './content/SiteContentContext';
-
-import { Routes, Route } from 'react-router-dom';
-import Header from './components/Navbar'; // Assuming Navbar is the Header, or we keep Navbar inside Home? 
-// Wait, Navbar is inside Home in Home.tsx. App.tsx had Navbar outside.
-// Let's use Home component for the main route.
-import ThemeInjector from './components/ThemeInjector';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
+import LegalPage from './pages/LegalPage';
+import { SiteContentProvider } from './content/SiteContentContext';
+import ThemeInjector from './components/ThemeInjector';
 
-const App: React.FC = () => {
+function App() {
   return (
     <SiteContentProvider>
       <ThemeInjector />
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/privacy" element={<LegalPage type="privacy" />} />
+          <Route path="/accessibility" element={<LegalPage type="accessibility" />} />
+          <Route path="/terms" element={<LegalPage type="terms" />} />
+        </Routes>
+      </Router>
     </SiteContentProvider>
   );
-};
+}
 
 export default App;
