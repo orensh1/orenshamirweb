@@ -102,6 +102,9 @@ const Contact: React.FC = () => {
               </div>
               <p>{c.copyrightText}</p>
             </div>
+            <p className="text-[11px] text-zinc-500 order-3 mt-2 text-center md:text-right w-full" dir="rtl">
+              * הנגשת אתרי הלקוחות הינה באחריות הלקוח בלבד. לפרטים נוספים ראו <a href="/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-zinc-300 transition-colors">תנאי שימוש</a>.
+            </p>
 
             <div className="flex items-center gap-6 order-1 md:order-2">
               <a href={c.instagramUrl} target="_blank" rel="noopener noreferrer" className="text-zinc-400 hover:text-pink-500 transition-colors" aria-label="Instagram Profile">
