@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Smartphone, BarChart3, Video as VideoIcon, Sparkles } from 'lucide-react';
 
 const reels = [
-    { url: 'https://www.instagram.com/p/C4loAKboAE4/', tags: ['שיפור ביצועים', 'נוכחות דיגיטלית'] },
-    { url: 'https://www.instagram.com/p/C7hFGIioIMe/', tags: ['הפקה מאפס', 'עריכה דינמית'] },
-    { url: 'https://www.instagram.com/p/C8RD3SfoJ5d/', tags: ['500K+ צפיות', 'ויראלי'] },
-    { url: 'https://www.instagram.com/p/C9xfRebIVkd/', tags: ['יום צילום', 'אווירה'] },
-    { url: 'https://www.instagram.com/p/C-CJhEHIdLk/', tags: ['קהילה', 'מותג'] },
+    { url: 'https://www.instagram.com/p/C4loAKboAE4/' },
+    { url: 'https://www.instagram.com/p/C7hFGIioIMe/' },
+    { url: 'https://www.instagram.com/p/C8RD3SfoJ5d/' },
+    { url: 'https://www.instagram.com/p/C9xfRebIVkd/' },
+    { url: 'https://www.instagram.com/p/C-CJhEHIdLk/' },
 ];
 
 const toEmbedUrl = (url: string) => url.replace(/\/$/, '') + '/embed/';
@@ -105,13 +105,7 @@ const PortfolioSection: React.FC = () => {
                                 ניהול עמוד סושיאל מאפס, הפקה וימי צילום בשטח, ועריכת סרטונים דינמיים שמעבירים את האנרגיות של המועדון ובונים נוכחות דיגיטלית חזקה.
                             </p>
 
-                            <div className="flex flex-wrap gap-2 mb-10">
-                                {reels[current].tags.map((tag, i) => (
-                                    <span key={i} className="px-4 py-1.5 rounded-full bg-zinc-800/50 border border-white/5 text-zinc-400 text-xs font-medium backdrop-blur-sm">
-                                        {tag}
-                                    </span>
-                                ))}
-                            </div>
+
 
                             <motion.a
                                 whileHover={{ scale: 1.02, x: -5 }}
