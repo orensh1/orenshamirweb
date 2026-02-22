@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, ExternalLink, Smartphone, BarChart3, Video as VideoIcon, Sparkles, Award } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ExternalLink, Smartphone, BarChart3, Video as VideoIcon, Sparkles, Award, TrendingUp, CheckCircle2, Shield } from 'lucide-react';
 
 const reels = [
     '/vatosvideo1.mp4',
@@ -8,6 +8,30 @@ const reels = [
     '/vatosvideo3.mp4',
     '/vatosvideo4.mp4',
     '/vatosvideo5.mp4',
+];
+
+const highlights = [
+    {
+        title: 'צפיות אורגניות',
+        number: '10,000+',
+        subtitle: 'חשיפה אורגנית וממוקדת לסרטוני הרילס שהופקו, ללא תקציב ממומן.',
+        icon: TrendingUp,
+        color: 'blue'
+    },
+    {
+        title: 'הפקת וידאו מלאה',
+        number: '100%',
+        subtitle: 'ניהול מא\' ועד ת\': משלב הרעיון, דרך ימי צילום בשטח, ועד עריכה דינמית.',
+        icon: CheckCircle2,
+        color: 'purple'
+    },
+    {
+        title: 'נוכחות דיגיטלית',
+        number: 'מיתוג מחדש',
+        subtitle: 'מעבר מפיד אקראי לנראות מקצועית ועוצמתית שמשדרת את האנרגיות של המועדון.',
+        icon: Shield,
+        color: 'pink'
+    }
 ];
 
 const PortfolioSection: React.FC = () => {
@@ -52,7 +76,7 @@ const PortfolioSection: React.FC = () => {
 
             <div className="container mx-auto px-6 relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-24">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -79,6 +103,30 @@ const PortfolioSection: React.FC = () => {
                     </motion.p>
                 </div>
 
+                {/* Project Highlights / Impact Row */}
+                <div className="grid md:grid-cols-3 gap-6 mb-24 max-w-7xl mx-auto">
+                    {highlights.map((item, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className="p-8 rounded-[2.5rem] bg-zinc-900/40 backdrop-blur-xl border border-white/5 group hover:border-white/10 transition-all duration-500"
+                        >
+                            <div className={`w-12 h-12 rounded-xl bg-${item.color}-500/10 flex items-center justify-center text-${item.color}-400 mb-6 group-hover:scale-110 transition-transform duration-500`}>
+                                <item.icon size={24} />
+                            </div>
+                            <h4 className="text-zinc-400 text-sm font-bold mb-2 uppercase tracking-wider">{item.title}</h4>
+                            <div className="text-4xl font-black text-white mb-4 tracking-tighter">
+                                {item.number}
+                            </div>
+                            <p className="text-zinc-500 text-sm leading-relaxed">
+                                {item.subtitle}
+                            </p>
+                        </motion.div>
+                    ))}
+                </div>
+
                 <div className="grid lg:grid-cols-12 gap-16 items-center max-w-7xl mx-auto">
 
                     {/* Left Side: Premium Client Card */}
@@ -97,9 +145,17 @@ const PortfolioSection: React.FC = () => {
                             <div className="relative z-10">
                                 <div className="flex items-center justify-between mb-12">
                                     <div className="flex items-center gap-5">
-                                        <div className="w-16 h-16 rounded-[1.25rem] bg-zinc-900 border border-white/10 flex items-center justify-center text-3xl shadow-inner relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
-                                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10" />
-                                            🥊
+                                        <div className="w-16 h-16 rounded-[1.25rem] bg-white border border-white/10 flex items-center justify-center shadow-inner relative overflow-hidden group-hover:scale-110 transition-transform duration-500">
+                                            <img
+                                                src="/vatos-logo.png"
+                                                alt="Vatos Logo"
+                                                className="w-12 h-12 object-contain"
+                                                onError={(e) => {
+                                                    // Fallback to emoji if logo fails to load
+                                                    e.currentTarget.style.display = 'none';
+                                                    e.currentTarget.parentElement!.innerHTML = '🥊';
+                                                }}
+                                            />
                                         </div>
                                         <div>
                                             <h3 className="text-3xl font-bold text-white tracking-tight">Vatos Martial Arts</h3>
@@ -121,7 +177,7 @@ const PortfolioSection: React.FC = () => {
                                 <motion.a
                                     whileHover={{ scale: 1.02, x: -10 }}
                                     transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                                    href="https://www.instagram.com/vatosisrael/"
+                                    href="https://www.instagram.com/vatos_mma/"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="group/btn flex items-center justify-between w-full p-6 rounded-[1.5rem] bg-white text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] transition-all overflow-hidden relative"
