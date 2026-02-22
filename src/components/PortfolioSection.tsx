@@ -82,7 +82,7 @@ const PortfolioSection: React.FC = () => {
 
                 <div className="grid lg:grid-cols-12 gap-12 items-center max-w-7xl mx-auto">
 
-                    {/* Left Side: Client Info & Tags */}
+                    {/* Left Side: Client Info */}
                     <div className="lg:col-span-5 space-y-8 order-2 lg:order-1">
                         <motion.div
                             initial={{ opacity: 0, x: 30 }}
@@ -104,8 +104,6 @@ const PortfolioSection: React.FC = () => {
                             <p className="text-zinc-300 text-lg leading-relaxed mb-8">
                                 ניהול עמוד סושיאל מאפס, הפקה וימי צילום בשטח, ועריכת סרטונים דינמיים שמעבירים את האנרגיות של המועדון ובונים נוכחות דיגיטלית חזקה.
                             </p>
-
-
 
                             <motion.a
                                 whileHover={{ scale: 1.02, x: -5 }}
@@ -142,10 +140,12 @@ const PortfolioSection: React.FC = () => {
                         <div className="relative w-full max-w-[340px] group">
 
                             {/* iPhone Frame Mockup */}
-                            <div className="relative z-20 w-full aspect-[9/18.5] bg-[#1a1a1a] rounded-[3rem] p-3 border-[6px] border-[#333] shadow-[0_0_80px_rgba(0,0,0,0.4)] overflow-hidden">
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#333] rounded-b-2xl z-30" /> {/* Dynamic Island */}
+                            <div className="relative z-20 w-full aspect-[9/19] bg-[#1a1a1a] rounded-[3.5rem] p-2.5 border-[8px] border-[#2a2a2a] shadow-[0_0_80px_rgba(0,0,0,0.5)] overflow-hidden ring-1 ring-white/10">
+                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-[#2a2a2a] rounded-b-3xl z-40 flex items-center justify-center">
+                                    <div className="w-12 h-1 bg-black/40 rounded-full" />
+                                </div>
 
-                                <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden bg-black">
+                                <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden bg-black">
                                     <AnimatePresence custom={direction} mode="popLayout">
                                         <motion.div
                                             key={current}
@@ -153,18 +153,28 @@ const PortfolioSection: React.FC = () => {
                                             initial={{ x: direction > 0 ? 340 : -340, opacity: 0 }}
                                             animate={{ x: 0, opacity: 1 }}
                                             exit={{ x: direction > 0 ? -340 : 340, opacity: 0 }}
-                                            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                                            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
                                             className="absolute inset-0 w-full h-full"
                                             onTouchStart={handleTouchStart}
                                             onTouchEnd={handleTouchEnd}
                                         >
-                                            <iframe
-                                                src={toEmbedUrl(reels[current].url)}
-                                                className="w-full h-full border-0"
-                                                scrolling="no"
-                                                allow="autoplay"
-                                                title={`Portfolio ${current + 1}`}
-                                            />
+                                            {/* 
+                                                CLEAN EMBED STRATEGY: 
+                                                We scale the iframe up and shift it to hide the IG header/footer.
+                                            */}
+                                            <div className="absolute inset-0 w-full h-full overflow-hidden scale-[1.38] origin-center -translate-y-[8.5%]">
+                                                <iframe
+                                                    src={`${toEmbedUrl(reels[current].url)}?hidecaption=1&utm_source=ig_embed`}
+                                                    className="absolute inset-0 w-full h-full border-0 pointer-events-none"
+                                                    scrolling="no"
+                                                    allow="autoplay"
+                                                    title={`Portfolio ${current + 1}`}
+                                                />
+                                            </div>
+
+                                            {/* Top/Bottom masks to hide any UI bleed during transitions */}
+                                            <div className="absolute inset-x-0 top-0 h-14 bg-black z-10" />
+                                            <div className="absolute inset-x-0 bottom-0 h-10 bg-black z-10" />
                                         </motion.div>
                                     </AnimatePresence>
                                 </div>
