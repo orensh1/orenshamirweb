@@ -3,14 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ExternalLink, Smartphone, BarChart3, Video as VideoIcon, Sparkles } from 'lucide-react';
 
 const reels = [
-    { url: 'https://www.instagram.com/p/C4loAKboAE4/' },
-    { url: 'https://www.instagram.com/p/C7hFGIioIMe/' },
-    { url: 'https://www.instagram.com/p/C8RD3SfoJ5d/' },
-    { url: 'https://www.instagram.com/p/C9xfRebIVkd/' },
-    { url: 'https://www.instagram.com/p/C-CJhEHIdLk/' },
+    '/vatosvideo1.mp4',
+    '/vatosvideo2.mp4',
+    '/vatosvideo3.mp4',
+    '/vatosvideo4.mp4',
+    '/vatosvideo5.mp4',
 ];
-
-const toEmbedUrl = (url: string) => url.replace(/\/$/, '') + '/embed/';
 
 const PortfolioSection: React.FC = () => {
     const [current, setCurrent] = useState(0);
@@ -141,11 +139,16 @@ const PortfolioSection: React.FC = () => {
 
                             {/* iPhone Frame Mockup */}
                             <div className="relative z-20 w-full aspect-[9/19] bg-[#1a1a1a] rounded-[3.5rem] p-2.5 border-[8px] border-[#2a2a2a] shadow-[0_0_80px_rgba(0,0,0,0.5)] overflow-hidden ring-1 ring-white/10">
+                                {/* Dynamic Island */}
                                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 h-7 bg-[#2a2a2a] rounded-b-3xl z-40 flex items-center justify-center">
                                     <div className="w-12 h-1 bg-black/40 rounded-full" />
                                 </div>
 
-                                <div className="relative w-full h-full rounded-[2.8rem] overflow-hidden bg-black">
+                                <div
+                                    className="relative w-full h-full rounded-[2.8rem] overflow-hidden bg-black"
+                                    onTouchStart={handleTouchStart}
+                                    onTouchEnd={handleTouchEnd}
+                                >
                                     <AnimatePresence custom={direction} mode="popLayout">
                                         <motion.div
                                             key={current}
@@ -153,28 +156,24 @@ const PortfolioSection: React.FC = () => {
                                             initial={{ x: direction > 0 ? 340 : -340, opacity: 0 }}
                                             animate={{ x: 0, opacity: 1 }}
                                             exit={{ x: direction > 0 ? -340 : 340, opacity: 0 }}
-                                            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+                                            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
                                             className="absolute inset-0 w-full h-full"
-                                            onTouchStart={handleTouchStart}
-                                            onTouchEnd={handleTouchEnd}
                                         >
-                                            {/* 
-                                                CLEAN EMBED STRATEGY: 
-                                                We scale the iframe up and shift it to hide the IG header/footer.
-                                            */}
-                                            <div className="absolute inset-0 w-full h-full overflow-hidden scale-[1.38] origin-center -translate-y-[8.5%]">
-                                                <iframe
-                                                    src={`${toEmbedUrl(reels[current].url)}?hidecaption=1&utm_source=ig_embed`}
-                                                    className="absolute inset-0 w-full h-full border-0 pointer-events-none"
-                                                    scrolling="no"
-                                                    allow="autoplay"
-                                                    title={`Portfolio ${current + 1}`}
-                                                />
-                                            </div>
-
-                                            {/* Top/Bottom masks to hide any UI bleed during transitions */}
-                                            <div className="absolute inset-x-0 top-0 h-14 bg-black z-10" />
-                                            <div className="absolute inset-x-0 bottom-0 h-10 bg-black z-10" />
+                                            <video
+                                                key={reels[current]}
+                                                src={reels[current]}
+                                                autoPlay
+                                                loop
+                                                muted
+                                                playsInline
+                                                style={{
+                                                    width: '100%',
+                                                    height: '100%',
+                                                    objectFit: 'cover',
+                                                    borderRadius: 'inherit',
+                                                    display: 'block',
+                                                }}
+                                            />
                                         </motion.div>
                                     </AnimatePresence>
                                 </div>
@@ -202,14 +201,14 @@ const PortfolioSection: React.FC = () => {
                                     <button
                                         key={i}
                                         onClick={() => goTo(i, i > current ? 1 : -1)}
-                                        className="relative group"
+                                        className="relative"
                                     >
                                         <motion.div
                                             animate={{
                                                 width: i === current ? 32 : 10,
                                                 backgroundColor: i === current ? '#3b82f6' : '#3f3f46'
                                             }}
-                                            className="h-2.5 rounded-full transition-colors duration-300"
+                                            className="h-2.5 rounded-full"
                                         />
                                     </button>
                                 ))}
