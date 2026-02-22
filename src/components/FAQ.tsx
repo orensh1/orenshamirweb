@@ -9,7 +9,7 @@ const FAQ: React.FC = () => {
     const faq = content.faq;
 
     return (
-        <section id="faq" className="py-20 bg-[#050505] relative overflow-hidden">
+        <section id="faq" className="py-20 bg-[#050505] relative overflow-hidden" dir="rtl">
             <div className="container mx-auto px-6 relative z-10 max-w-4xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
@@ -35,7 +35,7 @@ const FAQ: React.FC = () => {
                                 className="w-full p-6 flex items-center justify-between text-right text-lg md:text-xl font-medium text-white/90 hover:text-white transition-colors"
                             >
                                 <span>{item.question}</span>
-                                <span className={`mr-4 p-2 rounded-full bg-white/5 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-pink-500/20 text-pink-500' : 'text-zinc-400'}`}>
+                                <span className={`ms-4 p-2 rounded-full bg-white/5 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-pink-500/20 text-pink-500' : 'text-zinc-400'}`}>
                                     {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
                                 </span>
                             </button>
