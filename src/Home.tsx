@@ -6,6 +6,7 @@ import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
 import Testimonials from './components/Testimonials';
+import PortfolioSection from './components/PortfolioSection';
 import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 import Accessibility from './components/Accessibility';
@@ -44,6 +45,7 @@ const Home: React.FC = () => {
                 <About />
                 <Process />
                 <Testimonials />
+                <PortfolioSection />
                 <StyleShowcase />
                 <FAQ />
                 <Contact />
