@@ -45,13 +45,15 @@ const Navbar: React.FC = () => {
           </button>
 
           {/* Logo - Desktop Only (Left) */}
-          <a href="#" className="hidden md:block text-2xl font-bold tracking-tighter text-white">
-            {nav.logoImage ? (
-              <img src={nav.logoImage} alt={nav.logoText} className="h-10 w-auto object-contain" />
-            ) : (
-              nav.logoText
-            )}
-          </a>
+          <div className="hidden md:flex flex-1 justify-start">
+            <a href="#" className="text-2xl font-bold tracking-tighter text-white">
+              {nav.logoImage ? (
+                <img src={nav.logoImage} alt={nav.logoText} className="h-10 w-auto object-contain" />
+              ) : (
+                nav.logoText
+              )}
+            </a>
+          </div>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
@@ -69,7 +71,7 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* CTA - Desktop Only */}
-          <div className="hidden md:block">
+          <div className="hidden md:flex flex-1 justify-end">
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
               <Button variant="outline" className="!py-2 !px-4 text-sm flex items-center gap-2">
                 {nav.ctaText}
@@ -78,13 +80,15 @@ const Navbar: React.FC = () => {
           </div>
 
           {/* Logo - Mobile Only (Right Side) */}
-          <a href="#" className="md:hidden text-xl font-bold tracking-tighter text-white flex-shrink-0">
-            {nav.logoImage ? (
-              <img src={nav.logoImage} alt={nav.logoText} className="h-8 w-auto object-contain" />
-            ) : (
-              nav.logoText
-            )}
-          </a>
+          <div className="md:hidden flex-shrink-0">
+            <a href="#" className="text-xl font-bold tracking-tighter text-white">
+              {nav.logoImage ? (
+                <img src={nav.logoImage} alt={nav.logoText} className="h-8 w-auto object-contain" />
+              ) : (
+                nav.logoText
+              )}
+            </a>
+          </div>
         </div>
       </div>
 
