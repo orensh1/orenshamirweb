@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-10 relative text-balance text-white z-10"
+            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-10 relative text-balance text-white z-10"
             dir="rtl"
           >
             <span className="block drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
