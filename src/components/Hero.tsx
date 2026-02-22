@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
           {/* Subtext */}
           <motion.p
             variants={itemVariants}
-            className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14 px-4 drop-shadow-md"
+            className="text-lg md:text-2xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14 px-4 drop-shadow-md"
             dir="rtl"
           >
             {hero.subtitle}{' '}
