@@ -13,7 +13,7 @@ const reels = [
 const highlights = [
     {
         title: 'צפיות אורגניות',
-        number: '10,000+',
+        number: '100,000+',
         subtitle: 'חשיפה אורגנית וממוקדת לסרטוני הרילס שהופקו, ללא תקציב ממומן.',
         icon: TrendingUp,
         color: 'blue'
