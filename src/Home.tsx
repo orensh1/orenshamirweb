@@ -5,6 +5,7 @@ import StyleShowcase from './components/StyleShowcase';
 import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
+import Testimonials from './components/Testimonials';
 import Contact from './components/Contact';
 import WhatsAppButton from './components/WhatsAppButton';
 import Accessibility from './components/Accessibility';
@@ -42,6 +43,7 @@ const Home: React.FC = () => {
                 <Hero />
                 <About />
                 <Process />
+                <Testimonials />
                 <StyleShowcase />
                 <FAQ />
                 <Contact />

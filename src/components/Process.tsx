@@ -1,12 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle, Code2, Rocket } from 'lucide-react';
+import { MessageCircle, Video, FileText } from 'lucide-react';
 import { useSiteContent } from '../content/SiteContentContext';
 
 const iconMap = {
     MessageCircle,
-    Code2,
-    Rocket,
+    Video,
+    FileText,
 } as const;
 
 const Process: React.FC = () => {
