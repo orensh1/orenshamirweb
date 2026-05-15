@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
           {/* Headline */}
           <motion.h1
             variants={itemVariants}
-            className="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter mb-10 relative text-balance text-white z-10"
+            className="text-6xl md:text-8xl lg:text-9xl font-black leading-[0.9] tracking-tighter mb-10 relative text-balance text-white z-10"
             dir="rtl"
           >
             <span className="block drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
           {/* Subtext */}
           <motion.p
             variants={itemVariants}
-            className="text-lg md:text-2xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14 px-4 drop-shadow-md"
+            className="text-xl md:text-3xl text-gray-200 font-medium leading-relaxed max-w-3xl mb-14 px-4 drop-shadow-md"
             dir="rtl"
           >
             {hero.subtitle}{' '}
