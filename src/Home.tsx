@@ -2,8 +2,10 @@ import React, { useRef, useEffect, useState } from 'react';
 import Intro from './components/Intro';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
+import Pain from './components/Pain';
 import Process from './components/Process';
+import Stats from './components/Stats';
+import About from './components/About';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import Accessibility from './components/Accessibility';
@@ -26,10 +28,18 @@ const Home: React.FC = () => {
 
     useEffect(() => {
         if (showIntro) {
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
             document.body.style.overflow = 'hidden';
+            document.body.style.paddingRight = `${scrollbarWidth}px`;
         } else {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '0px';
         }
+
+        return () => {
+            document.body.style.overflow = '';
+            document.body.style.paddingRight = '0px';
+        };
     }, [showIntro]);
 
     return (
@@ -49,8 +59,10 @@ const Home: React.FC = () => {
 
             <main className="relative z-10">
                 <Hero />
-                <About />
+                <Pain />
                 <Process />
+                <Stats />
+                <About />
                 <FAQ />
                 <Contact />
             </main>

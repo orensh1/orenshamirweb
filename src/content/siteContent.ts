@@ -28,6 +28,16 @@ export interface FAQItem {
     answer: string;
 }
 
+export interface PainCard {
+    title: string;
+    description: string;
+}
+
+export interface StatItem {
+    value: string;
+    label: string;
+}
+
 export interface SiteContent {
     hero: {
         badgeText: string;
@@ -69,6 +79,16 @@ export interface SiteContent {
         titleBase: string;
         titleHighlight: string;
         items: FAQItem[];
+    };
+    pain: {
+        titleBase: string;
+        titleHighlight: string;
+        cards: PainCard[];
+    };
+    stats: {
+        titleBase: string;
+        titleHighlight: string;
+        items: StatItem[];
     };
     contact: {
         headingLine1: string;
