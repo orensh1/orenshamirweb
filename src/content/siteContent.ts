@@ -63,7 +63,10 @@ export interface SiteContent {
     about: {
         headingLine1: string;
         headingName: string;
-        paragraphs: string[];
+        storyBlocks: {
+            title: string;
+            content: string;
+        }[];
         features: FeatureCard[];
         imageAlt: string;
         imageCaption: string;
