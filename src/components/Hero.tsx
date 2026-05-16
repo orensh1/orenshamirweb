@@ -98,13 +98,13 @@ const Hero: React.FC = () => {
             {/* Center (Photo - Middle on desktop, middle on mobile) */}
             <motion.div
                 variants={itemVariants}
-                className="order-2 md:order-2 w-full max-w-[325px] sm:max-w-[370px] md:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] mx-auto relative z-20 flex-shrink-0"
+                className="order-2 md:order-2 w-full max-w-[350px] sm:max-w-[400px] md:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] mx-auto relative z-20 flex-shrink-0"
             >
                 <div className="relative overflow-visible">
                     <img 
                         src={orenImage} 
                         alt="Oren Shamir" 
-                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] scale-[1.3] md:scale-[1.4] lg:scale-[1.5] origin-bottom -translate-y-[10%] md:-translate-y-[16%] mb-[-10%] md:mb-0"
+                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] scale-[1.55] sm:scale-[1.4] md:scale-[1.4] lg:scale-[1.5] origin-bottom -translate-y-[6%] md:-translate-y-[16%] mb-[-12%] md:mb-0"
                         style={{
                             WebkitMaskImage: 'linear-gradient(to bottom, black 72%, transparent 98%)',
                             maskImage: 'linear-gradient(to bottom, black 72%, transparent 98%)'

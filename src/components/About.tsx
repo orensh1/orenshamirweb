@@ -47,15 +47,26 @@ const About: React.FC = () => {
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 w-full flex justify-center lg:sticky lg:top-36 z-20 mb-12 lg:mb-0"
+            className="lg:col-span-5 w-full flex justify-center lg:sticky lg:top-36 z-20 mb-12 lg:mb-0 relative"
           >
-            <div className="relative w-full max-w-[320px] md:max-w-[360px] lg:max-w-[400px] aspect-[4/5] flex items-end justify-center select-none overflow-hidden rounded-3xl bg-gradient-to-b from-orange-50/50 to-amber-50/30 border border-orange-100/60 shadow-xl">
-              {/* Background ambient glow inside container */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-orange-400/20 rounded-full blur-[60px] z-0 pointer-events-none" />
+            {/* Outer wrapper is overflow-visible to let image pop out */}
+            <div className="relative w-full max-w-[300px] md:max-w-[340px] lg:max-w-[380px] aspect-[4/5] flex items-end justify-center select-none overflow-visible">
+              
+              {/* Background Ambient Glow */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[90%] bg-orange-400/20 rounded-full blur-[60px] z-0 pointer-events-none" />
+              
+              {/* Card Box behind the image */}
+              <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-orange-50/50 to-amber-50/30 border border-orange-100/60 shadow-xl z-0" />
+              
+              {/* Smiling Photo popping out of the top/sides */}
               <img 
                 src={orenSmilingImage} 
                 alt="אורן שמיר" 
-                className="w-full h-auto object-contain relative z-10 scale-[1.12] origin-bottom -translate-y-[3%] drop-shadow-[0_15px_35px_rgba(0,0,0,0.1)]"
+                className="w-full h-auto object-contain relative z-10 scale-[1.42] origin-bottom -translate-y-[8%] drop-shadow-[0_20px_45px_rgba(0,0,0,0.18)]"
+                style={{
+                  WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                  maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
+                }}
               />
             </div>
           </motion.div>
