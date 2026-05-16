@@ -4,7 +4,7 @@
 User-agent: *
 Allow: /
 
-# Explicitly allow AI bots
+# Explicitly allow AI bots for AEO (Answer Engine Optimization)
 User-agent: GPTBot
 Allow: /
 
@@ -23,8 +23,17 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-# Sitemap location (update with your actual sitemap URL when available)
-# Sitemap: https://orenshamirweb.netlify.app/sitemap.xml
+User-agent: PerplexityBot
+Allow: /
 
-# Crawl-delay for respectful crawling (optional)
+User-agent: Bytespider
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+# Sitemap
+Sitemap: https://orenshamir.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
 Crawl-delay: 1
