@@ -98,14 +98,16 @@ const Hero: React.FC = () => {
             {/* Center (Photo - Middle on desktop, middle on mobile) */}
             <motion.div
                 variants={itemVariants}
-                className="order-2 md:order-2 w-full max-w-[280px] md:max-w-md lg:max-w-[500px] xl:max-w-[550px] mx-auto relative z-20 flex-shrink-0"
+                className="order-2 md:order-2 w-full max-w-[320px] md:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] mx-auto relative z-20 flex-shrink-0"
             >
-                <img 
-                    src={orenImage} 
-                    alt="Oren Shamir" 
-                    className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
-                />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100%] h-[100%] bg-orange-400/20 rounded-full blur-[60px] md:blur-[80px] z-0 pointer-events-none" />
+                <div className="relative overflow-visible">
+                    <img 
+                        src={orenImage} 
+                        alt="Oren Shamir" 
+                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] scale-[1.3] md:scale-[1.4] lg:scale-[1.5] origin-bottom -translate-y-[12%] md:-translate-y-[16%]"
+                    />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-400/20 rounded-full blur-[60px] md:blur-[90px] z-0 pointer-events-none" />
+                </div>
             </motion.div>
 
             {/* Right Side (Subtitle - Top on mobile, right on desktop) */}
