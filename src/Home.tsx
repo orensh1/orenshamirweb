@@ -6,7 +6,6 @@ import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
-import WhatsAppButton from './components/WhatsAppButton';
 import Accessibility from './components/Accessibility';
 import CookieConsent from './components/CookieConsent';
 
@@ -56,7 +55,6 @@ const Home: React.FC = () => {
                 <Contact />
             </main>
 
-            <WhatsAppButton />
             <Accessibility />
             <CookieConsent />
         </div>

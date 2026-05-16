@@ -60,33 +60,6 @@ const Contact: React.FC = () => {
 
             {/* Form Area */}
             <div className="flex flex-col gap-8 w-full lg:w-1/2">
-              {/* WhatsApp Section */}
-              <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="bg-[#25D366]/10 backdrop-blur-md p-8 rounded-3xl border border-[#25D366]/20 relative overflow-hidden group hover:border-[#25D366]/40 transition-colors"
-              >
-                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="text-center md:text-right">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{c.whatsappTitle}</h3>
-                    <p className="text-gray-600 text-sm">{c.whatsappSubtitle}</p>
-                  </div>
-                  <a
-                    href={`https://wa.me/${c.whatsappNumber}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 px-6 py-3 bg-[#25D366] text-white font-bold rounded-xl hover:bg-[#20bd5a] transition-colors shadow-lg shadow-green-900/20 whitespace-nowrap"
-                  >
-                    <Send size={18} className="rotate-0 md:rotate-45" />
-                    <span>{c.whatsappButtonText}</span>
-                  </a>
-                </div>
-                {/* Background Pattern */}
-                <div className="absolute inset-0 opacity-5 bg-[radial-gradient(#25D366_1px,transparent_1px)] [background-size:16px_16px]" />
-              </motion.div>
-
-
               {/* Working Form with Email Integration */}
               <ContactForm />
             </div>
@@ -113,7 +86,7 @@ const Contact: React.FC = () => {
               <a href={`mailto:${c.email}`} className="text-gray-500 hover:text-orange-500 transition-colors" aria-label="Send Email">
                 <Mail size={20} />
               </a>
-              <a href={`tel:+${c.whatsappNumber}`} className="text-gray-500 hover:text-orange-500 transition-colors" aria-label="Call Now">
+              <a href={`tel:${c.phone}`} className="text-gray-500 hover:text-orange-500 transition-colors" aria-label="Call Now">
                 <Phone size={20} />
               </a>
             </div>

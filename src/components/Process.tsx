@@ -17,9 +17,10 @@ const Process: React.FC = () => {
         <section id="process" className="py-20 bg-gray-50 relative overflow-hidden border-t border-gray-100">
             <div className="container mx-auto px-6 relative z-10">
                 <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(10px)", scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="text-4xl md:text-6xl font-bold mb-16 text-center text-gray-900"
                 >
                     {process.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">{process.titleHighlight}</span>
@@ -34,10 +35,10 @@ const Process: React.FC = () => {
                         return (
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.2 }}
+                                initial={{ opacity: 0, y: 40, filter: "blur(10px)", scale: 0.9 }}
+                                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ delay: index * 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                                 className="flex flex-col items-center text-center relative"
                             >
                                 <div className={`w-20 h-20 rounded-2xl ${step.bg} ${step.color} flex items-center justify-center mb-6 shadow-sm border border-orange-100 relative z-10 bg-white`}>

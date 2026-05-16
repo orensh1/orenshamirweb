@@ -12,9 +12,10 @@ const FAQ: React.FC = () => {
         <section id="faq" className="py-20 bg-white relative overflow-hidden" dir="rtl">
             <div className="container mx-auto px-6 relative z-10 max-w-4xl">
                 <motion.h2
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(10px)", scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                    viewport={{ once: true, margin: "-50px" }}
+                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="text-4xl md:text-6xl font-bold mb-16 text-center text-gray-900"
                 >
                     {faq.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">{faq.titleHighlight}</span>
@@ -24,10 +25,10 @@ const FAQ: React.FC = () => {
                     {faq.items.map((item, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
+                            initial={{ opacity: 0, y: 30, filter: "blur(10px)", scale: 0.95 }}
+                            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ delay: index * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                             className="border border-orange-100 rounded-2xl bg-white shadow-sm overflow-hidden hover:border-orange-300 hover:shadow-md transition-all"
                         >
                             <button
