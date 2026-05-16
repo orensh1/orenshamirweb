@@ -44,13 +44,13 @@ const Hero: React.FC = () => {
 
       <motion.div
         style={{ y: yText }}
-        className="flex flex-col items-center w-full max-w-5xl mx-auto relative z-20 text-center px-4"
+        className="flex flex-col items-center w-full max-w-[1400px] mx-auto relative z-20 text-center px-4 pt-10 h-full flex-1"
         initial="hidden"
         animate="visible"
         transition={{ staggerChildren: 0.15, delayChildren: 0.2 }}
       >
         {hero.badgeText && (
-          <motion.div variants={itemVariants} className="mb-3">
+          <motion.div variants={itemVariants} className="mb-6">
             <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-orange-50 border border-orange-100 backdrop-blur-xl shadow-sm">
               <span className="text-sm font-black tracking-wide text-gray-800 drop-shadow-none">
                 {hero.badgeText}
@@ -62,63 +62,82 @@ const Hero: React.FC = () => {
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-2 relative text-balance text-gray-900 z-10 font-heebo"
+          className="text-5xl md:text-7xl lg:text-[100px] font-black leading-[1.05] tracking-tight mb-2 relative text-balance text-gray-900 z-10 font-heebo"
           dir="rtl"
         >
           <span className="block drop-shadow-none">
             {hero.headlineLine1}
           </span>
-          <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent drop-shadow-sm pb-1 text-5xl md:text-7xl lg:text-8xl">
+          <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent drop-shadow-sm pb-1 text-6xl md:text-8xl lg:text-[120px]">
             {hero.headlineLine2}
           </span>
         </motion.h1>
 
-        {/* Image Container (Middle) */}
-        <motion.div
-            variants={itemVariants}
-            className="w-full max-w-2xl mx-auto relative mt-2 mb-8 z-20 flex justify-center"
-        >
-            <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-xl">
-                <img 
-                    src={orenImage} 
-                    alt="Oren Shamir" 
-                    className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
-                />
-                {/* Background decorative glow for image */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-orange-400/20 rounded-full blur-[80px] z-0 pointer-events-none" />
+        {/* Lower Hero Section - Dynamic Layout */}
+        <div className="w-full relative mt-8 flex flex-col md:block flex-1 min-h-[400px] md:min-h-[500px]">
+            
+            {/* Desktop Subtitle (Floating Right) */}
+            <motion.div 
+               variants={itemVariants}
+               className="hidden md:block absolute right-4 lg:right-12 xl:right-24 top-1/4 max-w-sm z-30 text-right"
+            >
+               <p className="text-xl lg:text-2xl text-gray-600 font-medium leading-relaxed drop-shadow-none font-heebo" dir="rtl">
+                 {hero.subtitle}
+               </p>
+            </motion.div>
+
+            {/* Desktop CTA (Floating Left) */}
+            <motion.div 
+               variants={itemVariants}
+               className="hidden md:block absolute left-4 lg:left-12 xl:left-24 top-1/4 z-30"
+            >
+               <Magnetic>
+                 <div className="group relative">
+                   <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 opacity-20 blur-md group-hover:opacity-60 group-hover:blur-lg transition-all duration-500" />
+                   <Button
+                     variant="primary"
+                     onClick={scrollToContact}
+                     className="relative !text-xl !px-12 !py-5 rounded-full !font-heebo !font-extrabold !tracking-tighter border-2 border-orange-400 overflow-hidden shadow-lg transition-colors duration-300"
+                   >
+                     <span className="relative z-20 flex items-center justify-center gap-3" dangerouslySetInnerHTML={{ __html: hero.ctaText }}></span>
+                   </Button>
+                 </div>
+               </Magnetic>
+            </motion.div>
+
+            {/* Photo (Center - Anchored to bottom) */}
+            <motion.div
+                variants={itemVariants}
+                className="w-full max-w-xl mx-auto relative z-20 flex justify-center md:absolute md:bottom-0 md:left-1/2 md:-translate-x-1/2"
+            >
+                <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-[600px]">
+                    <img 
+                        src={orenImage} 
+                        alt="Oren Shamir" 
+                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
+                    />
+                    {/* Background decorative glow for image */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-400/20 rounded-full blur-[100px] z-0 pointer-events-none" />
+                </div>
+            </motion.div>
+
+            {/* Mobile Subtitle & CTA */}
+            <div className="md:hidden flex flex-col items-center mt-6 z-30 relative pb-10">
+               <p className="text-xl text-gray-600 text-center mb-8 px-4 font-medium font-heebo" dir="rtl">{hero.subtitle}</p>
+               <Magnetic>
+                 <div className="group relative">
+                   <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 opacity-20 blur-md group-hover:opacity-60 group-hover:blur-lg transition-all duration-500" />
+                   <Button
+                     variant="primary"
+                     onClick={scrollToContact}
+                     className="relative !text-lg !px-10 !py-4 rounded-full !font-heebo !font-extrabold !tracking-tighter border-2 border-orange-400 overflow-hidden shadow-lg transition-colors duration-300"
+                   >
+                     <span className="relative z-20 flex items-center justify-center gap-3" dangerouslySetInnerHTML={{ __html: hero.ctaText }}></span>
+                   </Button>
+                 </div>
+               </Magnetic>
             </div>
-        </motion.div>
-
-        {/* Subtext */}
-        <motion.p
-          variants={itemVariants}
-          className="text-xl md:text-3xl text-gray-600 font-medium leading-relaxed max-w-3xl mb-12 px-4 drop-shadow-none font-heebo relative z-30"
-          dir="rtl"
-        >
-          {hero.subtitle}
-        </motion.p>
-
-        {/* CTA Button */}
-        <motion.div
-          variants={itemVariants}
-          className="relative z-30 w-full flex justify-center mb-16"
-        >
-          <Magnetic>
-            <div className="group relative">
-              {/* Gradient Border Glow */}
-              <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-orange-400 via-orange-500 to-amber-500 opacity-20 blur-md group-hover:opacity-60 group-hover:blur-lg transition-all duration-500" />
-
-              <Button
-                variant="primary"
-                onClick={scrollToContact}
-                className="relative !text-base md:!text-2xl !px-10 md:!px-16 !py-4 md:!py-6 w-auto max-w-xs md:max-w-none rounded-full !font-heebo !font-extrabold !tracking-tighter border-2 border-orange-400 overflow-hidden shadow-lg transition-colors duration-300"
-              >
-                <span className="relative z-20 flex items-center justify-center gap-3" dangerouslySetInnerHTML={{ __html: hero.ctaText }}></span>
-              </Button>
-            </div>
-          </Magnetic>
-        </motion.div>
-
+        </div>
       </motion.div>
     </div>
   );
