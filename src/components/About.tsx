@@ -51,18 +51,12 @@ const About: React.FC = () => {
                   transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className={`flex flex-col ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'} items-center gap-12 md:gap-20`}
                 >
-                  <div className="w-full md:w-1/3 flex justify-center md:justify-start relative">
-                    <div className="relative">
-                      {/* Giant Number Watermark */}
-                      <span className="text-[120px] md:text-[180px] font-black text-orange-50 leading-none absolute -top-10 -right-4 md:-top-16 md:-right-16 -z-10 select-none font-heebo">
-                        0{i + 1}
-                      </span>
-                      <h3 className="text-4xl md:text-5xl font-bold text-gray-900 drop-shadow-sm mt-4 md:mt-0 relative z-10">
-                        {block.title}
-                      </h3>
-                    </div>
+                  <div className="w-full md:w-1/4 flex justify-center md:justify-center relative select-none">
+                    <span className="text-[120px] md:text-[180px] font-black text-orange-50 leading-none font-heebo">
+                      0{i + 1}
+                    </span>
                   </div>
-                  <div className="w-full md:w-2/3">
+                  <div className="w-full md:w-3/4">
                     <p 
                       className="text-xl md:text-3xl text-gray-600 font-light leading-relaxed md:leading-[1.8]"
                       dangerouslySetInnerHTML={{ __html: block.content }}
