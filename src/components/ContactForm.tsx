@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, CheckCircle2, Loader2, User, Phone, Briefcase, MessageSquare, Mail } from 'lucide-react';
+import { Send, CheckCircle2, Loader2, User, Phone, MessageSquare } from 'lucide-react';
 
 const ContactForm = () => {
     const [formState, setFormState] = useState({
         name: '',
-        email: '',
         phone: '',
-        business: '',
         message: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,7 +30,7 @@ const ContactForm = () => {
 
             if (response.ok) {
                 setIsSuccess(true);
-                setFormState({ name: '', email: '', phone: '', business: '', message: '' });
+                setFormState({ name: '', phone: '', message: '' });
                 // Reset success message after 5 seconds if desired, currently sticking to success view per logic
             } else {
                 console.error('Submission failed:', data);
@@ -98,24 +96,6 @@ const ContactForm = () => {
                                         placeholder="ישראל ישראלי"
                                     />
                                 </div>
-                                {/* Email */}
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium text-gray-600 flex items-center gap-2">
-                                        <Mail className="w-4 h-4 text-orange-500" /> אימייל
-                                    </label>
-                                    <input
-                                        type="email"
-                                        name="email"
-                                        value={formState.email}
-                                        onChange={handleChange}
-                                        required
-                                        className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all placeholder:text-gray-400"
-                                        placeholder="example@mail.com"
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 {/* Phone */}
                                 <div className="space-y-2">
                                     <label className="text-sm font-medium text-gray-600 flex items-center gap-2">
@@ -131,27 +111,6 @@ const ContactForm = () => {
                                         placeholder="050-0000000"
                                     />
                                 </div>
-                            </div>
-
-                            {/* Business Type */}
-                            <div className="space-y-2">
-                                <label className="text-sm font-medium text-gray-600 flex items-center gap-2">
-                                    <Briefcase className="w-4 h-4 text-orange-500" /> סוג העסק
-                                </label>
-                                <select
-                                    name="business"
-                                    value={formState.business}
-                                    onChange={handleChange}
-                                    aria-label="Choose business type"
-                                    className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:border-orange-500 focus:bg-white transition-all appearance-none"
-                                >
-                                    <option value="" className="bg-white text-gray-500">בחרו תחום..</option>
-                                    <option value="ecommerce" className="bg-white text-gray-900">חנות אינטרנטית</option>
-                                    <option value="services" className="bg-white text-gray-900">נותן שירותים</option>
-                                    <option value="startup" className="bg-white text-gray-900">סטארטאפ / הייטק</option>
-                                    <option value="realestate" className="bg-white text-gray-900">נדל״ן</option>
-                                    <option value="other" className="bg-white text-gray-900">אחר</option>
-                                </select>
                             </div>
 
                             {/* Message */}
