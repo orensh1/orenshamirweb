@@ -42,20 +42,6 @@ const Contact: React.FC = () => {
                 {c.subtitle}
               </p>
 
-              <div className="flex flex-col gap-6">
-                <a href={`mailto:${c.email}`} className="flex items-center gap-4 text-gray-800 hover:text-orange-500 transition-colors group" aria-label={`Send email to ${c.email}`}>
-                  <div className="w-12 h-12 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                    <Mail size={20} />
-                  </div>
-                  <span className="text-lg">{c.email}</span>
-                </a>
-                <a href={`tel:${c.phone}`} className="flex items-center gap-4 text-gray-800 hover:text-orange-500 transition-colors group" aria-label={`Call ${c.phoneDisplay}`}>
-                  <div className="w-12 h-12 rounded-full bg-orange-50 border border-orange-100 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-colors">
-                    <Phone size={20} />
-                  </div>
-                  <span className="text-lg">{c.phoneDisplay}</span>
-                </a>
-              </div>
             </motion.div>
 
             {/* Form Area */}
