@@ -1,63 +1,121 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plus, Minus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { useSiteContent } from '../content/SiteContentContext';
+import orenImage from '../assets/oren-portrait-transparent.png';
 
 const FAQ: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
     const { content } = useSiteContent();
     const faq = content.faq;
 
+    const toggleQuestion = (index: number) => {
+        setOpenIndex(openIndex === index ? null : index);
+    };
+
     return (
-        <section id="faq" className="py-20 bg-white relative overflow-hidden" dir="rtl">
-            <div className="container mx-auto px-6 relative z-10 max-w-4xl">
+        <section id="faq" className="py-20 md:py-32 bg-gray-900 relative overflow-hidden" dir="rtl">
+            {/* Background subtle glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] bg-orange-500/5 rounded-full blur-[120px] pointer-events-none" />
+
+            <div className="container mx-auto px-4 md:px-6 relative z-10 max-w-2xl">
+                {/* Section Title */}
                 <motion.h2
-                    initial={{ opacity: 0, y: 30, filter: "blur(10px)", scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+                    initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+                    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                    className="text-4xl md:text-6xl font-bold mb-16 text-center text-gray-900"
+                    className="text-4xl md:text-6xl font-bold mb-16 text-center text-white"
                 >
                     {faq.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">{faq.titleHighlight}</span>
                 </motion.h2>
 
-                <div className="space-y-4">
+                {/* Chat Interface */}
+                <div className="flex flex-col gap-3">
                     {faq.items.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 30, filter: "blur(10px)", scale: 0.95 }}
-                            whileInView={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ delay: index * 0.1, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                            className="border border-orange-100 rounded-2xl bg-white shadow-sm overflow-hidden hover:border-orange-300 hover:shadow-md transition-all"
-                        >
-                            <button
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full p-6 flex items-center justify-between text-right text-lg md:text-xl font-medium text-gray-800 hover:text-gray-900 transition-colors"
+                        <div key={index} className="flex flex-col gap-3">
+                            {/* Question Bubble (Visitor - Right side) */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                viewport={{ once: true, margin: "-30px" }}
+                                transition={{ delay: index * 0.08, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                                className="flex justify-start"
                             >
-                                <span>{item.question}</span>
-                                <span className={`ms-4 p-2 rounded-full bg-orange-50 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-orange-100 text-orange-600' : 'text-orange-400'}`}>
-                                    {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
-                                </span>
-                            </button>
+                                <button
+                                    onClick={() => toggleQuestion(index)}
+                                    className={`group flex items-center gap-3 px-5 py-3.5 rounded-2xl rounded-tr-md text-right transition-all duration-300 max-w-[85%] md:max-w-[75%] ${
+                                        openIndex === index
+                                            ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20'
+                                            : 'bg-gray-800 text-gray-200 hover:bg-gray-750 hover:text-white border border-gray-700/50'
+                                    }`}
+                                >
+                                    <Plus
+                                        size={18}
+                                        className={`flex-shrink-0 transition-transform duration-300 ${
+                                            openIndex === index ? 'rotate-45' : ''
+                                        }`}
+                                    />
+                                    <span className="text-base md:text-lg font-medium leading-snug">
+                                        {item.question}
+                                    </span>
+                                </button>
+                            </motion.div>
 
+                            {/* Answer Bubble (Oren - Left side with avatar) */}
                             <AnimatePresence>
                                 {openIndex === index && (
                                     <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: "auto", opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                                        initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                                        className="flex justify-end gap-3 items-end"
                                     >
-                                        <div className="px-6 pb-6 text-gray-600 leading-relaxed font-light">
-                                            {item.answer}
+                                        {/* Avatar */}
+                                        <div className="w-9 h-9 rounded-full bg-orange-500 overflow-hidden flex-shrink-0 border-2 border-orange-400 shadow-md hidden md:block">
+                                            <img
+                                                src={orenImage}
+                                                alt="Oren"
+                                                className="w-full h-full object-cover object-top"
+                                            />
+                                        </div>
+                                        {/* Message Bubble */}
+                                        <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl rounded-bl-md px-5 py-4 max-w-[85%] md:max-w-[75%]">
+                                            <p className="text-gray-300 text-base md:text-lg leading-relaxed font-light">
+                                                {item.answer}
+                                            </p>
                                         </div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
+
+                {/* Typing indicator decoration */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5 }}
+                    className="flex justify-end gap-3 items-end mt-4"
+                >
+                    <div className="w-9 h-9 rounded-full bg-orange-500 overflow-hidden flex-shrink-0 border-2 border-orange-400 shadow-md hidden md:block">
+                        <img
+                            src={orenImage}
+                            alt="Oren"
+                            className="w-full h-full object-cover object-top"
+                        />
+                    </div>
+                    <div className="bg-gray-800/60 border border-gray-700/30 rounded-2xl rounded-bl-md px-5 py-3.5">
+                        <div className="flex gap-1.5 items-center">
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:0ms]" />
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:150ms]" />
+                            <span className="w-2 h-2 bg-orange-400 rounded-full animate-bounce [animation-delay:300ms]" />
+                        </div>
+                    </div>
+                </motion.div>
             </div>
         </section>
     );
