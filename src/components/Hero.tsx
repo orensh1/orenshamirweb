@@ -4,6 +4,7 @@ import { smoothScrollTo } from '../utils/smoothScroll';
 import Button from './ui/Button';
 import Magnetic from './ui/Magnetic';
 import { useSiteContent } from '../content/SiteContentContext';
+import orenImage from '../assets/oren-portrait-new.jpg';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -73,10 +74,26 @@ const Hero: React.FC = () => {
           </span>
         </motion.h1>
 
+        {/* Image Container (Middle) */}
+        <motion.div
+            variants={itemVariants}
+            className="w-full max-w-xl mx-auto relative mt-4 mb-10 z-20 flex justify-center"
+        >
+            <div className="relative w-full max-w-xs md:max-w-md">
+                <img 
+                    src={orenImage} 
+                    alt="Oren Shamir" 
+                    className="w-full h-auto object-contain mix-blend-darken relative z-10 drop-shadow-xl"
+                />
+                {/* Background decorative glow for image */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-orange-400/20 rounded-full blur-[80px] z-0 pointer-events-none" />
+            </div>
+        </motion.div>
+
         {/* Subtext */}
         <motion.p
           variants={itemVariants}
-          className="text-xl md:text-3xl text-gray-600 font-medium leading-relaxed max-w-3xl mb-12 px-4 drop-shadow-none font-heebo"
+          className="text-xl md:text-3xl text-gray-600 font-medium leading-relaxed max-w-3xl mb-12 px-4 drop-shadow-none font-heebo relative z-30"
           dir="rtl"
         >
           {hero.subtitle}
@@ -101,18 +118,6 @@ const Hero: React.FC = () => {
               </Button>
             </div>
           </Magnetic>
-        </motion.div>
-
-        {/* Placeholder Image Container */}
-        <motion.div
-            variants={itemVariants}
-            className="w-full max-w-2xl mx-auto h-[400px] mt-8 relative"
-        >
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-64 md:w-96 h-full flex items-end justify-center">
-                <div className="w-full h-full bg-gradient-to-t from-orange-50/80 to-transparent rounded-t-full border border-orange-200 backdrop-blur-sm flex items-center justify-center text-orange-500 font-heebo font-bold p-8 text-center shadow-[0_0_30px_rgba(249,115,22,0.05)]">
-                    [ Your Photo Here ]<br/>Send your photo later
-                </div>
-            </div>
         </motion.div>
 
       </motion.div>
