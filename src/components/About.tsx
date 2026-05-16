@@ -50,9 +50,8 @@ const About: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 + (i * 0.15), duration: 0.8 }}
-              >
-                {p}
-              </motion.p>
+                dangerouslySetInnerHTML={{ __html: p }}
+              />
             ))}
           </div>
         </motion.div>
