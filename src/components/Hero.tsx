@@ -74,7 +74,7 @@ const Hero: React.FC = () => {
         </motion.h1>
 
         {/* Lower Hero Section - Dynamic Flex Layout */}
-        <div className="w-full relative mt-8 md:mt-12 flex flex-col md:flex-row items-center md:items-end justify-between flex-1 z-20 gap-8 md:gap-0 pb-10 md:pb-0">
+        <div className="w-full relative mt-6 md:mt-12 flex flex-col md:flex-row items-center md:items-end justify-between flex-1 z-20 gap-4 md:gap-0 pb-6 md:pb-0">
             
             {/* Left Side (CTA on Desktop, bottom on mobile) */}
             <motion.div 
@@ -98,13 +98,13 @@ const Hero: React.FC = () => {
             {/* Center (Photo - Middle on desktop, middle on mobile) */}
             <motion.div
                 variants={itemVariants}
-                className="order-2 md:order-2 w-full max-w-[320px] md:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] mx-auto relative z-20 flex-shrink-0"
+                className="order-2 md:order-2 w-full max-w-[290px] sm:max-w-[340px] md:max-w-[440px] lg:max-w-[540px] xl:max-w-[580px] mx-auto relative z-20 flex-shrink-0"
             >
                 <div className="relative overflow-visible">
                     <img 
                         src={orenImage} 
                         alt="Oren Shamir" 
-                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] scale-[1.3] md:scale-[1.4] lg:scale-[1.5] origin-bottom -translate-y-[12%] md:-translate-y-[16%]"
+                        className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] scale-[1.2] md:scale-[1.4] lg:scale-[1.5] origin-bottom -translate-y-[8%] md:-translate-y-[16%] mb-[-8%] md:mb-0"
                     />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-orange-400/20 rounded-full blur-[60px] md:blur-[90px] z-0 pointer-events-none" />
                 </div>
@@ -113,7 +113,7 @@ const Hero: React.FC = () => {
             {/* Right Side (Subtitle - Top on mobile, right on desktop) */}
             <motion.div 
                variants={itemVariants}
-               className="order-1 md:order-3 flex-1 flex justify-center md:justify-end pb-0 md:pb-28 pr-0 md:pr-4 lg:pr-12 xl:pr-20 w-full md:w-auto z-30"
+               className="order-1 md:order-3 flex-1 flex justify-center md:justify-end pb-2 md:pb-28 pr-0 md:pr-4 lg:pr-12 xl:pr-20 w-full md:w-auto z-30"
             >
                <p className="text-xl md:text-xl lg:text-2xl text-gray-600 font-medium leading-relaxed max-w-[280px] md:max-w-xs lg:max-w-sm text-center md:text-right font-heebo" dir="rtl">
                  {hero.subtitle}
