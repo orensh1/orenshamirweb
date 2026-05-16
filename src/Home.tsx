@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import StyleShowcase from './components/StyleShowcase';
 import About from './components/About';
 import Process from './components/Process';
 import FAQ from './components/FAQ';
@@ -42,7 +41,6 @@ const Home: React.FC = () => {
                 <Hero />
                 <About />
                 <Process />
-                <StyleShowcase />
                 <FAQ />
                 <Contact />
             </main>

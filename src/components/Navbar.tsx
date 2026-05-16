@@ -33,11 +33,11 @@ const Navbar: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className={`
           relative flex items-center justify-between gap-2 px-4 md:px-6 py-3 rounded-2xl transition-all duration-500
-          ${isScrolled ? 'bg-black/60 backdrop-blur-xl border border-white/10 shadow-lg' : 'bg-transparent'}
+          ${isScrolled ? 'bg-white/90 backdrop-blur-xl border border-gray-200 shadow-lg' : 'bg-transparent'}
         `}>
           {/* Mobile Menu Toggle - Left Side */}
           <button
-            className="md:hidden text-white flex-shrink-0"
+            className="md:hidden text-gray-900 flex-shrink-0"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Open Menu"
           >
@@ -45,11 +45,11 @@ const Navbar: React.FC = () => {
           </button>
 
           {/* Logo - Desktop Only (Left) */}
-          <a href="#" className="hidden md:block text-2xl font-bold tracking-tighter text-white">
+          <a href="#" className="hidden md:block text-3xl font-black tracking-tighter text-gray-900 font-heebo">
             {nav.logoImage ? (
               <img src={nav.logoImage} alt={nav.logoText} className="h-10 w-auto object-contain" />
             ) : (
-              nav.logoText
+              <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">{nav.logoText}</span>
             )}
           </a>
 
@@ -60,10 +60,10 @@ const Navbar: React.FC = () => {
                 key={link.name}
                 href={`#${link.href}`}
                 onClick={(e) => handleScroll(e, link.href)}
-                className="text-sm font-medium text-white/70 hover:text-white transition-colors relative group"
+                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors relative group font-heebo"
               >
                 {link.name}
-                <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full" />
+                <span className="absolute -bottom-1 right-0 w-0 h-0.5 bg-orange-500 transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
           </div>
@@ -71,18 +71,18 @@ const Navbar: React.FC = () => {
           {/* CTA - Desktop Only */}
           <div className="hidden md:block">
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
-              <Button variant="outline" className="!py-2 !px-4 text-sm flex items-center gap-2">
-                {nav.ctaText}
+              <Button variant="primary" className="!py-2 !px-6 text-sm flex items-center gap-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 font-heebo font-bold transition-colors">
+                <span dangerouslySetInnerHTML={{ __html: nav.ctaText }}></span>
               </Button>
             </a>
           </div>
 
           {/* Logo - Mobile Only (Right Side) */}
-          <a href="#" className="md:hidden text-xl font-bold tracking-tighter text-white flex-shrink-0">
+          <a href="#" className="md:hidden text-2xl font-black tracking-tighter text-gray-900 flex-shrink-0 font-heebo">
             {nav.logoImage ? (
               <img src={nav.logoImage} alt={nav.logoText} className="h-8 w-auto object-contain" />
             ) : (
-              nav.logoText
+              <span className="bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">{nav.logoText}</span>
             )}
           </a>
         </div>
@@ -96,19 +96,21 @@ const Navbar: React.FC = () => {
           exit={{ opacity: 0, y: -20 }}
           className="absolute top-full left-0 right-0 p-4 md:hidden"
         >
-          <div className="bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl p-6 flex flex-col gap-4">
+          <div className="bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl p-6 flex flex-col gap-4">
             {nav.links.map((link) => (
               <a
                 key={link.name}
                 href={`#${link.href}`}
                 onClick={(e) => handleScroll(e, link.href)}
-                className="text-lg font-medium text-white/80 active:text-white"
+                className="text-lg font-medium text-gray-700 active:text-gray-900"
               >
                 {link.name}
               </a>
             ))}
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
-              <Button className="w-full justify-center">{nav.ctaText}</Button>
+              <Button className="w-full justify-center bg-orange-500 text-white hover:bg-orange-600 font-heebo font-bold">
+                <span dangerouslySetInnerHTML={{ __html: nav.ctaText }}></span>
+              </Button>
             </a>
           </div>
         </motion.div>

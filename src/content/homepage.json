@@ -1,22 +1,22 @@
 {
   "hero": {
-    "badgeText": "אורן שמיר | בונה דפי נחיתה מקצועיים",
-    "headlineLine1": "לא עוד סתם",
-    "headlineLine2": "דף נחיתה",
-    "subtitle": "בלי סיפורים – אני בונה אתרים שעוזרים לכם להכניס יותר",
-    "highlightWord": "כסף",
-    "ctaText": "אני רוצה אתר כזה",
+    "badgeText": "",
+    "headlineLine1": "אני מתמחה בדפי נחיתה",
+    "headlineLine2": "ברמת גימור אחרת",
+    "subtitle": "עיצוב מוקפד וחוויית משתמש שמושכת את הלקוחות וגורמת להם להשאיר פנייה",
+    "highlightWord": "",
+    "ctaText": "בואו נדבר &larr;",
     "waveColors": [
-      "#3B82F6",
-      "#06B6D4",
-      "#A855F7",
-      "#EC4899"
+      "#FF6B00",
+      "#FF8A33",
+      "#FFA966",
+      "#FFC899"
     ]
   },
   "navbar": {
-    "logoText": "OSH",
+    "logoText": "OREN SHAMIR",
     "logoImage": "",
-    "ctaText": "רוצה אתר כזה?",
+    "ctaText": "בואו נדבר &larr;",
     "links": [
       {
         "name": "שירותים",

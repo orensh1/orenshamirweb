@@ -9,7 +9,7 @@ html {
 
 @layer base {
   body {
-    @apply bg-[#050506] text-white font-heebo overflow-x-hidden;
+    @apply bg-white text-gray-900 font-heebo overflow-x-hidden;
   }
 
   /* Premium Noise Overlay - REMOVED for Performance */
@@ -29,6 +29,19 @@ html {
 
   .will-change-opacity {
     will-change: opacity;
+  }
+
+  .bg-premium-stripes {
+    background-color: #ffffff;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.08) 0%, transparent 70%),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 40px,
+        rgba(0, 0, 0, 0.02) 40px,
+        rgba(0, 0, 0, 0.02) 41px
+      );
   }
 }
 
