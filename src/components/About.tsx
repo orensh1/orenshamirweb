@@ -55,7 +55,7 @@ const About: React.FC = () => {
               <img 
                 src={orenSmilingImage} 
                 alt="אורן שמיר" 
-                className="w-full h-auto object-contain relative z-10 scale-[1.35] origin-bottom -translate-y-[10%] drop-shadow-[0_15px_35px_rgba(0,0,0,0.1)]"
+                className="w-full h-auto object-contain relative z-10 scale-[1.12] origin-bottom -translate-y-[3%] drop-shadow-[0_15px_35px_rgba(0,0,0,0.1)]"
               />
             </div>
           </motion.div>
