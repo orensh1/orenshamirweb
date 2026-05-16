@@ -17,7 +17,6 @@ const Hero: React.FC = () => {
   });
 
   const yText = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const scrollToContact = () => {
     smoothScrollTo('contact', 1000);
@@ -44,7 +43,7 @@ const Hero: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-radial-gradient from-orange-500/5 to-transparent pointer-events-none blur-3xl z-0" />
 
       <motion.div
-        style={{ y: yText, opacity: opacityText }}
+        style={{ y: yText }}
         className="flex flex-col items-center w-full max-w-5xl mx-auto relative z-20 text-center px-4"
         initial="hidden"
         animate="visible"
