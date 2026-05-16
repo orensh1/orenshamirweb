@@ -9,15 +9,15 @@ const FAQ: React.FC = () => {
     const faq = content.faq;
 
     return (
-        <section id="faq" className="py-20 bg-[#050505] relative overflow-hidden" dir="rtl">
+        <section id="faq" className="py-20 bg-white relative overflow-hidden" dir="rtl">
             <div className="container mx-auto px-6 relative z-10 max-w-4xl">
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-bold mb-16 text-center"
+                    className="text-4xl md:text-6xl font-bold mb-16 text-center text-gray-900"
                 >
-                    {faq.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">{faq.titleHighlight}</span>
+                    {faq.titleBase}<span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">{faq.titleHighlight}</span>
                 </motion.h2>
 
                 <div className="space-y-4">
@@ -28,14 +28,14 @@ const FAQ: React.FC = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
-                            className="border border-white/10 rounded-2xl bg-zinc-900/30 overflow-hidden hover:border-white/20 transition-colors"
+                            className="border border-orange-100 rounded-2xl bg-white shadow-sm overflow-hidden hover:border-orange-300 hover:shadow-md transition-all"
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full p-6 flex items-center justify-between text-right text-lg md:text-xl font-medium text-white/90 hover:text-white transition-colors"
+                                className="w-full p-6 flex items-center justify-between text-right text-lg md:text-xl font-medium text-gray-800 hover:text-gray-900 transition-colors"
                             >
                                 <span>{item.question}</span>
-                                <span className={`ms-4 p-2 rounded-full bg-white/5 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-pink-500/20 text-pink-500' : 'text-zinc-400'}`}>
+                                <span className={`ms-4 p-2 rounded-full bg-orange-50 transition-transform duration-300 ${openIndex === index ? 'rotate-180 bg-orange-100 text-orange-600' : 'text-orange-400'}`}>
                                     {openIndex === index ? <Minus size={20} /> : <Plus size={20} />}
                                 </span>
                             </button>
@@ -48,7 +48,7 @@ const FAQ: React.FC = () => {
                                         exit={{ height: 0, opacity: 0 }}
                                         transition={{ duration: 0.3, ease: "easeInOut" }}
                                     >
-                                        <div className="px-6 pb-6 text-zinc-400 leading-relaxed font-light">
+                                        <div className="px-6 pb-6 text-gray-600 leading-relaxed font-light">
                                             {item.answer}
                                         </div>
                                     </motion.div>

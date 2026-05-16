@@ -11,9 +11,9 @@ const iconMap = {
 } as const;
 
 const colorMap: Record<string, { text: string; bg: string; hoverBg: string }> = {
-  purple: { text: 'text-purple-500', bg: 'bg-purple-500/10', hoverBg: 'group-hover:bg-purple-500' },
-  blue: { text: 'text-blue-500', bg: 'bg-blue-500/10', hoverBg: 'group-hover:bg-blue-500' },
-  pink: { text: 'text-pink-500', bg: 'bg-pink-500/10', hoverBg: 'group-hover:bg-pink-500' },
+  purple: { text: 'text-orange-500', bg: 'bg-orange-100', hoverBg: 'group-hover:bg-orange-500' },
+  blue: { text: 'text-amber-500', bg: 'bg-amber-100', hoverBg: 'group-hover:bg-amber-500' },
+  pink: { text: 'text-rose-500', bg: 'bg-rose-100', hoverBg: 'group-hover:bg-rose-500' },
 };
 
 const About: React.FC = () => {
@@ -23,7 +23,7 @@ const About: React.FC = () => {
   const about = content.about;
 
   return (
-    <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-black min-h-screen">
+    <section id="about" className="py-20 md:py-32 relative overflow-hidden bg-white min-h-screen border-t border-gray-100">
       {/* Continuous Marquee Text */}
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
@@ -35,8 +35,8 @@ const About: React.FC = () => {
         className="absolute top-1/3 md:top-1/2 -translate-y-1/2 left-0 whitespace-nowrap opacity-[0.15] md:opacity-[0.03] select-none pointer-events-none flex gap-10 w-max z-1"
         style={{ position: 'absolute', zIndex: 1 }}
       >
-        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-white">{about.marqueeText}</span>
-        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-white">{about.marqueeText}</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-gray-900">{about.marqueeText}</span>
+        <span className="text-[10vw] md:text-[20vw] font-black uppercase text-gray-900">{about.marqueeText}</span>
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -56,13 +56,13 @@ const About: React.FC = () => {
                 height="800"
                 className="object-cover w-full h-full grayscale hover:grayscale-0 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent" />
               <div className="absolute bottom-6 right-6 text-white">
                 <p className="font-bold text-xl">{about.imageCaption}</p>
-                <p className="text-sm opacity-70">{about.imageSubCaption}</p>
+                <p className="text-sm opacity-90">{about.imageSubCaption}</p>
               </div>
             </div>
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-600 rounded-full blur-[80px] opacity-50" />
+            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-orange-400 rounded-full blur-[80px] opacity-30" />
           </motion.div>
 
           <motion.div
@@ -72,11 +72,11 @@ const About: React.FC = () => {
             className="w-full md:w-1/2"
           >
             <h2 className="text-4xl md:text-6xl font-bold mb-8 leading-tight">
-              <span className="text-white">{about.headingLine1}</span>
+              <span className="text-gray-900">{about.headingLine1}</span>
               <br />
               <span
                 style={{
-                  background: '-webkit-linear-gradient(45deg, #ff007f, #a200ff)',
+                  background: '-webkit-linear-gradient(45deg, #f97316, #f59e0b)',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent'
                 }}
@@ -84,7 +84,7 @@ const About: React.FC = () => {
                 {about.headingName}
               </span>
             </h2>
-            <div className="space-y-6 text-lg text-gray-200">
+            <div className="space-y-6 text-lg text-gray-600">
               {about.paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -95,12 +95,12 @@ const About: React.FC = () => {
                 const IconComponent = iconMap[feature.iconName];
                 const colors = colorMap[feature.colorClass] || colorMap.purple;
                 return (
-                  <div key={i} className="p-4 bg-zinc-900/50 backdrop-blur-md rounded-2xl border border-white/10 flex flex-col items-center gap-2 text-center group hover:bg-white/5 transition-colors">
+                  <div key={i} className="p-4 bg-white shadow-sm border border-orange-100 rounded-2xl flex flex-col items-center gap-2 text-center group hover:border-orange-300 hover:shadow-md transition-all">
                     <div className={`p-3 rounded-full ${colors.bg} ${colors.text} ${colors.hoverBg} group-hover:text-white transition-colors`}>
                       <IconComponent size={24} />
                     </div>
-                    <h3 className="font-bold text-white">{feature.title}</h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <h3 className="font-bold text-gray-900">{feature.title}</h3>
+                    <p className="text-sm text-gray-500 leading-relaxed">
                       {feature.description}
                     </p>
                   </div>

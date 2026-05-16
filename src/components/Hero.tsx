@@ -36,7 +36,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div ref={containerRef} className="relative bg-premium-stripes h-screen min-h-[800px] overflow-hidden flex flex-col items-center justify-center pt-24">
+    <div ref={containerRef} className="relative bg-premium-stripes min-h-screen overflow-hidden flex flex-col items-center justify-center pt-32 pb-20">
       {/* Spotlight Effect behind text */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-radial-gradient from-orange-500/5 to-transparent pointer-events-none blur-3xl z-0" />
 
@@ -93,7 +93,7 @@ const Hero: React.FC = () => {
               <Button
                 variant="primary"
                 onClick={scrollToContact}
-                className="relative !text-base md:!text-2xl !px-10 md:!px-16 !py-4 md:!py-6 w-auto max-w-xs md:max-w-none rounded-full bg-orange-500 hover:bg-orange-600 text-white !font-heebo !font-extrabold !tracking-tighter border-2 border-orange-400 overflow-hidden shadow-lg transition-colors duration-300"
+                className="relative !text-base md:!text-2xl !px-10 md:!px-16 !py-4 md:!py-6 w-auto max-w-xs md:max-w-none rounded-full !font-heebo !font-extrabold !tracking-tighter border-2 border-orange-400 overflow-hidden shadow-lg transition-colors duration-300"
               >
                 <span className="relative z-20 flex items-center justify-center gap-3" dangerouslySetInnerHTML={{ __html: hero.ctaText }}></span>
               </Button>

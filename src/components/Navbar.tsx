@@ -71,7 +71,7 @@ const Navbar: React.FC = () => {
           {/* CTA - Desktop Only */}
           <div className="hidden md:block">
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
-              <Button variant="primary" className="!py-2 !px-6 text-sm flex items-center gap-2 rounded-full bg-orange-500 text-white hover:bg-orange-600 font-heebo font-bold transition-colors">
+              <Button variant="primary" className="!py-2 !px-6 text-sm flex items-center gap-2 rounded-full font-heebo font-bold transition-colors">
                 <span dangerouslySetInnerHTML={{ __html: nav.ctaText }}></span>
               </Button>
             </a>
@@ -108,7 +108,7 @@ const Navbar: React.FC = () => {
               </a>
             ))}
             <a href="#contact" onClick={(e) => handleScroll(e, 'contact')}>
-              <Button className="w-full justify-center bg-orange-500 text-white hover:bg-orange-600 font-heebo font-bold">
+              <Button className="w-full justify-center font-heebo font-bold">
                 <span dangerouslySetInnerHTML={{ __html: nav.ctaText }}></span>
               </Button>
             </a>
