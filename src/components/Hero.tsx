@@ -4,7 +4,7 @@ import { smoothScrollTo } from '../utils/smoothScroll';
 import Button from './ui/Button';
 import Magnetic from './ui/Magnetic';
 import { useSiteContent } from '../content/SiteContentContext';
-import orenImage from '../assets/oren-portrait-new.jpg';
+import orenImage from '../assets/oren-portrait-transparent.png';
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -63,13 +63,13 @@ const Hero: React.FC = () => {
         {/* Headline */}
         <motion.h1
           variants={itemVariants}
-          className="text-6xl md:text-8xl lg:text-9xl font-black leading-[1] tracking-tighter mb-6 relative text-balance text-gray-900 z-10 font-heebo"
+          className="text-4xl md:text-6xl lg:text-7xl font-black leading-[1.1] tracking-tight mb-2 relative text-balance text-gray-900 z-10 font-heebo"
           dir="rtl"
         >
           <span className="block drop-shadow-none">
             {hero.headlineLine1}
           </span>
-          <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent drop-shadow-sm pb-2 text-7xl md:text-[140px]">
+          <span className="block bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent drop-shadow-sm pb-1 text-5xl md:text-7xl lg:text-8xl">
             {hero.headlineLine2}
           </span>
         </motion.h1>
@@ -77,13 +77,13 @@ const Hero: React.FC = () => {
         {/* Image Container (Middle) */}
         <motion.div
             variants={itemVariants}
-            className="w-full max-w-xl mx-auto relative mt-4 mb-10 z-20 flex justify-center"
+            className="w-full max-w-2xl mx-auto relative mt-2 mb-8 z-20 flex justify-center"
         >
-            <div className="relative w-full max-w-xs md:max-w-md">
+            <div className="relative w-full max-w-sm md:max-w-lg lg:max-w-xl">
                 <img 
                     src={orenImage} 
                     alt="Oren Shamir" 
-                    className="w-full h-auto object-contain mix-blend-darken relative z-10 drop-shadow-xl"
+                    className="w-full h-auto object-contain relative z-10 drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)]"
                 />
                 {/* Background decorative glow for image */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[80%] bg-orange-400/20 rounded-full blur-[80px] z-0 pointer-events-none" />
